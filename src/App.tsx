@@ -1,15 +1,17 @@
 import React from 'react';
 import DefaultApp from "./Components/DefaultApp";
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import {BrowserRouter, Switch} from 'react-router-dom';
+import {HOME} from "./Routes/AppRoutes";
+import RouteWrapper from "./Components/RouteWrapper";
 
 function App() {
     return (
         <>
             <BrowserRouter>
                 <Switch>
-                    <Route exact path='/'>
+                    <RouteWrapper route={HOME}>
                         <DefaultApp/>
-                    </Route>
+                    </RouteWrapper>
                 </Switch>
             </BrowserRouter>
         </>

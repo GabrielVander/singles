@@ -4,22 +4,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import firebase from "firebase/app";
-import "firebase/analytics";
-import "firebase/performance";
-import "firebase/auth";
-import "firebase/firestore";
-import firebaseConfig from "./Configurations/firebaseConfig";
+import FirebaseConfig from "./Configurations/FirebaseConfig";
 import rrfConfig from "./Configurations/rrfConfig";
 import Store from "./Redux/Store";
 import {createFirestoreInstance} from "redux-firestore";
 import {Provider} from "react-redux";
 import {ReactReduxFirebaseProvider} from "react-redux-firebase";
 
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-firebase.performance();
-firebase.auth();
-firebase.firestore();
+FirebaseConfig.initialize();
 
 ReactDOM.render(
     <React.StrictMode>

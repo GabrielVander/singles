@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import firebase from "firebase/app";
 import FirebaseConfig from "./Configurations/FirebaseConfig";
-import rrfConfig from "./Configurations/rrfConfig";
+import ReactReduxFirebaseConfig from "./Configurations/ReactReduxFirebaseConfig";
 import Store from "./Redux/Store";
 import {createFirestoreInstance} from "redux-firestore";
 import {Provider} from "react-redux";
@@ -18,7 +18,7 @@ ReactDOM.render(
         <Provider store={Store.store}>
             <ReactReduxFirebaseProvider
                 firebase={firebase}
-                config={rrfConfig}
+                config={ReactReduxFirebaseConfig.config}
                 dispatch={Store.store.dispatch}
                 createFirestoreInstance={createFirestoreInstance}
             >

@@ -11,6 +11,11 @@ Object {
         <header
           class="App-header"
         >
+          <img
+            alt="logo"
+            class="App-logo"
+            src="logo.svg"
+          />
           <p>
             Edit 
             <code>
@@ -18,11 +23,6 @@ Object {
             </code>
              and save to reload.
           </p>
-          <img
-            alt="logo"
-            class="App-logo"
-            src="logo.svg"
-          />
           <a
             class="App-link"
             href="https://reactjs.org"
@@ -42,6 +42,11 @@ Object {
       <header
         class="App-header"
       >
+        <img
+          alt="logo"
+          class="App-logo"
+          src="logo.svg"
+        />
         <p>
           Edit 
           <code>
@@ -49,11 +54,6 @@ Object {
           </code>
            and save to reload.
         </p>
-        <img
-          alt="logo"
-          class="App-logo"
-          src="logo.svg"
-        />
         <a
           class="App-link"
           href="https://reactjs.org"

@@ -6,63 +6,55 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="App"
+        class="sc-bdnylx VvKKX"
       >
-        <header
-          class="App-header"
+        <div
+          class="ant-spin ant-spin-spinning"
         >
-          <p>
-            Edit 
-            <code>
-              src/App.tsx
-            </code>
-             and save to reload.
-          </p>
-          <img
-            alt="logo"
-            class="App-logo"
-            src="logo.svg"
-          />
-          <a
-            class="App-link"
-            href="https://reactjs.org"
-            rel="noopener noreferrer"
-            target="_blank"
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
           >
-            defaultApp:learnReact
-          </a>
-        </header>
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="App"
+      class="sc-bdnylx VvKKX"
     >
-      <header
-        class="App-header"
+      <div
+        class="ant-spin ant-spin-spinning"
       >
-        <p>
-          Edit 
-          <code>
-            src/App.tsx
-          </code>
-           and save to reload.
-        </p>
-        <img
-          alt="logo"
-          class="App-logo"
-          src="logo.svg"
-        />
-        <a
-          class="App-link"
-          href="https://reactjs.org"
-          rel="noopener noreferrer"
-          target="_blank"
+        <span
+          class="ant-spin-dot ant-spin-dot-spin"
         >
-          defaultApp:learnReact
-        </a>
-      </header>
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+        </span>
+      </div>
     </div>
   </div>,
   "debug": [Function],

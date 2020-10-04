@@ -10,7 +10,7 @@ i18n
     .use(initReactI18next)
     .use(LanguageDetector)
     .init({
-        debug: true,
+        debug: false,
         detection: {
             order: ['navigator', 'querystring', 'cookie', 'localStorage', 'htmlTag'],
         },

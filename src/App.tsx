@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import DefaultApp from "./Components/DefaultApp";
 import {BrowserRouter, Switch} from 'react-router-dom';
 import {HOME} from "./Routes/AppRoutes";
 import RouteWrapper from "./Components/RouteWrapper";
+import {Spin} from "antd";
 
 function App() {
     return (
@@ -10,7 +11,9 @@ function App() {
             <BrowserRouter>
                 <Switch>
                     <RouteWrapper route={HOME}>
-                        <DefaultApp/>
+                        <Suspense fallback={<Spin/>}>
+                            <DefaultApp/>
+                        </Suspense>
                     </RouteWrapper>
                 </Switch>
             </BrowserRouter>

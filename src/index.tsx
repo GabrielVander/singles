@@ -10,6 +10,7 @@ import Store from "./Redux/Store";
 import {createFirestoreInstance} from "redux-firestore";
 import {Provider} from "react-redux";
 import {ReactReduxFirebaseProvider} from "react-redux-firebase";
+import "./Configurations/i18nConfig";
 
 FirebaseConfig.initialize();
 

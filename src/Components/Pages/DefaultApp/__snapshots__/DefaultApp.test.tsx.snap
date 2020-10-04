@@ -29,7 +29,7 @@ Object {
             rel="noopener noreferrer"
             target="_blank"
           >
-            Learn React
+            defaultApp:learnReact
           </a>
         </header>
       </div>
@@ -60,7 +60,7 @@ Object {
           rel="noopener noreferrer"
           target="_blank"
         >
-          Learn React
+          defaultApp:learnReact
         </a>
       </header>
     </div>

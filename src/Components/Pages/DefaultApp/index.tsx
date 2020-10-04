@@ -1,14 +1,19 @@
 import React from 'react';
 import logo from './logo.svg';
 import './DefaultApp.css';
+import {Trans, useTranslation} from "react-i18next";
 
 function DefaultApp() {
+    const {t} = useTranslation(['defaultApp']);
+
     return (
         <div className="App">
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
+                <img src={logo} className="App-logo" alt="logo"/>
                 <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
+                    <Trans i18nKey="defaultApp:editAndSave">
+                        Edit <code>src/App.tsx</code> and save to reload.
+                    </Trans>
                 </p>
                 <a
                     className="App-link"
@@ -16,7 +21,7 @@ function DefaultApp() {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Learn React
+                    {t('defaultApp:learnReact')}
                 </a>
             </header>
         </div>

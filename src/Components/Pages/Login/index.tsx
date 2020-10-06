@@ -1,14 +1,36 @@
 import React from "react";
 import Centered from "../../Styled/Centered";
-import {Button, Col, Divider, Form, Input, Layout, Row} from "antd";
+import {Button, Col, Divider, Form, Input, Layout, message, Row} from "antd";
 import {FacebookFilled, GoogleCircleFilled, LockOutlined, TwitterCircleFilled, UserOutlined} from "@ant-design/icons";
 import DynamicFont from "../../Styled/DynamicFont";
 import logo from "./logo.svg";
 import './styles.css';
+import {useFirebase} from "react-redux-firebase";
+import {useHistory} from "react-router-dom";
+import {HOME} from "../../../Routes/AppRoutes";
 
 function Login() {
-    const loginWithEmailAndPassword = () => {
+    const firebase = useFirebase();
+    const history = useHistory();
+
+    function loginWithEmailAndPassword() {
         console.log('Logging in with email anda password');
+    }
+
+    function signInWithGoogle() {
+        // @ts-ignore
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().useDeviceLanguage();
+        firebase.auth().signInWithPopup(provider).then(result => {
+            const user = result.user;
+            message.success(`Successfully logged in as ${user!.displayName}`);
+            history.push(HOME.path);
+        }).catch(error => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            message.error(`${errorCode} - ${errorMessage}`);
+        });
     }
 
     return (
@@ -78,7 +100,11 @@ function Login() {
                                     <Row justify="space-around" align="middle">
                                         <Col xs={24} xl={8}>
                                             <Centered>
-                                                <Button type="primary" icon={<GoogleCircleFilled/>}>
+                                                <Button
+                                                    type="primary"
+                                                    icon={<GoogleCircleFilled/>}
+                                                    onClick={signInWithGoogle}
+                                                >
                                                     Google
                                                 </Button>
                                             </Centered>

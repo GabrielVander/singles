@@ -2,7 +2,7 @@ import Route from "../Model/Route";
 
 export const HOME: Route = {
     path: '/',
-    exact: false,
+    exact: true,
 }
 
 export const LOGIN: Route = {

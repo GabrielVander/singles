@@ -1,0 +1,9 @@
+.main-row {
+    position: absolute;
+    left: 10vw;
+    right: 10vw;
+}
+
+.login-form {
+    max-width: 350px;
+}

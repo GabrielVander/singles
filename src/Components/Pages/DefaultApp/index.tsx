@@ -3,8 +3,18 @@ import logo from './logo.svg';
 import './DefaultApp.css';
 import {Trans, useTranslation} from "react-i18next";
 import DynamicFont from "../../Styled/DynamicFont";
+import {useFirebase} from "react-redux-firebase";
+import {useHistory} from 'react-router-dom';
+import {LOGIN} from "../../../Routes/AppRoutes";
 
 function DefaultApp() {
+    const firebase = useFirebase();
+    const history = useHistory();
+
+    const userIsSignedIn = firebase.auth().currentUser;
+    if (!userIsSignedIn) {
+        history.push(LOGIN.path);
+    }
     const {t} = useTranslation(['defaultApp']);
 
     return (

@@ -1,36 +1,49 @@
-import React from "react";
+import React, {useState} from "react";
 import Centered from "../../Styled/Centered";
 import {Button, Col, Divider, Form, Input, Layout, message, Row} from "antd";
-import {FacebookFilled, GoogleCircleFilled, LockOutlined, TwitterCircleFilled, UserOutlined} from "@ant-design/icons";
+import {FacebookFilled, GoogleCircleFilled, LockOutlined, MailOutlined, TwitterCircleFilled} from "@ant-design/icons";
 import DynamicFont from "../../Styled/DynamicFont";
 import logo from "./logo.svg";
 import './styles.css';
 import {useFirebase} from "react-redux-firebase";
 import {useHistory} from "react-router-dom";
 import {HOME} from "../../../Routes/AppRoutes";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import firebase from "firebase";
 
 function Login() {
     const firebase = useFirebase();
     const history = useHistory();
 
+    const [email, setEmail] = useState<string | null>(null);
+    const [password, setPassword] = useState<string | null>(null);
+
+    function handleAuthSuccess(result: firebase.auth.UserCredential) {
+        const user = result.user;
+        message.success(`Successfully logged in as ${user!.displayName || user!.email}`);
+        history.push(HOME.path);
+    }
+
     function loginWithEmailAndPassword() {
-        console.log('Logging in with email anda password');
+        firebase.auth().signInWithEmailAndPassword(email!, password!)
+            .then(result => handleAuthSuccess(result))
+            .catch(error => handleAuthError(error));
     }
 
     function signInWithGoogle() {
         // @ts-ignore
         const provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().useDeviceLanguage();
-        firebase.auth().signInWithPopup(provider).then(result => {
-            const user = result.user;
-            message.success(`Successfully logged in as ${user!.displayName}`);
-            history.push(HOME.path);
-        }).catch(error => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
+        firebase.auth().signInWithPopup(provider)
+            .then(result => handleAuthSuccess(result))
+            .catch(error => handleAuthError(error));
+    }
 
-            message.error(`${errorCode} - ${errorMessage}`);
-        });
+    function handleAuthError(error: { code: number; message: string; }) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        message.error(`${errorCode} - ${errorMessage}`);
     }
 
     return (
@@ -68,11 +81,14 @@ function Login() {
                                     onFinish={loginWithEmailAndPassword}
                                 >
                                     <Form.Item
-                                        name="username"
-                                        rules={[{required: true, message: 'Please input your Username!'}]}
+                                        name="email"
+                                        rules={[{required: true, message: 'Please input your Email!'}]}
                                     >
-                                        <Input prefix={<UserOutlined className="site-form-item-icon"/>}
-                                               placeholder="Username"/>
+                                        <Input
+                                            prefix={<MailOutlined className="site-form-item-icon"/>}
+                                            placeholder="Email"
+                                            onChange={event => setEmail(event.target.value)}
+                                        />
                                     </Form.Item>
                                     <Form.Item
                                         name="password"
@@ -82,6 +98,7 @@ function Login() {
                                             prefix={<LockOutlined className="site-form-item-icon"/>}
                                             type="password"
                                             placeholder="Password"
+                                            onChange={event => setPassword(event.target.value)}
                                         />
                                     </Form.Item>
                                     <Centered>

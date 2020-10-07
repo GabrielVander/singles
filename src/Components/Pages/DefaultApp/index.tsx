@@ -3,19 +3,20 @@ import logo from './logo.svg';
 import './DefaultApp.css';
 import {Trans, useTranslation} from "react-i18next";
 import DynamicFont from "../../Styled/DynamicFont";
-import {useFirebase} from "react-redux-firebase";
+import {isEmpty, isLoaded} from "react-redux-firebase";
 import {useHistory} from 'react-router-dom';
 import {LOGIN} from "../../../Routes/AppRoutes";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../Redux/Reducers";
 
 function DefaultApp() {
-    const firebase = useFirebase();
+    const auth = useSelector<RootState>(state => state.firebase.auth)
     const history = useHistory();
+    const {t} = useTranslation(['defaultApp']);
 
-    const userIsSignedIn = firebase.auth().currentUser;
-    if (!userIsSignedIn) {
+    if (!isLoaded(auth) || isEmpty(auth)) {
         history.push(LOGIN.path);
     }
-    const {t} = useTranslation(['defaultApp']);
 
     return (
         <DynamicFont>

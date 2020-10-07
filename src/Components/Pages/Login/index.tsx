@@ -64,7 +64,7 @@ function Login() {
                                 xl={12}
                             >
                                 <Centered>
-                                    <img src={logo} alt="logo"/>
+                                    <img src={logo} className="logo" alt="logo"/>
                                 </Centered>
                             </Col>
                             <Col
@@ -80,6 +80,9 @@ function Login() {
                                     initialValues={{remember: true}}
                                     onFinish={loginWithEmailAndPassword}
                                 >
+                                    <Centered>
+                                        <span className="login-title">Login</span>
+                                    </Centered>
                                     <Form.Item
                                         name="email"
                                         rules={[{required: true, message: 'Please input your Email!'}]}

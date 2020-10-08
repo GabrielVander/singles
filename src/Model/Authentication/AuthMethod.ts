@@ -1,14 +1,6 @@
 import {Credentials} from "react-redux-firebase";
-
-enum Providers {
-    GOOGLE = 'google',
-    FACEBOOK = 'facebook',
-}
-
-enum SignInTypes {
-    POP_UP = 'popup',
-    REDIRECT = 'redirect',
-}
+import {SignInTypes} from "./SignInTypes";
+import {Providers} from "./Providers";
 
 class AuthMethod {
 

@@ -8,7 +8,7 @@ import './styles.css';
 import {Credentials, useFirebase} from "react-redux-firebase";
 import {useHistory} from "react-router-dom";
 import {HOME} from "../../../Routes/AppRoutes";
-import AuthMethod from "../../../Model/AuthMethod";
+import AuthMethod from "../../../Model/Authentication/AuthMethod";
 import {User} from "firebase";
 import CenteredSpin from "../../Others/CenteredSpin";
 

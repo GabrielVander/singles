@@ -32,6 +32,10 @@ function Login() {
         signIn(AuthMethod.FACEBOOK)
     }
 
+    function signInWithTwitter() {
+        signIn(AuthMethod.TWITTER)
+    }
+
     function signIn(signInMethod: () => Credentials): void {
         setLoading(true);
 
@@ -152,7 +156,11 @@ function Login() {
                                         </Col>
                                         <Col xs={24} xl={8}>
                                             <Centered>
-                                                <Button type="primary" icon={<TwitterCircleFilled/>}>
+                                                <Button
+                                                    type="primary"
+                                                    icon={<TwitterCircleFilled/>}
+                                                    onClick={signInWithTwitter}
+                                                >
                                                     Twitter
                                                 </Button>
                                             </Centered>

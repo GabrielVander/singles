@@ -24,6 +24,13 @@ class AuthMethod {
             type: type ? type : SignInTypes.POP_UP,
         }
     }
+
+    static TWITTER(type?: SignInTypes): Credentials {
+        return {
+            provider: Providers.TWITTER,
+            type: type ? type : SignInTypes.POP_UP,
+        }
+    }
 }
 
 export default AuthMethod;

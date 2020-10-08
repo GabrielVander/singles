@@ -8,9 +8,8 @@ import './styles.css';
 import {Credentials, useFirebase} from "react-redux-firebase";
 import {useHistory} from "react-router-dom";
 import {HOME} from "../../../Routes/AppRoutes";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import firebase from "firebase";
 import AuthMethod from "../../../Model/AuthMethod";
+import {User} from "firebase";
 
 function Login() {
     const firebase = useFirebase();
@@ -19,37 +18,33 @@ function Login() {
     const [email, setEmail] = useState<string | null>(null);
     const [password, setPassword] = useState<string | null>(null);
 
-    function handleAuthSuccess(result: firebase.auth.UserCredential) {
-        const user = result.user;
-        message.success(`Successfully logged in as ${user!.displayName || user!.email}`);
-        history.push(HOME.path);
-    }
-
     function signInWithEmailAndPassword() {
-        firebase.auth().signInWithEmailAndPassword(email!, password!)
-            .then(result => handleAuthSuccess(result))
-            .catch(error => handleAuthError(error));
+        signIn(() => AuthMethod.EMAIL_AND_PASSWORD(email!, password!));
     }
 
     function signInWithGoogle() {
         signIn(AuthMethod.GOOGLE)
     }
 
-    function signIn(method: () => Credentials) {
-        firebase.login(method())
-            .then(result => handleAuthSuccess(result))
-            .catch(reason => handleAuthError(reason));
-    }
-
     function signInWithFacebook() {
         signIn(AuthMethod.FACEBOOK)
     }
 
-    function handleAuthError(error: { code: number; message: string; }) {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+    function signIn(signInMethod: () => Credentials): void {
+        firebase.login(signInMethod())
+            .then(result => handleAuthSuccess(result))
+            .catch(reason => handleAuthError(reason));
+    }
 
-        message.error(`${errorCode} - ${errorMessage}`);
+    function handleAuthSuccess(result: { user: User | null, displayName?: string }): void {
+        const user = result.user;
+
+        message.success(`Successfully logged in as ${user!.displayName || user!.email}`);
+        history.push(HOME.path);
+    }
+
+    function handleAuthError(error: { code: string; message: string; }): void {
+        message.error(`${(error.code)} - ${(error.message)}`);
     }
 
     return (

@@ -5,11 +5,12 @@ import {FacebookFilled, GoogleCircleFilled, LockOutlined, MailOutlined, TwitterC
 import DynamicFont from "../../Styled/DynamicFont";
 import logo from "./logo.svg";
 import './styles.css';
-import {useFirebase} from "react-redux-firebase";
+import {Credentials, useFirebase} from "react-redux-firebase";
 import {useHistory} from "react-router-dom";
 import {HOME} from "../../../Routes/AppRoutes";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import firebase from "firebase";
+import AuthMethod from "../../../Model/AuthMethod";
 
 function Login() {
     const firebase = useFirebase();
@@ -24,19 +25,24 @@ function Login() {
         history.push(HOME.path);
     }
 
-    function loginWithEmailAndPassword() {
+    function signInWithEmailAndPassword() {
         firebase.auth().signInWithEmailAndPassword(email!, password!)
             .then(result => handleAuthSuccess(result))
             .catch(error => handleAuthError(error));
     }
 
     function signInWithGoogle() {
-        // @ts-ignore
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().useDeviceLanguage();
-        firebase.auth().signInWithPopup(provider)
+        signIn(AuthMethod.GOOGLE)
+    }
+
+    function signIn(method: () => Credentials) {
+        firebase.login(method())
             .then(result => handleAuthSuccess(result))
-            .catch(error => handleAuthError(error));
+            .catch(reason => handleAuthError(reason));
+    }
+
+    function signInWithFacebook() {
+        signIn(AuthMethod.FACEBOOK)
     }
 
     function handleAuthError(error: { code: number; message: string; }) {
@@ -78,7 +84,7 @@ function Login() {
                                     name="normal_login"
                                     className="login-form"
                                     initialValues={{remember: true}}
-                                    onFinish={loginWithEmailAndPassword}
+                                    onFinish={signInWithEmailAndPassword}
                                 >
                                     <Centered>
                                         <span className="login-title">Login</span>
@@ -131,7 +137,11 @@ function Login() {
                                         </Col>
                                         <Col xs={24} xl={8}>
                                             <Centered>
-                                                <Button type="primary" icon={<FacebookFilled/>}>
+                                                <Button
+                                                    type="primary"
+                                                    icon={<FacebookFilled/>}
+                                                    onClick={signInWithFacebook}
+                                                >
                                                     Facebook
                                                 </Button>
                                             </Centered>

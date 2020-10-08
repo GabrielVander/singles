@@ -10,6 +10,7 @@ import {useHistory} from "react-router-dom";
 import {HOME} from "../../../Routes/AppRoutes";
 import AuthMethod from "../../../Model/AuthMethod";
 import {User} from "firebase";
+import CenteredSpin from "../../Others/CenteredSpin";
 
 function Login() {
     const firebase = useFirebase();
@@ -17,6 +18,7 @@ function Login() {
 
     const [email, setEmail] = useState<string | null>(null);
     const [password, setPassword] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
     function signInWithEmailAndPassword() {
         signIn(() => AuthMethod.EMAIL_AND_PASSWORD(email!, password!));
@@ -31,6 +33,8 @@ function Login() {
     }
 
     function signIn(signInMethod: () => Credentials): void {
+        setLoading(true);
+
         firebase.login(signInMethod())
             .then(result => handleAuthSuccess(result))
             .catch(reason => handleAuthError(reason));
@@ -44,7 +48,12 @@ function Login() {
     }
 
     function handleAuthError(error: { code: string; message: string; }): void {
-        message.error(`${(error.code)} - ${(error.message)}`);
+        message.error(`${(error.code)} - ${(error.message)}`, 5);
+        setLoading(false);
+    }
+
+    if (loading) {
+        return <CenteredSpin tip="Logging in..."/>
     }
 
     return (

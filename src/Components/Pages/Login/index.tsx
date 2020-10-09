@@ -10,10 +10,12 @@ import {HOME} from "../../../Routes/AppRoutes";
 import AuthMethod from "../../../Model/Authentication/AuthMethod";
 import {User} from "firebase";
 import CenteredSpin from "../../Others/CenteredSpin";
+import {Trans, useTranslation} from "react-i18next";
 
 function Login() {
     const firebase = useFirebase();
     const history = useHistory();
+    const {t} = useTranslation(['login']);
 
     const [email, setEmail] = useState<string | null>(null);
     const [password, setPassword] = useState<string | null>(null);
@@ -94,18 +96,18 @@ function Login() {
                             >
                                 <Row justify="space-around" align="middle">
                                     <Col>
-                                        <h1 className="login-title">Login</h1>
+                                        <h1 className="login-title">{t('login:loginTitle')}</h1>
                                     </Col>
                                 </Row>
                                 <Row justify="space-around" align="middle">
                                     <Col>
                                         <Form.Item
                                             name="email"
-                                            rules={[{required: true, message: 'Please input your Email!'}]}
+                                            rules={[{required: true, message: t("login:emailInputError")}]}
                                         >
                                             <Input
                                                 prefix={<MailOutlined className="site-form-item-icon"/>}
-                                                placeholder="Email"
+                                                placeholder={t("login:emailInputPlaceholder")}
                                                 onChange={event => setEmail(event.target.value)}
                                             />
                                         </Form.Item>
@@ -115,12 +117,12 @@ function Login() {
                                     <Col>
                                         <Form.Item
                                             name="password"
-                                            rules={[{required: true, message: 'Please input your Password!'}]}
+                                            rules={[{required: true, message: t("login:passwordInputError")}]}
                                         >
                                             <Input
                                                 prefix={<LockOutlined className="site-form-item-icon"/>}
                                                 type="password"
-                                                placeholder="Password"
+                                                placeholder={t("login:passwordInputPlaceholder")}
                                                 onChange={event => setPassword(event.target.value)}
                                             />
                                         </Form.Item>
@@ -130,19 +132,21 @@ function Login() {
                                     <Col>
                                         <Form.Item>
                                             <Button type="primary" htmlType="submit" className="login-form-button">
-                                                Log in
+                                                {t("login:loginButton")}
                                             </Button>
                                         </Form.Item>
                                     </Col>
                                 </Row>
                                 <Row justify="space-around" align="middle" style={{textAlign: "center"}}>
                                     <Col>
-                                            <span>
-                                                 Don't have an account? <a href="/register">Register now!</a>
-                                            </span>
+                                        <span>
+                                            <Trans i18nKey="login:noAccount">
+                                             Don't have an account? <a href="/register">Register now!</a>
+                                            </Trans>
+                                        </span>
                                     </Col>
                                 </Row>
-                                <Divider plain>Or login via</Divider>
+                                <Divider plain>{t('login:oauthSubdivision')}</Divider>
                                 <Row
                                     justify="space-around"
                                     align="middle"

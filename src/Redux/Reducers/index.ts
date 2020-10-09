@@ -8,7 +8,7 @@ interface Profile {
     email: string
 }
 
-interface RootState {
+export interface RootState {
     firebase: FirebaseReducer.Reducer<Profile>;
     firestore: FirestoreReducer.Reducer;
 }

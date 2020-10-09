@@ -9,7 +9,7 @@
 }
 
 .login-title {
-    font-size: calc(2vw + 1vh + 5px);
+    font-size: max(3vw, 26px);
     font-weight: bold;
     margin-bottom: 15px;
 }

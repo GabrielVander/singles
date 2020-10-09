@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import Centered from "../../Styled/Centered";
 import {Button, Col, Divider, Form, Input, Layout, message, Row} from "antd";
 import {FacebookFilled, GoogleCircleFilled, LockOutlined, MailOutlined, TwitterCircleFilled} from "@ant-design/icons";
-import DynamicFont from "../../Styled/DynamicFont";
 import logo from "./logo.svg";
 import './styles.css';
 import {Credentials, useFirebase} from "react-redux-firebase";
@@ -63,114 +62,143 @@ function Login() {
     return (
         <Layout style={{height: "100%"}}>
             <Layout.Content>
-                <DynamicFont>
-                    <Centered>
-                        <Row
-                            className="main-row"
-                            justify="space-around"
-                            align="middle"
+                <Centered>
+                    <Row
+                        className="main-row"
+                        justify="space-around"
+                        align="middle"
+                    >
+                        <Col
+                            xs={16}
+                            sm={16}
+                            md={16}
+                            lg={12}
+                            xl={12}
                         >
-                            <Col
-                                xs={16}
-                                sm={16}
-                                md={16}
-                                lg={12}
-                                xl={12}
+                            <Centered>
+                                <img src={logo} className="logo" alt="logo"/>
+                            </Centered>
+                        </Col>
+                        <Col
+                            xs={16}
+                            sm={16}
+                            md={16}
+                            lg={12}
+                            xl={12}
+                        >
+                            <Form
+                                name="normal_login"
+                                className="login-form"
+                                initialValues={{remember: true}}
+                                onFinish={signInWithEmailAndPassword}
                             >
-                                <Centered>
-                                    <img src={logo} className="logo" alt="logo"/>
-                                </Centered>
-                            </Col>
-                            <Col
-                                xs={16}
-                                sm={16}
-                                md={16}
-                                lg={12}
-                                xl={12}
-                            >
-                                <Form
-                                    name="normal_login"
-                                    className="login-form"
-                                    initialValues={{remember: true}}
-                                    onFinish={signInWithEmailAndPassword}
-                                >
-                                    <Centered>
-                                        <span className="login-title">Login</span>
-                                    </Centered>
-                                    <Form.Item
-                                        name="email"
-                                        rules={[{required: true, message: 'Please input your Email!'}]}
-                                    >
-                                        <Input
-                                            prefix={<MailOutlined className="site-form-item-icon"/>}
-                                            placeholder="Email"
-                                            onChange={event => setEmail(event.target.value)}
-                                        />
-                                    </Form.Item>
-                                    <Form.Item
-                                        name="password"
-                                        rules={[{required: true, message: 'Please input your Password!'}]}
-                                    >
-                                        <Input
-                                            prefix={<LockOutlined className="site-form-item-icon"/>}
-                                            type="password"
-                                            placeholder="Password"
-                                            onChange={event => setPassword(event.target.value)}
-                                        />
-                                    </Form.Item>
-                                    <Centered>
+                                <Row justify="space-around" align="middle">
+                                    <Col>
+                                        <h1 className="login-title">Login</h1>
+                                    </Col>
+                                </Row>
+                                <Row justify="space-around" align="middle">
+                                    <Col>
+                                        <Form.Item
+                                            name="email"
+                                            rules={[{required: true, message: 'Please input your Email!'}]}
+                                        >
+                                            <Input
+                                                prefix={<MailOutlined className="site-form-item-icon"/>}
+                                                placeholder="Email"
+                                                onChange={event => setEmail(event.target.value)}
+                                            />
+                                        </Form.Item>
+                                    </Col>
+                                </Row>
+                                <Row justify="space-around" align="middle">
+                                    <Col>
+                                        <Form.Item
+                                            name="password"
+                                            rules={[{required: true, message: 'Please input your Password!'}]}
+                                        >
+                                            <Input
+                                                prefix={<LockOutlined className="site-form-item-icon"/>}
+                                                type="password"
+                                                placeholder="Password"
+                                                onChange={event => setPassword(event.target.value)}
+                                            />
+                                        </Form.Item>
+                                    </Col>
+                                </Row>
+                                <Row justify="space-around" align="middle">
+                                    <Col>
                                         <Form.Item>
                                             <Button type="primary" htmlType="submit" className="login-form-button">
                                                 Log in
                                             </Button>
                                         </Form.Item>
-                                    </Centered>
-                                    <Centered>
+                                    </Col>
+                                </Row>
+                                <Row justify="space-around" align="middle" style={{textAlign: "center"}}>
+                                    <Col>
                                             <span>
                                                  Don't have an account? <a href="/register">Register now!</a>
                                             </span>
-                                    </Centered>
-                                    <Divider plain>Or login via</Divider>
-                                    <Row justify="space-around" align="middle">
-                                        <Col xs={24} xl={8}>
-                                            <Centered>
-                                                <Button
-                                                    type="primary"
-                                                    icon={<GoogleCircleFilled/>}
-                                                    onClick={signInWithGoogle}
-                                                >
-                                                    Google
-                                                </Button>
-                                            </Centered>
-                                        </Col>
-                                        <Col xs={24} xl={8}>
-                                            <Centered>
-                                                <Button
-                                                    type="primary"
-                                                    icon={<FacebookFilled/>}
-                                                    onClick={signInWithFacebook}
-                                                >
-                                                    Facebook
-                                                </Button>
-                                            </Centered>
-                                        </Col>
-                                        <Col xs={24} xl={8}>
-                                            <Centered>
-                                                <Button
-                                                    type="primary"
-                                                    icon={<TwitterCircleFilled/>}
-                                                    onClick={signInWithTwitter}
-                                                >
-                                                    Twitter
-                                                </Button>
-                                            </Centered>
-                                        </Col>
-                                    </Row>
-                                </Form>
-                            </Col>
-                        </Row>
-                    </Centered>
-                </DynamicFont>
+                                    </Col>
+                                </Row>
+                                <Divider plain>Or login via</Divider>
+                                <Row
+                                    justify="space-around"
+                                    align="middle"
+                                    gutter={[16, 24]}
+                                >
+                                    <Col
+                                        xs={24}
+                                        xl={8}
+                                        className="oauth-button"
+                                    >
+                                        <Centered>
+                                            <Button
+                                                type="primary"
+                                                icon={<GoogleCircleFilled/>}
+                                                onClick={signInWithGoogle}
+                                            >
+                                                Google
+                                            </Button>
+                                        </Centered>
+                                    </Col>
+                                    <Col
+                                        xs={24}
+                                        xl={8}
+                                        className="oauth-button"
+                                    >
+                                        <Centered>
+                                            <Button
+                                                type="primary"
+                                                icon={<FacebookFilled/>}
+                                                onClick={signInWithFacebook}
+                                            >
+                                                Facebook
+                                            </Button>
+                                        </Centered>
+                                    </Col
+                                    >
+                                    <Col
+                                        xs={24}
+                                        xl={8}
+                                        className="oauth-button"
+                                    >
+                                        <Centered>
+                                            <Button
+                                                type="primary"
+                                                icon={<TwitterCircleFilled/>}
+                                                onClick={signInWithTwitter}
+                                            >
+                                                Twitter
+                                            </Button>
+                                        </Centered>
+                                    </Col>
+                                </Row>
+                            </Form>
+                        </Col>
+                    </Row>
+                </Centered>
             </Layout.Content>
         </Layout>
     );

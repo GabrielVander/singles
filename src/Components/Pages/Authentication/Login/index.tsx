@@ -1,7 +1,5 @@
 import React, {useState} from "react";
-import Centered from "../../../Styled/Centered";
-import {Col, Layout, message, Row} from "antd";
-import logo from "./logo.svg";
+import {message} from "antd";
 import './styles.css';
 import {Credentials, useFirebase} from "react-redux-firebase";
 import {useHistory} from "react-router-dom";
@@ -10,7 +8,8 @@ import AuthMethod from "../../../../Model/Authentication/AuthMethod";
 import {User} from "firebase";
 import CenteredSpin from "../../../Others/CenteredSpin";
 import {useTranslation} from "react-i18next";
-import LoginForm from "../../../Others/LoginForm";
+import LoginForm from "./LoginForm";
+import AuthLayout from "../../../Others/AuthLayout";
 
 function Login() {
     const firebase = useFirebase();
@@ -60,42 +59,13 @@ function Login() {
     }
 
     return (
-        <Layout style={{height: "100%"}}>
-            <Layout.Content>
-                <Centered>
-                    <Row
-                        className="main-row"
-                        justify="space-around"
-                        align="middle"
-                    >
-                        <Col
-                            xs={16}
-                            sm={16}
-                            md={16}
-                            lg={12}
-                            xl={12}
-                        >
-                            <Centered>
-                                <img src={logo} className="logo" alt="logo"/>
-                            </Centered>
-                        </Col>
-                        <Col
-                            xs={16}
-                            sm={16}
-                            md={16}
-                            lg={12}
-                            xl={12}
-                        >
-                            <LoginForm
-                                signInWithEmailAndPassword={signInWithEmailAndPassword}
-                                signInWithGoogle={signInWithGoogle}
-                                signInWithFacebook={signInWithFacebook}
-                                signInWithTwitter={signInWithTwitter}/>
-                        </Col>
-                    </Row>
-                </Centered>
-            </Layout.Content>
-        </Layout>
+        <AuthLayout>
+            <LoginForm
+                signInWithEmailAndPassword={signInWithEmailAndPassword}
+                signInWithGoogle={signInWithGoogle}
+                signInWithFacebook={signInWithFacebook}
+                signInWithTwitter={signInWithTwitter}/>
+        </AuthLayout>
     );
 }
 

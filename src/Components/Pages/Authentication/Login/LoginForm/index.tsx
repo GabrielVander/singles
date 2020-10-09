@@ -2,9 +2,9 @@ import {Trans, useTranslation} from "react-i18next";
 import React, {useState} from "react";
 import {Button, Col, Divider, Form, Input, Row} from "antd";
 import {LockOutlined, MailOutlined} from "@ant-design/icons";
-import GoogleButton from "../GoogleButton";
-import FacebookButton from "../FacebookButton";
-import TwitterButton from "../TwitterButton";
+import GoogleButton from "../../../../Others/GoogleButton";
+import FacebookButton from "../../../../Others/FacebookButton";
+import TwitterButton from "../../../../Others/TwitterButton";
 
 interface LoginFormProps {
     signInWithEmailAndPassword: (email: string, password: string) => void;
@@ -82,24 +82,15 @@ function LoginForm(props: LoginFormProps) {
             align="middle"
             gutter={[16, 24]}
         >
-            <Col
-                xs={24}
-                xl={8}
-                className="oauth-button"
+            <Col xs={24} xl={8} className="oauth-button"
             >
                 <GoogleButton onClick={props.signInWithGoogle}/>
             </Col>
-            <Col
-                xs={24}
-                xl={8}
-                className="oauth-button"
+            <Col xs={24} xl={8} className="oauth-button"
             >
                 <FacebookButton onClick={props.signInWithFacebook}/>
             </Col>
-            <Col
-                xs={24}
-                xl={8}
-                className="oauth-button"
+            <Col xs={24} xl={8} className="oauth-button"
             >
                 <TwitterButton onClick={props.signInWithTwitter}/>
             </Col>

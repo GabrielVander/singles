@@ -16,4 +16,6 @@
 
 .logo {
     margin-bottom: 15px;
+    height: max(calc(15vh + 15vw), 200px);
+    width: max(calc(15vh + 15vw), 200px);
 }

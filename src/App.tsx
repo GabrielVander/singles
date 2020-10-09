@@ -3,7 +3,7 @@ import DefaultApp from "./Components/Pages/DefaultApp";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {HOME, LOGIN} from "./Routes/AppRoutes";
 import CenteredSpin from "./Components/Others/CenteredSpin";
-import Login from "./Components/Pages/Login";
+import Login from "./Components/Pages/Authentication/Login";
 
 function App() {
     return (

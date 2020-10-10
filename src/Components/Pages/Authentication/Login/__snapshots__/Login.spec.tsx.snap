@@ -35,7 +35,7 @@ Object {
                 class="ant-col ant-col-xs-16 ant-col-sm-16 ant-col-md-16 ant-col-lg-12 ant-col-xl-12"
               >
                 <form
-                  class="ant-form ant-form-horizontal login-form"
+                  class="ant-form ant-form-horizontal"
                   id="normal_login"
                 >
                   <div
@@ -383,7 +383,7 @@ Object {
               class="ant-col ant-col-xs-16 ant-col-sm-16 ant-col-md-16 ant-col-lg-12 ant-col-xl-12"
             >
               <form
-                class="ant-form ant-form-horizontal login-form"
+                class="ant-form ant-form-horizontal"
                 id="normal_login"
               >
                 <div

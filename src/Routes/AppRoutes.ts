@@ -11,3 +11,9 @@ export const LOGIN: Route = {
     exact: false,
     private: false
 }
+
+export const REGISTER: Route = {
+    path: '/register',
+    exact: false,
+    private: false
+}

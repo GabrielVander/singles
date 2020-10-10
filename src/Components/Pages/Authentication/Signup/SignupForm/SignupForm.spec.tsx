@@ -1,8 +1,9 @@
 import {render} from "@testing-library/react";
-import React from "react";
-import Login from "./index";
 import {Provider} from "react-redux";
-import Store from "../../../Redux/Store";
+import Store from "../../../../../Redux/Store";
+import {BrowserRouter} from "react-router-dom";
+import React from "react";
+import SignupForm from "./index";
 
 // Jest's official workaround for the "window.matchMedia is not a function" error
 beforeAll(() => {
@@ -24,9 +25,15 @@ beforeAll(() => {
 test('matches snapshot', () => {
     const component = render(
         <Provider store={Store.store}>
-            <Login/>
+            <BrowserRouter>
+                <SignupForm
+                    signInWithEmailAndPassword={jest.fn()}
+                    signInWithFacebook={jest.fn()}
+                    signInWithGoogle={jest.fn()}
+                    signInWithTwitter={jest.fn()}
+                />
+            </BrowserRouter>
         </Provider>
     );
-
     expect(component).toMatchSnapshot();
 })

@@ -1,6 +1,6 @@
 import {Col, Layout, Row} from "antd";
 import Centered from "../../Styled/Centered";
-import logo from "../../Pages/Authentication/Login/logo.svg";
+import logo from "./logo.svg";
 import React from "react";
 
 interface AuthLayoutProps {

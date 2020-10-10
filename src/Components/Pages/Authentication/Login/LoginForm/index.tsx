@@ -5,6 +5,8 @@ import {LockOutlined, MailOutlined} from "@ant-design/icons";
 import GoogleButton from "../../../../Others/GoogleButton";
 import FacebookButton from "../../../../Others/FacebookButton";
 import TwitterButton from "../../../../Others/TwitterButton";
+import {Link} from "react-router-dom";
+import "./styles.css";
 
 interface LoginFormProps {
     signInWithEmailAndPassword: (email: string, password: string) => void;
@@ -20,7 +22,6 @@ function LoginForm(props: LoginFormProps) {
 
     return <Form
         name="normal_login"
-        className="login-form"
         initialValues={{remember: true}}
         onFinish={() => props.signInWithEmailAndPassword(email!, password!)}
     >
@@ -71,7 +72,7 @@ function LoginForm(props: LoginFormProps) {
             <Col>
                 <span>
                     <Trans i18nKey="loginForm:noAccount">
-                     Don't have an account? <a href="/register">Register now!</a>
+                     Don't have an account? <Link to="/register">Register now!</Link>
                     </Trans>
                 </span>
             </Col>

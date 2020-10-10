@@ -4,7 +4,7 @@ import logo from "../../Pages/Authentication/Login/logo.svg";
 import React from "react";
 
 interface AuthLayoutProps {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 function AuthLayout(props: AuthLayoutProps) {

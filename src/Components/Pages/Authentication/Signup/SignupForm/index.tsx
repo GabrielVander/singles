@@ -1,16 +1,11 @@
 import {useTranslation} from "react-i18next";
 import React from "react";
-import {Button, Col, Divider, Form, Input, Row} from "antd";
-import GoogleButton from "../../../../Others/GoogleButton";
-import FacebookButton from "../../../../Others/FacebookButton";
-import TwitterButton from "../../../../Others/TwitterButton";
+import {Button, Col, Form, Input, Row} from "antd";
 import "./styles.css";
+import OAuth from "../../../../Others/OAuth";
 
 interface SignupFormProps {
     signInWithEmailAndPassword: (email: string, password: string) => void;
-    signInWithGoogle: () => void;
-    signInWithFacebook: () => void;
-    signInWithTwitter: () => void;
 }
 
 function SignupForm(props: SignupFormProps) {
@@ -95,32 +90,16 @@ function SignupForm(props: SignupFormProps) {
             </Row>
             <Row justify="space-around" align="middle">
                 <Col>
-                    <Form.Item /*{...tailFormItemLayout}*/>
+                    <Form.Item>
                         <Button type="primary" htmlType="submit">
                             Register
                         </Button>
                     </Form.Item>
                 </Col>
             </Row>
-            <Divider plain>{t('loginForm:oauthSubdivision')}</Divider>
-            <Row
-                justify="space-around"
-                align="middle"
-                gutter={[16, 24]}
-            >
-                <Col xs={24} xl={8} className="oauth-button"
-                >
-                    <GoogleButton onClick={props.signInWithGoogle}/>
-                </Col>
-                <Col xs={24} xl={8} className="oauth-button"
-                >
-                    <FacebookButton onClick={props.signInWithFacebook}/>
-                </Col>
-                <Col xs={24} xl={8} className="oauth-button"
-                >
-                    <TwitterButton onClick={props.signInWithTwitter}/>
-                </Col>
-            </Row>
+            <OAuth
+                sectionTitle={t('signupForm:oauthSubdivision')}
+            />
         </Form>
     );
 }

@@ -253,7 +253,7 @@ Object {
           <span
             class="ant-divider-inner-text"
           >
-            loginForm:oauthSubdivision
+            signupForm:oauthSubdivision
           </span>
         </div>
         <div
@@ -624,7 +624,7 @@ Object {
         <span
           class="ant-divider-inner-text"
         >
-          loginForm:oauthSubdivision
+          signupForm:oauthSubdivision
         </span>
       </div>
       <div

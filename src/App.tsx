@@ -1,9 +1,9 @@
 import React, {Suspense} from 'react';
-import DefaultApp from "./Components/Pages/DefaultApp";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {HOME, LOGIN} from "./Routes/AppRoutes";
 import CenteredSpin from "./Components/Others/CenteredSpin";
 import Login from "./Components/Pages/Login";
+import Home from "./Components/Pages/Landing/Home";
 
 function App() {
     return (
@@ -17,7 +17,7 @@ function App() {
                     </Route>
                     <Route path={HOME.path} exact={HOME.exact}>
                         <Suspense fallback={<CenteredSpin/>}>
-                            <DefaultApp/>
+                            <Home/>
                         </Suspense>
                     </Route>
                 </Switch>

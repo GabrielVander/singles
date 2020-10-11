@@ -11,3 +11,9 @@ export const LOGIN: Route = {
     exact: false,
     private: false
 }
+
+export const NOT_FOUND: Route = {
+    path: '*',
+    exact: true,
+    private: false
+}

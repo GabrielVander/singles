@@ -9,7 +9,7 @@ interface SignupFormProps {
 }
 
 function SignupForm(props: SignupFormProps) {
-    const {t} = useTranslation(['loginForm']);
+    const {t} = useTranslation(['signupForm']);
     const [form] = Form.useForm();
 
     return (
@@ -29,15 +29,15 @@ function SignupForm(props: SignupFormProps) {
                 <Col flex="auto">
                     <Form.Item
                         name="email"
-                        label="E-mail"
+                        label={t('signupForm:emailLabel')}
                         rules={[
                             {
                                 type: 'email',
-                                message: 'The input is not valid E-mail!',
+                                message: t('signupForm:emailInvalid'),
                             },
                             {
                                 required: true,
-                                message: 'Please input your E-mail!',
+                                message: t('signupForm:emailRequired'),
                             },
                         ]}
                     >
@@ -49,11 +49,11 @@ function SignupForm(props: SignupFormProps) {
                 <Col flex="auto">
                     <Form.Item
                         name="password"
-                        label="Password"
+                        label={t('signupForm:passwordLabel')}
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your password!',
+                                message: t('signupForm:passwordRequired'),
                             },
                         ]}
                         hasFeedback
@@ -66,20 +66,20 @@ function SignupForm(props: SignupFormProps) {
                 <Col flex="auto">
                     <Form.Item
                         name="confirm"
-                        label="Confirm Password"
+                        label={t('signupForm:passwordConfirmLabel')}
                         dependencies={['password']}
                         hasFeedback
                         rules={[
                             {
                                 required: true,
-                                message: 'Please confirm your password!',
+                                message: t('signupForm:passwordConfirmRequired'),
                             },
                             ({getFieldValue}) => ({
                                 validator(rule, value) {
                                     if (!value || getFieldValue('password') === value) {
                                         return Promise.resolve();
                                     }
-                                    return Promise.reject('The two passwords that you entered do not match!');
+                                    return Promise.reject(t('signupForm:passwordsDontMatch'));
                                 },
                             }),
                         ]}
@@ -92,7 +92,7 @@ function SignupForm(props: SignupFormProps) {
                 <Col>
                     <Form.Item>
                         <Button type="primary" htmlType="submit">
-                            Register
+                            {t('signupForm:registerButton')}
                         </Button>
                     </Form.Item>
                 </Col>

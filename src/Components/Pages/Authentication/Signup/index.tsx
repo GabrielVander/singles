@@ -17,7 +17,7 @@ function Signup() {
     const history = useHistory();
     const loading = useSelector<RootState>((state) => state.app.loading)
     const dispatch = useDispatch();
-    const {t} = useTranslation(['login']);
+    const {t} = useTranslation(['signup']);
 
     function signInWithEmailAndPassword(email: string, password: string) {
         dispatch(toggleLoading());
@@ -37,7 +37,7 @@ function Signup() {
     }
 
     if (loading) {
-        return <CenteredSpin tip={t('login:loggingIn')}/>
+        return <CenteredSpin tip={t('signup:signingIn')}/>
     }
 
     return (

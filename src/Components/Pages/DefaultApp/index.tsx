@@ -7,7 +7,7 @@ import {isEmpty, isLoaded} from "react-redux-firebase";
 import {useHistory} from 'react-router-dom';
 import {LOGIN} from "../../../Routes/AppRoutes";
 import {useSelector} from "react-redux";
-import {RootState} from "../../../Redux/Reducers";
+import RootState from "../../../Redux/States/RootState";
 
 function DefaultApp() {
     const auth = useSelector<RootState>(state => state.firebase.auth)

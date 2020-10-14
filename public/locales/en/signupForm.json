@@ -1,0 +1,12 @@
+{
+    "emailLabel": "Email",
+    "emailInvalid": "Invalid email",
+    "emailRequired": "Email is required",
+    "passwordLabel": "Password",
+    "passwordRequired": "Password is required",
+    "passwordConfirmLabel": "Confirm password",
+    "passwordConfirmRequired": "Password confirmation is required",
+    "passwordsDontMatch": "Passwords don't match",
+    "registerButton": "Register",
+    "oauthSubdivision": "Or sign in via"
+}

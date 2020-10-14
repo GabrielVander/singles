@@ -95,7 +95,7 @@ const Header = ({
             >
               <span className="screen-reader">Menu</span>
               <span className="hamburger">
-                  <span className="hamburger-inner"></span>
+                  <span className="hamburger-inner"/>
                 </span>
             </button>
             <nav
@@ -111,17 +111,16 @@ const Header = ({
                     'list-reset text-xs',
                     navPosition && `header-nav-${navPosition}`
                   )}>
-                  <li>
-                    <Link to="#0" onClick={closeMenu}>Documentation</Link>
-                  </li>
                 </ul>
                 {!hideSignin &&
                 <ul
                   className="list-reset header-nav-right"
                 >
                   <li>
-                    <Link to="#0" className="button button-primary button-wide-mobile button-sm" onClick={closeMenu}>Sign
-                      up</Link>
+                    <Link to="/login" className="button button-primary button-wide-mobile button-sm"
+                          onClick={closeMenu}>
+                      Login
+                    </Link>
                   </li>
                 </ul>}
               </div>

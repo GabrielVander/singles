@@ -1,22 +1,12 @@
 import {combineReducers} from "redux";
-import {FirebaseReducer, firebaseReducer, FirestoreReducer} from "react-redux-firebase";
+import {firebaseReducer} from "react-redux-firebase";
 import {firestoreReducer} from "redux-firestore";
+import appReducer from "./AppReducer";
 
-interface Profile {
-    id: string
-    name: string
-    email: string
-}
-
-export interface RootState {
-    firebase: FirebaseReducer.Reducer<Profile>;
-    firestore: FirestoreReducer.Reducer;
-}
-
-const rootReducer = combineReducers<RootState>({
+const rootReducer = combineReducers({
     firebase: firebaseReducer,
-    // @ts-ignore
     firestore: firestoreReducer,
+    app: appReducer,
 });
 
 export default rootReducer;

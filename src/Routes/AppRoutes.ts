@@ -17,3 +17,9 @@ export const NOT_FOUND: Route = {
     exact: true,
     private: false
 }
+
+export const REGISTER: Route = {
+    path: '/register',
+    exact: false,
+    private: false
+}

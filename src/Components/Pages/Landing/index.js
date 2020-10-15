@@ -1,8 +1,8 @@
 import React from "react";
 import {Box} from "grommet";
 import NavHeader from "./NavHeader";
-import Hero from "./Hero";
-import Sign from "./Sign";
+import Hero from "../../Others/Hero";
+import RegisterBeta from "../../Others/RegisterBeta";
 import Features from "./features/Features";
 import Talents from "./Talents";
 import Section from "./Section";
@@ -14,7 +14,7 @@ const Landing = () => {
       <NavHeader/>
       <Box align="center" pad="large">
         <Hero size="xlarge"/>
-        <Sign/>
+        <RegisterBeta/>
         <Features/>
       </Box>
       <Talents/>

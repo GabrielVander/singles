@@ -38,9 +38,9 @@ Object {
                 <label
                   class="ant-form-item-required"
                   for="register_email"
-                  title="E-mail"
+                  title="signupForm:emailLabel"
                 >
-                  E-mail
+                  signupForm:emailLabel
                 </label>
               </div>
               <div
@@ -80,9 +80,9 @@ Object {
                 <label
                   class="ant-form-item-required"
                   for="register_password"
-                  title="Password"
+                  title="signupForm:passwordLabel"
                 >
-                  Password
+                  signupForm:passwordLabel
                 </label>
               </div>
               <div
@@ -155,9 +155,9 @@ Object {
                 <label
                   class="ant-form-item-required"
                   for="register_confirm"
-                  title="Confirm Password"
+                  title="signupForm:passwordConfirmLabel"
                 >
-                  Confirm Password
+                  signupForm:passwordConfirmLabel
                 </label>
               </div>
               <div
@@ -237,7 +237,7 @@ Object {
                       type="submit"
                     >
                       <span>
-                        Register
+                        signupForm:registerButton
                       </span>
                     </button>
                   </div>
@@ -409,9 +409,9 @@ Object {
               <label
                 class="ant-form-item-required"
                 for="register_email"
-                title="E-mail"
+                title="signupForm:emailLabel"
               >
-                E-mail
+                signupForm:emailLabel
               </label>
             </div>
             <div
@@ -451,9 +451,9 @@ Object {
               <label
                 class="ant-form-item-required"
                 for="register_password"
-                title="Password"
+                title="signupForm:passwordLabel"
               >
-                Password
+                signupForm:passwordLabel
               </label>
             </div>
             <div
@@ -526,9 +526,9 @@ Object {
               <label
                 class="ant-form-item-required"
                 for="register_confirm"
-                title="Confirm Password"
+                title="signupForm:passwordConfirmLabel"
               >
-                Confirm Password
+                signupForm:passwordConfirmLabel
               </label>
             </div>
             <div
@@ -608,7 +608,7 @@ Object {
                     type="submit"
                   >
                     <span>
-                      Register
+                      signupForm:registerButton
                     </span>
                   </button>
                 </div>

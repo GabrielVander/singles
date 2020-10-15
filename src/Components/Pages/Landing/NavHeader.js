@@ -1,7 +1,7 @@
 import React from "react";
 import {Anchor, Box, ResponsiveContext, Text} from "grommet";
 import SocialMedia from "./SocialMedia";
-import Logo from "./Logo";
+import Logo from "../../Others/Logo";
 import {useTranslation} from "react-i18next";
 
 const NavHeader = () => {

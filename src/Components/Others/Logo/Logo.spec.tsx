@@ -1,11 +1,11 @@
+// Jest's official workaround for the "window.matchMedia is not a function" error
 import {render} from "@testing-library/react";
 import {Provider} from "react-redux";
 import Store from "../../../Redux/Store";
 import {BrowserRouter} from "react-router-dom";
 import React from "react";
-import Hero from "./index";
+import Logo from "./index";
 
-// Jest's official workaround for the "window.matchMedia is not a function" error
 beforeAll(() => {
     Object.defineProperty(window, "matchMedia", {
         writable: true,
@@ -26,7 +26,7 @@ test('matches snapshot', () => {
     const component = render(
         <Provider store={Store.store}>
             <BrowserRouter>
-                <Hero size="small"/>
+                <Logo/>
             </BrowserRouter>
         </Provider>
     );

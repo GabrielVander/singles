@@ -1,7 +1,7 @@
 import React from "react";
 import {Box, ResponsiveContext, Text} from "grommet";
 
-import Logo from "../Logo";
+import Logo from "../../../Others/Logo";
 import SocialMedia from "../SocialMedia";
 import FooterContent from "./FooterContent";
 

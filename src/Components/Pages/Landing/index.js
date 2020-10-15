@@ -1,7 +1,7 @@
 import React from "react";
 import {Box} from "grommet";
 import NavHeader from "./NavHeader";
-import InstaXtreme from "./InstaXtreme";
+import Hero from "./Hero";
 import Sign from "./Sign";
 import Features from "./features/Features";
 import Talents from "./Talents";
@@ -13,7 +13,7 @@ const Landing = () => {
     <>
       <NavHeader/>
       <Box align="center" pad="large">
-        <InstaXtreme size="xlarge"/>
+        <Hero size="xlarge"/>
         <Sign/>
         <Features/>
       </Box>

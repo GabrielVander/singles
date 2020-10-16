@@ -6,7 +6,7 @@ import "firebase/firestore";
 
 class FirebaseConfig {
 
-    private static config = {
+    public static config = {
         apiKey: "AIzaSyC0DUjj-QV0rJIndPbilcf4YO3hq8JRJRw",
         authDomain: "singles-7aa8b.firebaseapp.com",
         databaseURL: "https://singles-7aa8b.firebaseio.com",

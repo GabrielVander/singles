@@ -5,8 +5,6 @@ import Hero from "../../Commom/Hero";
 import RegisterBeta from "../../Commom/RegisterBeta";
 import Features from "../../Commom/Features";
 import JoinUs from "../../Commom/JoinUs";
-import Section from "./Section";
-import Footer from "./footer/Footer";
 
 const Landing = () => {
   return (
@@ -18,11 +16,10 @@ const Landing = () => {
       </Box>
       <Box>
         <Features/>
+      </Box>
+      <Box>
         <JoinUs/>
       </Box>
-      <Section>
-        <Footer/>
-      </Section>
     </>
   );
 }

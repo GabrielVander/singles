@@ -4,7 +4,7 @@ import {Button, Col, Form, Input, Row} from "antd";
 import {LockOutlined, MailOutlined} from "@ant-design/icons";
 import {Link} from "react-router-dom";
 import "./styles.css";
-import OAuth from "../../../../Others/OAuth";
+import OAuth from "../../../../Commom/OAuth";
 
 interface LoginFormProps {
     signInWithEmailAndPassword: (email: string, password: string) => void;

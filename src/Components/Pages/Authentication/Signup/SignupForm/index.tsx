@@ -2,7 +2,7 @@ import {useTranslation} from "react-i18next";
 import React from "react";
 import {Button, Col, Form, Input, Row} from "antd";
 import "./styles.css";
-import OAuth from "../../../../Others/OAuth";
+import OAuth from "../../../../Commom/OAuth";
 
 interface SignupFormProps {
     signInWithEmailAndPassword: (email: string, password: string) => void;

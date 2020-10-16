@@ -1,7 +1,7 @@
 import React, {Suspense} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {HOME, LOGIN, REGISTER} from "./Routes/AppRoutes";
-import CenteredSpin from "./Components/Others/CenteredSpin";
+import CenteredSpin from "./Components/Commom/CenteredSpin";
 import Login from "./Components/Pages/Authentication/Login";
 import Signup from "./Components/Pages/Authentication/Signup";
 import Landing from "./Components/Pages/Landing";

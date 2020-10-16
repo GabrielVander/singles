@@ -1,6 +1,6 @@
 import React from "react";
 import {Box} from "grommet";
-import NavHeader from "./NavHeader";
+import NavHeader from "../../Commom/NavHeader";
 import Hero from "../../Commom/Hero";
 import RegisterBeta from "../../Commom/RegisterBeta";
 import Features from "../../Commom/Features";

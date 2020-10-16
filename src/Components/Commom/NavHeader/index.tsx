@@ -1,7 +1,6 @@
 import React from "react";
 import {Anchor, Box, ResponsiveContext, Text} from "grommet";
-import SocialMedia from "./SocialMedia";
-import Logo from "../../Commom/Logo";
+import Logo from "../Logo";
 import {useTranslation} from "react-i18next";
 
 const NavHeader = () => {
@@ -26,7 +25,6 @@ const NavHeader = () => {
               size !== "small" && <Text size="large">{t('navHeader:brandName')}</Text>
             }
           />
-          <SocialMedia/>
         </Box>
       )}
     </ResponsiveContext.Consumer>

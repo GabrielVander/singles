@@ -1,7 +1,7 @@
 import React from "react";
 
 import {Box, Heading, Paragraph} from "grommet";
-import FeatureEmoji from "../../Pages/Landing/emojis/FeatureEmoji";
+import FeatureEmoji from "../FeatureEmoji";
 import RegisterBeta from "../RegisterBeta";
 import {useTranslation} from "react-i18next";
 

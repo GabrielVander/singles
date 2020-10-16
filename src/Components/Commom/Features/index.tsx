@@ -1,7 +1,7 @@
 import React from "react";
 import {Box} from "grommet";
 import Tile from "./Tile";
-import FeatureEmoji from "../../Pages/Landing/emojis/FeatureEmoji";
+import FeatureEmoji from "../FeatureEmoji";
 import {useTranslation} from "react-i18next";
 
 const Features = () => {

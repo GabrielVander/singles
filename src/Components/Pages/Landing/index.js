@@ -15,9 +15,11 @@ const Landing = () => {
       <Box align="center" pad="large">
         <Hero size="xlarge"/>
         <RegisterBeta/>
-        <Features/>
       </Box>
-      <Talents/>
+      <Box>
+        <Features/>
+        <Talents/>
+      </Box>
       <Section>
         <Footer/>
       </Section>

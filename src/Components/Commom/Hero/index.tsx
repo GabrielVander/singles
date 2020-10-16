@@ -1,5 +1,4 @@
 import React, {Fragment} from "react";
-import PropTypes from "prop-types";
 
 import {Box, Heading, Paragraph} from "grommet";
 import {Trans, useTranslation} from "react-i18next";
@@ -24,10 +23,6 @@ const Hero = ({size}: HeroProps) => {
             </Paragraph>
         </Fragment>
     );
-};
-
-Hero.propTypes = {
-    size: PropTypes.string.isRequired
 };
 
 export default Hero;

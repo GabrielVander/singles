@@ -1,16 +1,15 @@
-import React from 'react';
-import {render} from '@testing-library/react';
-import DefaultApp from "./index";
-import Store from "../../../Redux/Store";
-
+import {render} from "@testing-library/react";
 import {Provider} from "react-redux";
+import Store from "../../../Redux/Store";
 import {BrowserRouter} from "react-router-dom";
+import React from "react";
+import Landing from "./index";
 
 test('matches snapshot', () => {
     const component = render(
         <Provider store={Store.store}>
             <BrowserRouter>
-                <DefaultApp/>
+                <Landing/>
             </BrowserRouter>
         </Provider>
     );

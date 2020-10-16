@@ -4,7 +4,7 @@ import NavHeader from "./NavHeader";
 import Hero from "../../Commom/Hero";
 import RegisterBeta from "../../Commom/RegisterBeta";
 import Features from "../../Commom/Features";
-import Talents from "./Talents";
+import JoinUs from "../../Commom/JoinUs";
 import Section from "./Section";
 import Footer from "./footer/Footer";
 
@@ -18,7 +18,7 @@ const Landing = () => {
       </Box>
       <Box>
         <Features/>
-        <Talents/>
+        <JoinUs/>
       </Box>
       <Section>
         <Footer/>

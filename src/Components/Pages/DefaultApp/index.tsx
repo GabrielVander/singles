@@ -3,11 +3,10 @@ import logo from './logo.svg';
 import './DefaultApp.css';
 import {Trans, useTranslation} from "react-i18next";
 import DynamicFont from "../../Styled/DynamicFont";
-import {useUser} from "reactfire";
 
 function DefaultApp() {
     const {t} = useTranslation(['defaultApp']);
-    console.log(useUser());
+
     return (
         <DynamicFont>
             <div className="App">

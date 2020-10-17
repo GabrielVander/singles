@@ -8,6 +8,7 @@ import {Trans, useTranslation} from "react-i18next";
 import {useAuth} from "reactfire";
 import {toast} from "react-toastify";
 import Loader from "react-loader-spinner";
+import firebase from "firebase/app";
 
 function Login() {
     const {t} = useTranslation(['login']);
@@ -22,24 +23,40 @@ function Login() {
         setSigningIn(true);
         auth
             .signInWithEmailAndPassword(email!, password!)
-            .then(user => {
+            .then(credential => {
+                toast.success(t('login:successfullyLoggedIn', {name: credential.user?.displayName || credential.user?.email}));
                 history.push(HOME.path);
-                toast.success(t('login:successfullyLoggedIn', {name: user.user?.displayName || user.user?.email}));
             })
-            .catch(reason => toast.error(reason))
-            .finally(() => setSigningIn(false));
+            .catch(reason => {
+                setSigningIn(false);
+                toast.error(reason);
+            });
     }
 
     function loginWithGoogle() {
-
+        oAuthLogin(new firebase.auth.GoogleAuthProvider());
     }
 
     function loginWithFacebook() {
-
+        oAuthLogin(new firebase.auth.FacebookAuthProvider());
     }
 
     function loginWithTwitter() {
+        oAuthLogin(new firebase.auth.TwitterAuthProvider());
+    }
 
+    function oAuthLogin(provider: firebase.auth.AuthProvider) {
+        setSigningIn(true);
+        auth.useDeviceLanguage();
+        auth.signInWithPopup(provider)
+            .then(credential => {
+                toast.success(t('login:successfullyLoggedIn', {name: credential.user?.displayName || credential.user?.email}));
+                history.push(HOME.path);
+            })
+            .catch(reason => {
+                setSigningIn(false);
+                toast.error(reason);
+            });
     }
 
     return (

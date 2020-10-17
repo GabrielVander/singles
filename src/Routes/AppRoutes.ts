@@ -17,3 +17,9 @@ export const REGISTER: Route = {
     exact: false,
     private: false
 }
+
+export const LANDING: Route = {
+    path: '/landing',
+    exact: false,
+    private: false
+}

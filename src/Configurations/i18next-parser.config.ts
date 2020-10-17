@@ -1,6 +1,6 @@
 // @ts-ignore
 module.exports = {
-    createOldCatalogs: true,
+    createOldCatalogs: false,
     defaultNamespace: 'translation',
     defaultValue: '',
     keepRemoved: false,
@@ -10,7 +10,6 @@ module.exports = {
         ts: ['JsxLexer'],
         jsx: ['JsxLexer'],
         tsx: ['JsxLexer'],
-
         default: ['JsxLexer'],
     },
     locales: ['en'],

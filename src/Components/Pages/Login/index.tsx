@@ -4,8 +4,11 @@ import logo from "../../../Assets/logoWithText.svg";
 import {Facebook, Google, Twitter} from "grommet-icons";
 import {Link} from "react-router-dom";
 import {REGISTER} from "../../../Routes/AppRoutes";
+import {Trans, useTranslation} from "react-i18next";
 
 function Login() {
+    const {t} = useTranslation(['login']);
+
     const [email, setEmail] = useState<string>();
     const [password, setPassword] = useState<string>();
 
@@ -35,7 +38,7 @@ function Login() {
                         width="small"
                         height="small"
                     >
-                        <img src={logo} alt="App's logo"/>
+                        <img src={logo} alt={t('login:logoLabel')}/>
                     </Box>
                     <Box>
                         <Form
@@ -53,12 +56,12 @@ function Login() {
                                 name="email"
                                 // @ts-ignore
                                 htmlfor="email-input-id"
-                                label="Email">
+                                label={t('login:emailLabel')}>
                                 <TextInput
                                     id="email-input-id"
                                     autoFocus={true}
                                     type="email"
-                                    placeholder="Type your email address"
+                                    placeholder={t('login:emailPlaceholder')}
                                     onChange={event => setEmail(event.target.value)}
                                     name="email"/>
                             </FormField>
@@ -67,12 +70,12 @@ function Login() {
                                 value={password}
                                 // @ts-ignore
                                 htmlfor="password-input-id"
-                                label="Password">
+                                label={t('login:passwordLabel')}>
                                 <TextInput
                                     id="password-input-id"
                                     type="password"
                                     autoFocus={true}
-                                    placeholder="Type your password"
+                                    placeholder={t('login:passwordPlaceholder')}
                                     onChange={event => setPassword(event.target.value)}
                                     name="password"/>
                             </FormField>
@@ -82,7 +85,7 @@ function Login() {
                                 justify="center"
                                 margin="medium"
                             >
-                                <Button type="submit" primary label="Login"/>
+                                <Button type="submit" primary label={t('login:loginButtonLabel')}/>
                             </Box>
                             <Box
                                 direction="row"
@@ -91,7 +94,7 @@ function Login() {
                                 margin="small"
                             >
                                 <Paragraph margin="none">
-                                    Or login via
+                                    {t('login:loginVia')}
                                 </Paragraph>
                             </Box>
                             <Box
@@ -112,7 +115,9 @@ function Login() {
                                 direction="row"
                                 margin="small">
                                 <Paragraph margin="none">
-                                    Don't have an account? <Link to={REGISTER.path}>Register now</Link>
+                                    <Trans i18nKey="login:register">
+                                        Don't have an account? <Link to={REGISTER.path}>Register now</Link>
+                                    </Trans>
                                 </Paragraph>
                             </Box>
                         </Form>

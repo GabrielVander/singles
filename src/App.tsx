@@ -1,7 +1,6 @@
 import React, {Suspense} from 'react';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import {HOME, LANDING, LOGIN, REGISTER} from "./Routes/AppRoutes";
-import Signup from "./Components/Pages/Authentication/Signup";
 import Landing from "./Components/Pages/Landing";
 import {Grommet} from "grommet";
 import {customTheme} from "./theme";
@@ -12,6 +11,7 @@ import DefaultApp from "./Components/Pages/DefaultApp";
 import {AuthCheck} from "reactfire";
 import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer} from "react-toastify";
+import Register from "./Components/Pages/Register";
 
 function App() {
     return (
@@ -34,7 +34,7 @@ function App() {
                                     <Loader type="Puff"/>
                                 </Centered>
                             }>
-                                <Signup/>
+                                <Register/>
                             </Suspense>
                         </Route>
                         <Route path={LANDING.path} exact={LANDING.exact}>

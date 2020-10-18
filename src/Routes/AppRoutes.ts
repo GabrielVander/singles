@@ -1,8 +1,8 @@
 import Route from "../Model/Route";
 
 export const HOME: Route = {
-    path: '/',
-    exact: true,
+    path: '/home',
+    exact: false,
     private: true
 }
 
@@ -19,7 +19,7 @@ export const REGISTER: Route = {
 }
 
 export const LANDING: Route = {
-    path: '/landing',
-    exact: false,
+    path: '/',
+    exact: true,
     private: false
 }

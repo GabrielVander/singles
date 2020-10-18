@@ -1,0 +1,18 @@
+{
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required",
+    "passwordConfirmationRequired": "Please confirm your password",
+    "passwordsDontMatch": "Passwords do not match",
+    "registeredSuccessfully": "Registered successfully as {{name}}",
+    "logoLabel": "App's logo",
+    "title": "Register",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Insert your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Choose a password",
+    "passwordConfirmationLabel": "Password confirmation",
+    "passwordConfirmationPlaceholder": "Confirm password",
+    "registerButtonLabel": "Register",
+    "registerVia": "Or register via",
+    "register": "Already have an account? <1>Login</1>"
+}

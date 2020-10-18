@@ -10,6 +10,12 @@ import {toast} from "react-toastify";
 import Loader from "react-loader-spinner";
 import firebase from "firebase/app";
 
+interface FormErrors {
+    email?: string;
+    password?: string;
+    passwordConfirmation?: string;
+}
+
 function Register() {
     const {t} = useTranslation(['register']);
     const auth = useAuth();
@@ -19,13 +25,77 @@ function Register() {
     const [password, setPassword] = useState<string>();
     const [passwordConfirmation, setPasswordConfirmation] = useState<string>();
     const [registering, setRegistering] = useState<boolean>(false);
+    const [errors, setErrors] = useState<FormErrors>();
 
-    function loginWithEmailAndPassword() {
+    function validateFields(): boolean {
+        let hasErrors = false
+
+        if (!email) {
+            setErrors(prevState => ({
+                ...prevState,
+                email: t('register:emailRequired')
+            }));
+            hasErrors = true;
+        } else {
+            setErrors(prevState => ({
+                ...prevState,
+                email: undefined,
+            }));
+        }
+
+        if (!password) {
+            setErrors(prevState => ({
+                ...prevState,
+                password: t('register:passwordRequired')
+            }));
+            hasErrors = true;
+        } else {
+            setErrors(prevState => ({
+                ...prevState,
+                password: undefined
+            }));
+        }
+
+        if (!passwordConfirmation) {
+            setErrors(prevState => ({
+                ...prevState,
+                passwordConfirmation: t('register:passwordConfirmationRequired')
+            }));
+            hasErrors = true;
+        } else {
+            setErrors(prevState => ({
+                ...prevState,
+                passwordConfirmation: undefined
+            }));
+        }
+
+        if (password !== passwordConfirmation) {
+            setErrors(prevState => ({
+                ...prevState,
+                password: t('register:passwordsDontMatch'),
+                passwordConfirmation: t('register:passwordsDontMatch')
+            }));
+            hasErrors = true;
+        } else {
+            setErrors(prevState => ({
+                ...prevState,
+                password: undefined,
+                passwordConfirmation: undefined
+            }));
+        }
+
+        if (!hasErrors) setErrors(undefined);
+
+        return !hasErrors;
+    }
+
+    function registerWithEmailAndPassword() {
+        if (!validateFields()) return;
         setRegistering(true);
         auth
-            .signInWithEmailAndPassword(email!, password!)
+            .createUserWithEmailAndPassword(email!, password!)
             .then(credential => {
-                toast.success(t('register:successfullyLoggedIn', {name: credential.user?.displayName || credential.user?.email}));
+                toast.success(t('register:registeredSuccessfully', {name: credential.user?.displayName || credential.user?.email}));
                 history.push(HOME.path);
             })
             .catch(reason => {
@@ -34,15 +104,15 @@ function Register() {
             });
     }
 
-    function loginWithGoogle() {
+    function registerWithGoogle() {
         oAuthLogin(new firebase.auth.GoogleAuthProvider());
     }
 
-    function loginWithFacebook() {
+    function registerWithFacebook() {
         oAuthLogin(new firebase.auth.FacebookAuthProvider());
     }
 
-    function loginWithTwitter() {
+    function registerWithTwitter() {
         oAuthLogin(new firebase.auth.TwitterAuthProvider());
     }
 
@@ -51,7 +121,7 @@ function Register() {
         auth.useDeviceLanguage();
         auth.signInWithPopup(provider)
             .then(credential => {
-                toast.success(t('register:successfullyLoggedIn', {name: credential.user?.displayName || credential.user?.email}));
+                toast.success(t('register:registeredSuccessfully', {name: credential.user?.displayName || credential.user?.email}));
                 history.push(HOME.path);
             })
             .catch(reason => {
@@ -86,35 +156,32 @@ function Register() {
                                 {t('register:title')}
                             </Heading>
                             <Form
-                                value={{
-                                    email,
-                                    password,
-                                    passwordConfirmation
-                                }}
+                                errors={errors}
                                 onReset={() => {
                                     setEmail(undefined);
                                     setPassword(undefined);
                                 }}
-                                onSubmit={loginWithEmailAndPassword}
+                                onSubmit={registerWithEmailAndPassword}
                             >
                                 <FormField
                                     name="email"
                                     // @ts-ignore
                                     htmlfor="email-input-id"
-                                    required
                                     label={t('register:emailLabel')}>
                                     <TextInput
                                         id="email-input-id"
                                         autoFocus={true}
                                         type="email"
                                         placeholder={t('register:emailPlaceholder')}
-                                        onChange={event => setEmail(event.target.value)}
+                                        onChange={event => {
+                                            setEmail(event.target.value);
+                                            validateFields();
+                                        }}
                                         name="email"/>
                                 </FormField>
                                 <FormField
                                     name="password"
                                     value={password}
-                                    required
                                     // @ts-ignore
                                     htmlfor="password-input-id"
                                     label={t('register:passwordLabel')}>
@@ -123,13 +190,15 @@ function Register() {
                                         type="password"
                                         autoFocus={true}
                                         placeholder={t('register:passwordPlaceholder')}
-                                        onChange={event => setPassword(event.target.value)}
+                                        onChange={event => {
+                                            setPassword(event.target.value);
+                                            validateFields();
+                                        }}
                                         name="password"/>
                                 </FormField>
                                 <FormField
                                     name="passwordConfirmation"
                                     value={passwordConfirmation}
-                                    required
                                     // @ts-ignore
                                     htmlfor="passwordConfirmation-input-id"
                                     label={t('register:passwordConfirmationLabel')}>
@@ -138,7 +207,10 @@ function Register() {
                                         type="password"
                                         autoFocus={true}
                                         placeholder={t('register:passwordConfirmationPlaceholder')}
-                                        onChange={event => setPasswordConfirmation(event.target.value)}
+                                        onChange={event => {
+                                            setPasswordConfirmation(event.target.value);
+                                            validateFields();
+                                        }}
                                         name="passwordConfirmation"/>
                                 </FormField>
                                 <Box
@@ -164,13 +236,13 @@ function Register() {
                                     justify="around"
                                 >
                                     <Button
-                                        onClick={loginWithGoogle}
+                                        onClick={registerWithGoogle}
                                         icon={<Google color="plain"/>}/>
                                     <Button
-                                        onClick={loginWithFacebook}
+                                        onClick={registerWithFacebook}
                                         icon={<Facebook color="plain"/>}/>
                                     <Button
-                                        onClick={loginWithTwitter}
+                                        onClick={registerWithTwitter}
                                         icon={<Twitter color="plain"/>}/>
                                 </Box>
                                 <Box margin="small" align="center">

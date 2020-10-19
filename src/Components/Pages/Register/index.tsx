@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Box, Button, Form, FormField, Heading, Main, Paragraph, TextInput} from "grommet";
+import {Box, Button, Form, FormField, Heading, Image, Main, Paragraph, TextInput} from "grommet";
 import logo from "../../../Assets/logoWithText.svg";
 import {Facebook, Google, Twitter} from "grommet-icons";
 import {Link, useHistory} from "react-router-dom";
@@ -137,19 +137,19 @@ function Register() {
                     <Box
                         direction="row-responsive"
                         align="center"
+                        pad="medium"
                         justify="between"
-                        width="large">
+                        width="xlarge">
                         <Box
                             justify="center"
                             align="center"
+                            width="medium"
+                            height="medium"
                         >
-                            <img
-                                style={{
-                                    maxWidth: "100%",
-                                    maxHeight: "100%"
-                                }}
+                            <Image
+                                fit="cover"
                                 src={logo}
-                                alt={t('register:logoLabel')}/>
+                                a11yTitle={t('register:logoLabel')}/>
                         </Box>
                         <Box>
                             <Heading textAlign="center">

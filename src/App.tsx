@@ -1,6 +1,6 @@
 import React, {Suspense} from 'react';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
-import {HOME, LANDING, LOGIN, REGISTER} from "./Routes/AppRoutes";
+import {HOME, LANDING, LOGIN, REGISTER, NOT_FOUND} from "./Routes/AppRoutes";
 import Landing from "./Components/Pages/Landing";
 import {Grommet} from "grommet";
 import {customTheme} from "./theme";
@@ -8,6 +8,7 @@ import Login from "./Components/Pages/Login";
 import Loader from "react-loader-spinner";
 import Centered from "./Components/Styled/Centered";
 import DefaultApp from "./Components/Pages/DefaultApp";
+import NotFound from "./Components/Pages/NotFound";
 import {AuthCheck} from "reactfire";
 import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer} from "react-toastify";
@@ -55,6 +56,15 @@ function App() {
                                 <AuthCheck fallback={<Redirect to={LOGIN.path}/>}>
                                     <DefaultApp/>
                                 </AuthCheck>
+                            </Suspense>
+                        </Route>
+                        <Route path={NOT_FOUND.path} exact={NOT_FOUND.exact}>
+                            <Suspense fallback={
+                                <Centered>
+                                    <Loader type="Puff"/>
+                                </Centered>
+                            }>
+                                <NotFound/>
                             </Suspense>
                         </Route>
                     </Switch>

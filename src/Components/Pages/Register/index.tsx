@@ -9,6 +9,7 @@ import {useAuth} from "reactfire";
 import {toast} from "react-toastify";
 import Loader from "react-loader-spinner";
 import firebase from "firebase/app";
+import LogRocket from "logrocket";
 
 interface FormErrors {
     email?: string;
@@ -95,6 +96,10 @@ function Register() {
         auth
             .createUserWithEmailAndPassword(email!, password!)
             .then(credential => {
+                LogRocket.identify(credential.user?.uid!, {
+                    name: credential.user?.displayName || '',
+                    email: credential.user?.email!,
+                });
                 toast.success(t('register:registeredSuccessfully', {name: credential.user?.displayName || credential.user?.email}));
                 history.push(HOME.path);
             })
@@ -121,6 +126,10 @@ function Register() {
         auth.useDeviceLanguage();
         auth.signInWithPopup(provider)
             .then(credential => {
+                LogRocket.identify(credential.user?.uid!, {
+                    name: credential.user?.displayName || '',
+                    email: credential.user?.email!,
+                });
                 toast.success(t('register:registeredSuccessfully', {name: credential.user?.displayName || credential.user?.email}));
                 history.push(HOME.path);
             })

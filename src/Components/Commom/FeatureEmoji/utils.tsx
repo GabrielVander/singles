@@ -9,11 +9,11 @@ const StyledEmoji = styled(Emoji)`
   }
 `;
 
-export const getEmoji = (name: string) => {
+export const getEmoji = (name: string, size?: number) => {
     return isAppleProduct() ? (
         <StyledEmoji text={name}/>
     ) : (
-        <EmojioneV4 size={128} text={name}/>
+        <EmojioneV4 size={size || 128} text={name}/>
     );
 };
 

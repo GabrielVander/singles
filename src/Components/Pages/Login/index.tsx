@@ -9,6 +9,7 @@ import {useAuth} from "reactfire";
 import {toast} from "react-toastify";
 import Loader from "react-loader-spinner";
 import firebase from "firebase/app";
+import LogRocket from "logrocket";
 
 function Login() {
     const {t} = useTranslation(['login']);
@@ -24,6 +25,10 @@ function Login() {
         auth
             .signInWithEmailAndPassword(email!, password!)
             .then(credential => {
+                LogRocket.identify(credential.user?.uid!, {
+                    name: credential.user?.displayName || '',
+                    email: credential.user?.email!,
+                });
                 toast.success(t('login:successfullyLoggedIn', {name: credential.user?.displayName || credential.user?.email}));
                 history.push(HOME.path);
             })
@@ -50,6 +55,10 @@ function Login() {
         auth.useDeviceLanguage();
         auth.signInWithPopup(provider)
             .then(credential => {
+                LogRocket.identify(credential.user?.uid!, {
+                    name: credential.user?.displayName || '',
+                    email: credential.user?.email!,
+                });
                 toast.success(t('login:successfullyLoggedIn', {name: credential.user?.displayName || credential.user?.email}));
                 history.push(HOME.path);
             })

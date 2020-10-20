@@ -10,8 +10,10 @@ import "./Configurations/i18nConfig";
 import {FirebaseAppProvider, SuspenseWithPerf} from "reactfire";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import LogRocket from 'logrocket';
 
 FirebaseConfig.initialize();
+LogRocket.init('id8jrz/singles');
 
 ReactDOM.render(
     <React.StrictMode>

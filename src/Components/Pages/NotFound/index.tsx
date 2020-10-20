@@ -14,15 +14,15 @@ function NotFound() {
                 <Box align="center" animation="pulse" justify="center" width="medium" height="medium"
                      style={{fontSize: "10vw"}}>
                     <Image fit="contain" style={{width: '100%', height: "100%"}} src={notFound}
-                           a11yTitle={"404 illustration"}/>
+                           a11yTitle={t('notFound:illustrationAccessibilityLabel')}/>
                 </Box>
                 <Box gap="small">
                     <Heading level="3">
-                        Oops, it seems this page doesn't exist
+                        {t('notFound:description')}
                     </Heading>
                     <Box align="center">
                         <Link to={HOME.path}>
-                            <Button primary label="Go to home page"/>
+                            <Button primary label={t('notFound:buttonLabel')}/>
                         </Link>
                     </Box>
                 </Box>

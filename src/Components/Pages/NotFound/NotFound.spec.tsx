@@ -1,8 +1,9 @@
-// jest-dom adds custom jest matchers for asserting on DOM nodes.
-// allows you to do things like:
-// expect(element).toHaveTextContent(/react/i)
-// learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom/extend-expect';
+import {render} from "@testing-library/react";
+import React from "react";
+import NotFound from "./index";
+import {Provider} from "react-redux";
+import Store from "../../../Redux/Store";
+import {BrowserRouter} from "react-router-dom";
 
 // Jest's official workaround for the "window.matchMedia is not a function" error
 beforeAll(() => {
@@ -20,3 +21,15 @@ beforeAll(() => {
         }))
     });
 });
+
+test('matches snapshot', () => {
+    const component = render(
+        <Provider store={Store.store}>
+            <BrowserRouter>
+                <NotFound/>
+            </BrowserRouter>
+        </Provider>
+    );
+
+    expect(component).toMatchSnapshot();
+})

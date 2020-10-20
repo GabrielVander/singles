@@ -1,0 +1,12 @@
+{
+    "loggingIn": "",
+    "successfullyLoggedIn": "Successfully logged in as {{name}}",
+    "logoLabel": "App's logo",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Type your email address",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Type your password",
+    "loginButtonLabel": "Login",
+    "loginVia": "Or login via",
+    "register": "Don't have an account? <1>Register now</1>"
+}

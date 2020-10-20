@@ -1,0 +1,316 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="StyledBox-sc-13pk1d4-0 cwIKOn"
+      >
+        <div
+          class="StyledBox-sc-13pk1d4-0 lfXogP"
+        >
+          <div
+            class="StyledBox-sc-13pk1d4-0 khUjuC"
+          >
+            <span
+              style="font-size: 128px;"
+            >
+              <span
+                class="undefined"
+              >
+                <img
+                  alt="💬"
+                  src="http://cdn.jsdelivr.net/emojione/assets/4.0/png/128/1f4ac.png"
+                  style="width: 1em; height: 1em; margin: 0px .05em 0px .1em; vertical-align: -0.1em;"
+                />
+              </span>
+            </span>
+          </div>
+          <p
+            class="StyledParagraph-tbetod-0 eBvfAm"
+          >
+            features:chatSummary
+          </p>
+          <div
+            class="StyledBox-sc-13pk1d4-0 daweyS"
+          >
+            <a
+              class="StyledAnchor-sc-1rp7lwl-0 iFYGxI"
+              href="/"
+            >
+              features:chatAction
+            </a>
+          </div>
+        </div>
+        <div
+          class="StyledBox-sc-13pk1d4-0 lfXogP"
+        >
+          <div
+            class="StyledBox-sc-13pk1d4-0 khUjuC"
+          >
+            <span
+              class="sc-gtssRu dUaMrD"
+              style="font-size: 128px;"
+            >
+              <span
+                class="undefined"
+              >
+                <img
+                  alt="👍"
+                  src="http://cdn.jsdelivr.net/emojione/assets/4.0/png/128/1f44d.png"
+                  style="width: 1em; height: 1em; margin: 0px .05em 0px .1em; vertical-align: -0.1em;"
+                />
+              </span>
+            </span>
+            <span
+              style="font-size: 128px;"
+            >
+              <span
+                class="undefined"
+              >
+                <img
+                  alt="👎"
+                  src="http://cdn.jsdelivr.net/emojione/assets/4.0/png/128/1f44e.png"
+                  style="width: 1em; height: 1em; margin: 0px .05em 0px .1em; vertical-align: -0.1em;"
+                />
+              </span>
+            </span>
+          </div>
+          <p
+            class="StyledParagraph-tbetod-0 eBvfAm"
+          >
+            features:ratingSummary
+          </p>
+          <div
+            class="StyledBox-sc-13pk1d4-0 daweyS"
+          >
+            <a
+              class="StyledAnchor-sc-1rp7lwl-0 iFYGxI"
+              href="/"
+            >
+              features:ratingAction
+            </a>
+          </div>
+        </div>
+        <div
+          class="StyledBox-sc-13pk1d4-0 lfXogP"
+        >
+          <div
+            class="StyledBox-sc-13pk1d4-0 khUjuC"
+          >
+            <span
+              style="font-size: 128px;"
+            >
+              <span
+                class="undefined"
+              >
+                <img
+                  alt="👩‍👧‍👦"
+                  src="http://cdn.jsdelivr.net/emojione/assets/4.0/png/128/1f469-1f467-1f466.png"
+                  style="width: 1em; height: 1em; margin: 0px .05em 0px .1em; vertical-align: -0.1em;"
+                />
+              </span>
+            </span>
+          </div>
+          <p
+            class="StyledParagraph-tbetod-0 eBvfAm"
+          >
+            features:postSummary
+          </p>
+          <div
+            class="StyledBox-sc-13pk1d4-0 daweyS"
+          >
+            <a
+              class="StyledAnchor-sc-1rp7lwl-0 iFYGxI"
+              href="/"
+            >
+              features:postAction
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="StyledBox-sc-13pk1d4-0 cwIKOn"
+    >
+      <div
+        class="StyledBox-sc-13pk1d4-0 lfXogP"
+      >
+        <div
+          class="StyledBox-sc-13pk1d4-0 khUjuC"
+        >
+          <span
+            style="font-size: 128px;"
+          >
+            <span
+              class="undefined"
+            >
+              <img
+                alt="💬"
+                src="http://cdn.jsdelivr.net/emojione/assets/4.0/png/128/1f4ac.png"
+                style="width: 1em; height: 1em; margin: 0px .05em 0px .1em; vertical-align: -0.1em;"
+              />
+            </span>
+          </span>
+        </div>
+        <p
+          class="StyledParagraph-tbetod-0 eBvfAm"
+        >
+          features:chatSummary
+        </p>
+        <div
+          class="StyledBox-sc-13pk1d4-0 daweyS"
+        >
+          <a
+            class="StyledAnchor-sc-1rp7lwl-0 iFYGxI"
+            href="/"
+          >
+            features:chatAction
+          </a>
+        </div>
+      </div>
+      <div
+        class="StyledBox-sc-13pk1d4-0 lfXogP"
+      >
+        <div
+          class="StyledBox-sc-13pk1d4-0 khUjuC"
+        >
+          <span
+            class="sc-gtssRu dUaMrD"
+            style="font-size: 128px;"
+          >
+            <span
+              class="undefined"
+            >
+              <img
+                alt="👍"
+                src="http://cdn.jsdelivr.net/emojione/assets/4.0/png/128/1f44d.png"
+                style="width: 1em; height: 1em; margin: 0px .05em 0px .1em; vertical-align: -0.1em;"
+              />
+            </span>
+          </span>
+          <span
+            style="font-size: 128px;"
+          >
+            <span
+              class="undefined"
+            >
+              <img
+                alt="👎"
+                src="http://cdn.jsdelivr.net/emojione/assets/4.0/png/128/1f44e.png"
+                style="width: 1em; height: 1em; margin: 0px .05em 0px .1em; vertical-align: -0.1em;"
+              />
+            </span>
+          </span>
+        </div>
+        <p
+          class="StyledParagraph-tbetod-0 eBvfAm"
+        >
+          features:ratingSummary
+        </p>
+        <div
+          class="StyledBox-sc-13pk1d4-0 daweyS"
+        >
+          <a
+            class="StyledAnchor-sc-1rp7lwl-0 iFYGxI"
+            href="/"
+          >
+            features:ratingAction
+          </a>
+        </div>
+      </div>
+      <div
+        class="StyledBox-sc-13pk1d4-0 lfXogP"
+      >
+        <div
+          class="StyledBox-sc-13pk1d4-0 khUjuC"
+        >
+          <span
+            style="font-size: 128px;"
+          >
+            <span
+              class="undefined"
+            >
+              <img
+                alt="👩‍👧‍👦"
+                src="http://cdn.jsdelivr.net/emojione/assets/4.0/png/128/1f469-1f467-1f466.png"
+                style="width: 1em; height: 1em; margin: 0px .05em 0px .1em; vertical-align: -0.1em;"
+              />
+            </span>
+          </span>
+        </div>
+        <p
+          class="StyledParagraph-tbetod-0 eBvfAm"
+        >
+          features:postSummary
+        </p>
+        <div
+          class="StyledBox-sc-13pk1d4-0 daweyS"
+        >
+          <a
+            class="StyledAnchor-sc-1rp7lwl-0 iFYGxI"
+            href="/"
+          >
+            features:postAction
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

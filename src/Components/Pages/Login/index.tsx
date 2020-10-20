@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Box, Button, Form, FormField, Main, Paragraph, TextInput} from "grommet";
+import {Box, Button, Form, FormField, Image, Main, Paragraph, TextInput} from "grommet";
 import logo from "../../../Assets/logoWithText.svg";
 import {Facebook, Google, Twitter} from "grommet-icons";
 import {Link, useHistory} from "react-router-dom";
@@ -70,7 +70,7 @@ function Login() {
                             width="small"
                             height="small"
                         >
-                            <img src={logo} alt={t('login:logoLabel')}/>
+                            <Image fit="cover" src={logo} a11yTitle={t('login:logoLabel')}/>
                         </Box>
                         <Box>
                             <Form

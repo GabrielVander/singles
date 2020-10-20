@@ -1,39 +1,76 @@
 import React, {Suspense} from 'react';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {HOME, LANDING, LOGIN, REGISTER, NOT_FOUND} from "./Routes/AppRoutes";
+import Landing from "./Components/Pages/Landing";
+import {Grommet} from "grommet";
+import {customTheme} from "./theme";
+import Login from "./Components/Pages/Login";
+import Loader from "react-loader-spinner";
+import Centered from "./Components/Styled/Centered";
 import DefaultApp from "./Components/Pages/DefaultApp";
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {HOME, LOGIN, NOT_FOUND, REGISTER} from "./Routes/AppRoutes";
-import CenteredSpin from "./Components/Others/CenteredSpin";
-import Login from "./Components/Pages/Authentication/Login";
-import Signup from "./Components/Pages/Authentication/Signup";
 import NotFound from "./Components/Pages/NotFound";
+import {AuthCheck} from "reactfire";
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer} from "react-toastify";
+import Register from "./Components/Pages/Register";
 
 function App() {
     return (
         <>
-            <BrowserRouter>
-                <Switch>
-                    <Route path={LOGIN.path} exact={LOGIN.exact}>
-                        <Suspense fallback={<CenteredSpin/>}>
-                            <Login/>
-                        </Suspense>
-                    </Route>
-                    <Route path={REGISTER.path} exact={REGISTER.exact}>
-                        <Suspense fallback={<CenteredSpin/>}>
-                            <Signup/>
-                        </Suspense>
-                    </Route>
-                    <Route path={HOME.path} exact={HOME.exact}>
-                        <Suspense fallback={<CenteredSpin/>}>
-                            <DefaultApp/>
-                        </Suspense>
-                    </Route>
-                    <Route path={NOT_FOUND.path} exact={NOT_FOUND.exact}>
-                        <Suspense fallback={<CenteredSpin/>}>
-                            <NotFound/>
-                        </Suspense>
-                    </Route>
-                </Switch>
-            </BrowserRouter>
+            <Grommet theme={customTheme} full>
+                <BrowserRouter>
+                    <Switch>
+                        <Route path={LOGIN.path} exact={LOGIN.exact}>
+                            <Suspense fallback={
+                                <Centered>
+                                    <Loader type="Puff"/>
+                                </Centered>
+                            }>
+                                <Login/>
+                            </Suspense>
+                        </Route>
+                        <Route path={REGISTER.path} exact={REGISTER.exact}>
+                            <Suspense fallback={
+                                <Centered>
+                                    <Loader type="Puff"/>
+                                </Centered>
+                            }>
+                                <Register/>
+                            </Suspense>
+                        </Route>
+                        <Route path={LANDING.path} exact={LANDING.exact}>
+                            <Suspense fallback={
+                                <Centered>
+                                    <Loader type="Puff"/>
+                                </Centered>
+                            }>
+                                <Landing/>
+                            </Suspense>
+                        </Route>
+                        <Route path={HOME.path} exact={HOME.exact}>
+                            <Suspense fallback={
+                                <Centered>
+                                    <Loader type="Puff"/>
+                                </Centered>
+                            }>
+                                <AuthCheck fallback={<Redirect to={LOGIN.path}/>}>
+                                    <DefaultApp/>
+                                </AuthCheck>
+                            </Suspense>
+                        </Route>
+                        <Route path={NOT_FOUND.path} exact={NOT_FOUND.exact}>
+                            <Suspense fallback={
+                                <Centered>
+                                    <Loader type="Puff"/>
+                                </Centered>
+                            }>
+                                <NotFound/>
+                            </Suspense>
+                        </Route>
+                    </Switch>
+                </BrowserRouter>
+                <ToastContainer progressStyle={{color: "accent-1"}}/>
+            </Grommet>
         </>
     );
 }

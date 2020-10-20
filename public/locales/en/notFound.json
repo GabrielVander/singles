@@ -1,4 +1,5 @@
 {
-    "subtitle": "Sorry, the page you visited does not exist.",
-    "home": "Home"
+    "illustrationAccessibilityLabel": "404 illustration",
+    "description": "Oops, it seems this page doesn't exist",
+    "buttonLabel": "Go to home page"
 }

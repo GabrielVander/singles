@@ -3,28 +3,30 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import firebase from "firebase/app";
 import FirebaseConfig from "./Configurations/FirebaseConfig";
-import ReactReduxFirebaseConfig from "./Configurations/ReactReduxFirebaseConfig";
 import Store from "./Redux/Store";
-import {createFirestoreInstance} from "redux-firestore";
 import {Provider} from "react-redux";
-import {ReactReduxFirebaseProvider} from "react-redux-firebase";
 import "./Configurations/i18nConfig";
+import {FirebaseAppProvider, SuspenseWithPerf} from "reactfire";
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 FirebaseConfig.initialize();
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={Store.store}>
-            <ReactReduxFirebaseProvider
-                firebase={firebase}
-                config={ReactReduxFirebaseConfig.config}
-                dispatch={Store.store.dispatch}
-                createFirestoreInstance={createFirestoreInstance}
+            <FirebaseAppProvider
+                firebaseConfig={FirebaseConfig.config}
             >
-                <App/>
-            </ReactReduxFirebaseProvider>
+                <SuspenseWithPerf fallback={
+                    <Loader
+                        type="RevolvingDot"
+                    />
+                } traceId="load-app">
+                    <App/>
+                </SuspenseWithPerf>
+            </FirebaseAppProvider>
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')

@@ -2,15 +2,27 @@ import {render} from "@testing-library/react";
 import {Provider} from "react-redux";
 import Store from "../../../Redux/Store";
 import {BrowserRouter} from "react-router-dom";
-import React from "react";
+import React, {Suspense} from "react";
 import JoinUs from "./index";
+import FirebaseConfig from "../../../Configurations/FirebaseConfig";
+import Loader from "react-loader-spinner";
+import {FirebaseAppProvider} from "reactfire";
 
 test('matches snapshot', () => {
     const component = render(
         <Provider store={Store.store}>
-            <BrowserRouter>
-                <JoinUs/>
-            </BrowserRouter>
+            <FirebaseAppProvider
+                firebaseConfig={FirebaseConfig.config}>
+                <Suspense fallback={
+                    <Loader
+                        type="RevolvingDot"
+                    />
+                }>
+                    <BrowserRouter>
+                        <JoinUs/>
+                    </BrowserRouter>
+                </Suspense>
+            </FirebaseAppProvider>
         </Provider>
     );
     expect(component).toMatchSnapshot();

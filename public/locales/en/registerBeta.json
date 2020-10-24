@@ -1,4 +1,8 @@
 {
+    "invalidEmail": "Invalid email",
+    "emailExists": "Email already saved",
+    "emailSaved": "Email saved",
+    "error": "Couldn't save email\n{{reason}}",
     "emailPlaceholder": "Your email address",
     "applyButton": "Apply for Beta"
 }

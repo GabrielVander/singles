@@ -24,7 +24,7 @@ const RegisterBeta = () => {
 
         if (!emailIsValid()) {
             setSavingEmail(() => false);
-            toast.error("Invalid email");
+            toast.error(t("registerBeta:invalidEmail"));
             return;
         }
 
@@ -32,7 +32,7 @@ const RegisterBeta = () => {
 
         if (await emailExists(collection)) {
             setSavingEmail(() => false);
-            toast.info("Email already saved");
+            toast.info(t("registerBeta:emailExists"));
             return;
         }
 
@@ -47,9 +47,12 @@ const RegisterBeta = () => {
                     id: value.id,
                 });
                 setSavingEmail(() => false);
-                toast.success("Email saved")
+                toast.success(t("registerBeta:emailSaved"))
             })
-            .catch(reason => toast.error("Couldn't save email\n" + reason));
+            .catch(reason => {
+                setSavingEmail(() => false);
+                toast.error(t("registerBeta:error", {reason}));
+            });
     }
 
     function emailIsValid() {

@@ -20,13 +20,13 @@ function Login() {
     const loginSchema = Yup.object().shape({
         email: Yup
             .string()
-            .email('Invalid email')
-            .required('Required'),
+            .email(t('login:invalidEmail'))
+            .required(t('login:required')),
         password: Yup
             .string()
-            .required('Required')
-            .min(6, 'Passwords are at least 6 characters long')
-            .max(15, 'Passwords are no longer than 15 characters')
+            .required(t('login:required'))
+            .min(6, t('login:passwordMinChars', {number: 6}))
+            .max(15, t('login:passwordMaxChars', {number: 15}))
     });
 
     function submit(values: any, {setSubmitting}: any) {

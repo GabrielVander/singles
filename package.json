@@ -11,6 +11,7 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "firebase": "^7.24.0",
+    "formik": "^2.2.1",
     "grommet": "^2.15.1",
     "grommet-icons": "^4.5.0",
     "i18next": "^19.8.1",

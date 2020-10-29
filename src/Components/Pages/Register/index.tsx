@@ -99,7 +99,7 @@ function Register() {
                             src={logo}
                             a11yTitle={t('register:logoLabel')}/>
                     </Box>
-                    <Box>
+                    <Box width="medium">
                         <Heading textAlign="center">
                             {t('register:title')}
                         </Heading>

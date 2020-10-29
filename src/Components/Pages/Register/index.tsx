@@ -20,17 +20,17 @@ function Register() {
     const registerSchema = Yup.object({
         email: Yup
             .string()
-            .email('Invalid email')
-            .required('Required'),
+            .email(t('register:invalidEmail'))
+            .required(t('register:required')),
         password: Yup
             .string()
-            .required('Required')
-            .min(6, 'Please insert a password at least 6 characters long')
-            .max(15, 'Passwords should not be longer that 15 characters'),
+            .required(t('register:required'))
+            .min(6, t('register:minPassword'))
+            .max(15, t('register:maxPassword')),
         passwordConfirmation: Yup
             .string()
-            .required('Required')
-            .oneOf([Yup.ref('password')], 'Passwords must match')
+            .required(t('register:required'))
+            .oneOf([Yup.ref('password')], t('register:passwordsMatch'))
     });
 
     function submit(values: any, {setSubmitting}: any) {

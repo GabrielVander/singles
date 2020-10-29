@@ -43,8 +43,8 @@ function Login() {
             })
             .catch(reason => {
                 toast.error(reason.message);
+                setSubmitting(false);
             })
-            .finally(() => setSubmitting(false));
     }
 
     function loginWithGoogle() {

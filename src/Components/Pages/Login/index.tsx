@@ -86,7 +86,7 @@ function Login() {
                 >
                     <Image fit="cover" src={logo} a11yTitle={t('login:logoLabel')}/>
                 </Box>
-                <Box>
+                <Box width="medium">
                     <Formik
                         onSubmit={submit}
                         initialValues={{

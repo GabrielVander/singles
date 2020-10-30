@@ -74,12 +74,10 @@ function Login() {
                 {signingIn ? <Loader type="ThreeDots"/> :
                     <Box align="center" justify="around" pad="large">
                         <Box
-                            justify="center"
-                            align="center"
                             width="small"
                             height="small"
                         >
-                            <Image fit="cover" src={logo} a11yTitle={t('login:logoLabel')}/>
+                            <Image fit="contain" src={logo} a11yTitle={t('login:logoLabel')}/>
                         </Box>
                         <Box>
                             <Form

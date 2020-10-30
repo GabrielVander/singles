@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Box, Button, Form, FormField, Image, Main, Paragraph, TextInput} from "grommet";
+import React from "react";
+import {Box, Button, FormField, Image, Main, Paragraph, TextInput} from "grommet";
 import logo from "../../../Assets/logoWithText.svg";
 import {Facebook, Google, Twitter} from "grommet-icons";
 import {Link, useHistory} from "react-router-dom";
@@ -7,23 +7,32 @@ import {HOME, REGISTER} from "../../../Routes/AppRoutes";
 import {Trans, useTranslation} from "react-i18next";
 import {useAuth} from "reactfire";
 import {toast} from "react-toastify";
-import Loader from "react-loader-spinner";
 import firebase from "firebase/app";
 import LogRocket from "logrocket";
+import {Form, Formik} from "formik";
+import * as Yup from 'yup';
 
 function Login() {
     const {t} = useTranslation(['login']);
     const auth = useAuth();
     const history = useHistory();
 
-    const [email, setEmail] = useState<string>();
-    const [password, setPassword] = useState<string>();
-    const [signingIn, setSigningIn] = useState<boolean>(false);
+    const loginSchema = Yup.object().shape({
+        email: Yup
+            .string()
+            .email(t('login:invalidEmail'))
+            .required(t('login:required')),
+        password: Yup
+            .string()
+            .required(t('login:required'))
+            .min(6, t('login:passwordMinChars', {number: 6}))
+            .max(15, t('login:passwordMaxChars', {number: 15}))
+    });
 
-    function loginWithEmailAndPassword() {
-        setSigningIn(true);
+    function submit(values: any, {setSubmitting}: any) {
+        const {email, password} = values;
         auth
-            .signInWithEmailAndPassword(email!, password!)
+            .signInWithEmailAndPassword(email, password)
             .then(credential => {
                 LogRocket.identify(credential.user?.uid!, {
                     name: credential.user?.displayName || '',
@@ -33,9 +42,9 @@ function Login() {
                 history.push(HOME.path);
             })
             .catch(reason => {
-                setSigningIn(false);
-                toast.error(reason);
-            });
+                toast.error(reason.message);
+                setSubmitting(false);
+            })
     }
 
     function loginWithGoogle() {
@@ -51,7 +60,6 @@ function Login() {
     }
 
     function oAuthLogin(provider: firebase.auth.AuthProvider) {
-        setSigningIn(true);
         auth.useDeviceLanguage();
         auth.signInWithPopup(provider)
             .then(credential => {
@@ -63,63 +71,59 @@ function Login() {
                 history.push(HOME.path);
             })
             .catch(reason => {
-                setSigningIn(false);
-                toast.error(reason);
+                toast.error(reason.message);
             });
     }
 
     return (
-        <>
-            <Main justify="center" align="center">
-                {signingIn ? <Loader type="ThreeDots"/> :
-                    <Box align="center" justify="around" pad="large">
-                        <Box
-                            justify="center"
-                            align="center"
-                            width="small"
-                            height="small"
-                        >
-                            <Image fit="cover" src={logo} a11yTitle={t('login:logoLabel')}/>
-                        </Box>
-                        <Box>
-                            <Form
-                                value={{
-                                    email,
-                                    password
-                                }}
-                                onReset={() => {
-                                    setEmail(undefined);
-                                    setPassword(undefined);
-                                }}
-                                onSubmit={loginWithEmailAndPassword}
-                            >
+        <Main justify="center" align="center">
+            <Box align="center" justify="around" pad="large">
+                <Box
+                    justify="center"
+                    align="center"
+                    width="small"
+                    height="small"
+                >
+                    <Image fit="cover" src={logo} a11yTitle={t('login:logoLabel')}/>
+                </Box>
+                <Box width="medium">
+                    <Formik
+                        onSubmit={submit}
+                        initialValues={{
+                            email: '',
+                            password: ''
+                        }}
+                        validationSchema={loginSchema}>
+                        {({
+                              errors,
+                              handleChange,
+                              handleBlur,
+                              handleSubmit,
+                              isSubmitting
+                          }) => (
+                            <Form onSubmit={event => {
+                                event.preventDefault();
+                                handleSubmit();
+                            }}>
                                 <FormField
-                                    name="email"
-                                    // @ts-ignore
-                                    htmlfor="email-input-id"
-                                    required
+                                    error={errors.email}
                                     label={t('login:emailLabel')}>
                                     <TextInput
                                         id="email-input-id"
-                                        autoFocus={true}
-                                        type="email"
                                         placeholder={t('login:emailPlaceholder')}
-                                        onChange={event => setEmail(event.target.value)}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
                                         name="email"/>
                                 </FormField>
                                 <FormField
-                                    name="password"
-                                    value={password}
-                                    required
-                                    // @ts-ignore
-                                    htmlfor="password-input-id"
+                                    error={errors.password}
                                     label={t('login:passwordLabel')}>
                                     <TextInput
                                         id="password-input-id"
                                         type="password"
-                                        autoFocus={true}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
                                         placeholder={t('login:passwordPlaceholder')}
-                                        onChange={event => setPassword(event.target.value)}
                                         name="password"/>
                                 </FormField>
                                 <Box
@@ -128,7 +132,11 @@ function Login() {
                                     justify="center"
                                     margin="medium"
                                 >
-                                    <Button type="submit" primary label={t('login:loginButtonLabel')}/>
+                                    <Button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        primary
+                                        label={t('login:loginButtonLabel')}/>
                                 </Box>
                                 <Box
                                     direction="row"
@@ -164,11 +172,11 @@ function Login() {
                                     </Paragraph>
                                 </Box>
                             </Form>
-                        </Box>
-                    </Box>
-                }
-            </Main>
-        </>
+                        )}
+                    </Formik>
+                </Box>
+            </Box>
+        </Main>
     );
 }
 

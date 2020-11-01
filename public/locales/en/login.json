@@ -1,4 +1,8 @@
 {
+    "invalidEmail": "Invalid email",
+    "required": "Required",
+    "passwordMinChars": "Passwords are at least {{number}} characters long",
+    "passwordMaxChars": "Passwords are no longer than {{number}} characters",
     "successfullyLoggedIn": "Successfully logged in as {{name}}",
     "logoLabel": "App's logo",
     "emailLabel": "Email",

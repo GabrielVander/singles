@@ -89,13 +89,11 @@ function Register() {
                     justify="between"
                     width="xlarge">
                     <Box
-                        justify="center"
-                        align="center"
                         width="medium"
                         height="medium"
                     >
                         <Image
-                            fit="cover"
+                            fit="contain"
                             src={logo}
                             a11yTitle={t('register:logoLabel')}/>
                     </Box>

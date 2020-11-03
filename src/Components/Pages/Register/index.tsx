@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Box, Button, Form, FormField, Heading, Image, Main, Paragraph, TextInput} from "grommet";
+import React from "react";
+import {Box, Button, FormField, Heading, Image, Main, Paragraph, TextInput} from "grommet";
 import logo from "../../../Assets/logoWithText.svg";
 import {Facebook, Google, Twitter} from "grommet-icons";
 import {Link, useHistory} from "react-router-dom";
@@ -7,101 +7,48 @@ import {HOME, LOGIN} from "../../../Routes/AppRoutes";
 import {Trans, useTranslation} from "react-i18next";
 import {useAuth} from "reactfire";
 import {toast} from "react-toastify";
-import Loader from "react-loader-spinner";
 import firebase from "firebase/app";
-
-interface FormErrors {
-    email?: string;
-    password?: string;
-    passwordConfirmation?: string;
-}
+import LogRocket from "logrocket";
+import * as Yup from 'yup';
+import {Form, Formik} from "formik";
 
 function Register() {
     const {t} = useTranslation(['register']);
     const auth = useAuth();
     const history = useHistory();
 
-    const [email, setEmail] = useState<string>();
-    const [password, setPassword] = useState<string>();
-    const [passwordConfirmation, setPasswordConfirmation] = useState<string>();
-    const [registering, setRegistering] = useState<boolean>(false);
-    const [errors, setErrors] = useState<FormErrors>();
+    const registerSchema = Yup.object({
+        email: Yup
+            .string()
+            .email(t('register:invalidEmail'))
+            .required(t('register:required')),
+        password: Yup
+            .string()
+            .required(t('register:required'))
+            .min(6, t('register:minPassword'))
+            .max(15, t('register:maxPassword')),
+        passwordConfirmation: Yup
+            .string()
+            .required(t('register:required'))
+            .oneOf([Yup.ref('password')], t('register:passwordsMatch'))
+    });
 
-    function validateFields(): boolean {
-        let hasErrors = false
-
-        if (!email) {
-            setErrors(prevState => ({
-                ...prevState,
-                email: t('register:emailRequired')
-            }));
-            hasErrors = true;
-        } else {
-            setErrors(prevState => ({
-                ...prevState,
-                email: undefined,
-            }));
-        }
-
-        if (!password) {
-            setErrors(prevState => ({
-                ...prevState,
-                password: t('register:passwordRequired')
-            }));
-            hasErrors = true;
-        } else {
-            setErrors(prevState => ({
-                ...prevState,
-                password: undefined
-            }));
-        }
-
-        if (!passwordConfirmation) {
-            setErrors(prevState => ({
-                ...prevState,
-                passwordConfirmation: t('register:passwordConfirmationRequired')
-            }));
-            hasErrors = true;
-        } else {
-            setErrors(prevState => ({
-                ...prevState,
-                passwordConfirmation: undefined
-            }));
-        }
-
-        if (password !== passwordConfirmation) {
-            setErrors(prevState => ({
-                ...prevState,
-                password: t('register:passwordsDontMatch'),
-                passwordConfirmation: t('register:passwordsDontMatch')
-            }));
-            hasErrors = true;
-        } else {
-            setErrors(prevState => ({
-                ...prevState,
-                password: undefined,
-                passwordConfirmation: undefined
-            }));
-        }
-
-        if (!hasErrors) setErrors(undefined);
-
-        return !hasErrors;
-    }
-
-    function registerWithEmailAndPassword() {
-        if (!validateFields()) return;
-        setRegistering(true);
+    function submit(values: any, {setSubmitting}: any) {
+        const {email, password} = values;
         auth
-            .createUserWithEmailAndPassword(email!, password!)
+            .createUserWithEmailAndPassword(email, password)
             .then(credential => {
+                LogRocket.identify(credential.user?.uid!, {
+                    name: credential.user?.displayName || '',
+                    email: credential.user?.email!,
+                });
                 toast.success(t('register:registeredSuccessfully', {name: credential.user?.displayName || credential.user?.email}));
                 history.push(HOME.path);
             })
             .catch(reason => {
-                setRegistering(false);
-                toast.error(reason);
-            });
+                toast.error(reason.message);
+                setSubmitting(false);
+            })
     }
 
     function registerWithGoogle() {
@@ -117,145 +64,135 @@ function Register() {
     }
 
     function oAuthLogin(provider: firebase.auth.AuthProvider) {
-        setRegistering(true);
         auth.useDeviceLanguage();
         auth.signInWithPopup(provider)
             .then(credential => {
+                LogRocket.identify(credential.user?.uid!, {
+                    name: credential.user?.displayName || '',
+                    email: credential.user?.email!,
+                });
                 toast.success(t('register:registeredSuccessfully', {name: credential.user?.displayName || credential.user?.email}));
                 history.push(HOME.path);
             })
             .catch(reason => {
-                setRegistering(false);
-                toast.error(reason);
+                toast.error(reason.message);
             });
     }
 
     return (
         <>
             <Main justify="center" align="center">
-                {registering ? <Loader type="ThreeDots"/> :
+                <Box
+                    direction="row-responsive"
+                    align="center"
+                    pad="medium"
+                    justify="between"
+                    width="xlarge">
                     <Box
-                        direction="row-responsive"
-                        align="center"
-                        pad="medium"
-                        justify="between"
-                        width="xlarge">
-                        <Box
-                            justify="center"
-                            align="center"
-                            width="medium"
-                            height="medium"
-                        >
-                            <Image
-                                fit="cover"
-                                src={logo}
-                                a11yTitle={t('register:logoLabel')}/>
-                        </Box>
-                        <Box>
-                            <Heading textAlign="center">
-                                {t('register:title')}
-                            </Heading>
-                            <Form
-                                errors={errors}
-                                onReset={() => {
-                                    setEmail(undefined);
-                                    setPassword(undefined);
-                                }}
-                                onSubmit={registerWithEmailAndPassword}
-                            >
-                                <FormField
-                                    name="email"
-                                    // @ts-ignore
-                                    htmlfor="email-input-id"
-                                    label={t('register:emailLabel')}>
-                                    <TextInput
-                                        id="email-input-id"
-                                        autoFocus={true}
-                                        type="email"
-                                        placeholder={t('register:emailPlaceholder')}
-                                        onChange={event => {
-                                            setEmail(event.target.value);
-                                            validateFields();
-                                        }}
-                                        name="email"/>
-                                </FormField>
-                                <FormField
-                                    name="password"
-                                    value={password}
-                                    // @ts-ignore
-                                    htmlfor="password-input-id"
-                                    label={t('register:passwordLabel')}>
-                                    <TextInput
-                                        id="password-input-id"
-                                        type="password"
-                                        autoFocus={true}
-                                        placeholder={t('register:passwordPlaceholder')}
-                                        onChange={event => {
-                                            setPassword(event.target.value);
-                                            validateFields();
-                                        }}
-                                        name="password"/>
-                                </FormField>
-                                <FormField
-                                    name="passwordConfirmation"
-                                    value={passwordConfirmation}
-                                    // @ts-ignore
-                                    htmlfor="passwordConfirmation-input-id"
-                                    label={t('register:passwordConfirmationLabel')}>
-                                    <TextInput
-                                        id="passwordConfirmation-input-id"
-                                        type="password"
-                                        autoFocus={true}
-                                        placeholder={t('register:passwordConfirmationPlaceholder')}
-                                        onChange={event => {
-                                            setPasswordConfirmation(event.target.value);
-                                            validateFields();
-                                        }}
-                                        name="passwordConfirmation"/>
-                                </FormField>
-                                <Box
-                                    direction="row"
-                                    gap="medium"
-                                    justify="center"
-                                    margin="medium"
-                                >
-                                    <Button type="submit" primary label={t('register:registerButtonLabel')}/>
-                                </Box>
-                                <Box
-                                    direction="row"
-                                    justify="center"
-                                    align="center"
-                                    margin="small"
-                                >
-                                    <Paragraph margin="none">
-                                        {t('register:registerVia')}
-                                    </Paragraph>
-                                </Box>
-                                <Box
-                                    direction="row"
-                                    justify="around"
-                                >
-                                    <Button
-                                        onClick={registerWithGoogle}
-                                        icon={<Google color="plain"/>}/>
-                                    <Button
-                                        onClick={registerWithFacebook}
-                                        icon={<Facebook color="plain"/>}/>
-                                    <Button
-                                        onClick={registerWithTwitter}
-                                        icon={<Twitter color="plain"/>}/>
-                                </Box>
-                                <Box margin="small" align="center">
-                                    <Paragraph margin="none" textAlign="center">
-                                        <Trans i18nKey="register:register">
-                                            Already have an account? <Link to={LOGIN.path}>Login</Link>
-                                        </Trans>
-                                    </Paragraph>
-                                </Box>
-                            </Form>
-                        </Box>
+                        width="medium"
+                        height="medium"
+                    >
+                        <Image
+                            fit="contain"
+                            src={logo}
+                            a11yTitle={t('register:logoLabel')}/>
                     </Box>
-                }
+                    <Box width="medium">
+                        <Heading textAlign="center">
+                            {t('register:title')}
+                        </Heading>
+                        <Formik
+                            initialValues={{
+                                email: '',
+                                password: '',
+                                passwordConfirmation: ''
+                            }}
+                            onSubmit={submit}
+                            validationSchema={registerSchema}>
+                            {({
+                                  errors,
+                                  handleChange,
+                                  handleBlur,
+                                  handleSubmit
+                              }) => (
+                                <Form
+                                    onSubmit={event => {
+                                        event.preventDefault();
+                                        handleSubmit();
+                                    }}>
+                                    <FormField
+                                        error={errors.email}
+                                        label={t('register:emailLabel')}>
+                                        <TextInput
+                                            placeholder={t('register:emailPlaceholder')}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            name="email"/>
+                                    </FormField>
+                                    <FormField
+                                        error={errors.password}
+                                        label={t('register:passwordLabel')}>
+                                        <TextInput
+                                            type="password"
+                                            placeholder={t('register:passwordPlaceholder')}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            name="password"/>
+                                    </FormField>
+                                    <FormField
+                                        error={errors.passwordConfirmation}
+                                        label={t('register:passwordConfirmationLabel')}>
+                                        <TextInput
+                                            type="password"
+                                            placeholder={t('register:passwordConfirmationPlaceholder')}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            name="passwordConfirmation"/>
+                                    </FormField>
+                                    <Box
+                                        direction="row"
+                                        gap="medium"
+                                        justify="center"
+                                        margin="medium"
+                                    >
+                                        <Button type="submit" primary label={t('register:registerButtonLabel')}/>
+                                    </Box>
+                                    <Box
+                                        direction="row"
+                                        justify="center"
+                                        align="center"
+                                        margin="small"
+                                    >
+                                        <Paragraph margin="none">
+                                            {t('register:registerVia')}
+                                        </Paragraph>
+                                    </Box>
+                                    <Box
+                                        direction="row"
+                                        justify="around"
+                                    >
+                                        <Button
+                                            onClick={registerWithGoogle}
+                                            icon={<Google color="plain"/>}/>
+                                        <Button
+                                            onClick={registerWithFacebook}
+                                            icon={<Facebook color="plain"/>}/>
+                                        <Button
+                                            onClick={registerWithTwitter}
+                                            icon={<Twitter color="plain"/>}/>
+                                    </Box>
+                                    <Box margin="small" align="center">
+                                        <Paragraph margin="none" textAlign="center">
+                                            <Trans i18nKey="register:register">
+                                                Already have an account? <Link to={LOGIN.path}>Login</Link>
+                                            </Trans>
+                                        </Paragraph>
+                                    </Box>
+                                </Form>
+                            )}
+                        </Formik>
+                    </Box>
+                </Box>
             </Main>
         </>
     );

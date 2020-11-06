@@ -5,8 +5,6 @@ import Landing from "./Components/Pages/Landing";
 import {Grommet} from "grommet";
 import {customTheme} from "./theme";
 import Login from "./Components/Pages/Login";
-import Loader from "react-loader-spinner";
-import Centered from "./Components/Styled/Centered";
 import DefaultApp from "./Components/Pages/DefaultApp";
 import NotFound from "./Components/Pages/NotFound";
 import {AuthCheck} from "reactfire";
@@ -14,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer} from "react-toastify";
 import Register from "./Components/Pages/Register";
 import Profile from "./Components/Pages/Profile";
+import PageLoader from "./Components/Commom/PageLoader";
 
 function App() {
     return (
@@ -22,60 +21,36 @@ function App() {
                 <BrowserRouter>
                     <Switch>
                         <Route path={LOGIN.path} exact={LOGIN.exact}>
-                            <Suspense fallback={
-                                <Centered>
-                                    <Loader type="Puff"/>
-                                </Centered>
-                            }>
+                            <Suspense fallback={<PageLoader/>}>
                                 <Login/>
                             </Suspense>
                         </Route>
                         <Route path={REGISTER.path} exact={REGISTER.exact}>
-                            <Suspense fallback={
-                                <Centered>
-                                    <Loader type="Puff"/>
-                                </Centered>
-                            }>
+                            <Suspense fallback={<PageLoader/>}>
                                 <Register/>
                             </Suspense>
                         </Route>
                         <Route path={LANDING.path} exact={LANDING.exact}>
-                            <Suspense fallback={
-                                <Centered>
-                                    <Loader type="Puff"/>
-                                </Centered>
-                            }>
+                            <Suspense fallback={<PageLoader/>}>
                                 <Landing/>
                             </Suspense>
                         </Route>
                         <Route path={HOME.path} exact={HOME.exact}>
-                            <Suspense fallback={
-                                <Centered>
-                                    <Loader type="Puff"/>
-                                </Centered>
-                            }>
+                            <Suspense fallback={<PageLoader/>}>
                                 <AuthCheck fallback={<Redirect to={LOGIN.path}/>}>
                                     <DefaultApp/>
                                 </AuthCheck>
                             </Suspense>
                         </Route>
                         <Route path={PROFILE.path} exact={PROFILE.exact}>
-                            <Suspense fallback={
-                                <Centered>
-                                    <Loader type="Puff"/>
-                                </Centered>
-                            }>
+                            <Suspense fallback={<PageLoader/>}>
                                 <AuthCheck fallback={<Redirect to={LOGIN.path}/>}>
                                     <Profile/>
                                 </AuthCheck>
                             </Suspense>
                         </Route>
                         <Route path={NOT_FOUND.path} exact={NOT_FOUND.exact}>
-                            <Suspense fallback={
-                                <Centered>
-                                    <Loader type="Puff"/>
-                                </Centered>
-                            }>
+                            <Suspense fallback={<PageLoader/>}>
                                 <NotFound/>
                             </Suspense>
                         </Route>

@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import {Form, Formik} from "formik";
-import {Box, DateInput, FormField, Select, TextInput} from "grommet";
+import {Box, DateInput, FormField, RangeInput, Select, Text, TextInput} from "grommet";
 import * as Yup from "yup";
 import Gender from "../../../Model/Gender";
 
@@ -10,6 +10,8 @@ function Userinfo() {
         .keys(Gender)
         .filter(key => typeof Gender[key as any] === "number")
         .map(key => key.charAt(0) + key.slice(1).toLowerCase());
+
+    const [children, setChildren] = useState(0);
 
     const profileSchema = Yup.object({
         fullName: Yup
@@ -25,7 +27,11 @@ function Userinfo() {
         gender: Yup
             .string()
             .optional()
-            .oneOf(genderOptions)
+            .oneOf(genderOptions),
+        children: Yup
+            .number()
+            .default(0)
+            .required()
     });
 
     return (
@@ -36,7 +42,7 @@ function Userinfo() {
                 country: '',
                 gender: '',
                 languages: '',
-                children: ''
+                children: children
             }}
             onSubmit={() => console.log('Submitted')}
             validationSchema={profileSchema}>
@@ -69,6 +75,20 @@ function Userinfo() {
                                     <DateInput
                                         format="dd/mm/yyyy"
                                         name="birthday"/>
+                                </FormField>
+                                <FormField
+                                    error={errors.children}
+                                    label={'How many children?'}>
+                                    <Box align="center">
+                                        <Text>{children}</Text>
+                                    </Box>
+                                    <RangeInput
+                                        name="children"
+                                        value={children}
+                                        min={0}
+                                        max={20}
+                                        onChange={event => setChildren(Number(event.target.value))}
+                                    />
                                 </FormField>
                             </Box>
                             <Box direction="column">

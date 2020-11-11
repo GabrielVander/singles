@@ -17,6 +17,7 @@
     "i18next": "^19.8.1",
     "i18next-browser-languagedetector": "^6.0.1",
     "i18next-xhr-backend": "^3.2.2",
+    "language-list": "^0.0.3",
     "logrocket": "^1.0.14",
     "polished": "^4.0.2",
     "react": "^16.13.1",

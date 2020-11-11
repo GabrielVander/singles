@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React from "react";
 import {Form, Formik} from "formik";
-import {Box, DateInput, FormField, RangeInput, Select, Text, TextInput} from "grommet";
+import {Box, Button, DateInput, FormField, RangeInput, Select, Text, TextInput} from "grommet";
 import * as Yup from "yup";
 import Gender from "../../../Model/Gender";
 
@@ -11,7 +11,8 @@ function Userinfo() {
         .filter(key => typeof Gender[key as any] === "number")
         .map(key => key.charAt(0) + key.slice(1).toLowerCase());
 
-    const [children, setChildren] = useState(0);
+    const languages = require('language-list')();
+    const languagesList = languages.getData().map((language: { language: string; }) => language.language);
 
     const profileSchema = Yup.object({
         fullName: Yup
@@ -31,7 +32,11 @@ function Userinfo() {
         children: Yup
             .number()
             .default(0)
-            .required()
+            .required(),
+        languages: Yup
+            .object()
+            .optional()
+            .nullable()
     });
 
     return (
@@ -42,7 +47,7 @@ function Userinfo() {
                 country: '',
                 gender: '',
                 languages: '',
-                children: children
+                children: 0
             }}
             onSubmit={() => console.log('Submitted')}
             validationSchema={profileSchema}>
@@ -50,7 +55,8 @@ function Userinfo() {
                   errors,
                   handleChange,
                   handleBlur,
-                  handleSubmit
+                  handleSubmit,
+                  values
               }) => {
                 return (
                     <Form
@@ -80,14 +86,13 @@ function Userinfo() {
                                     error={errors.children}
                                     label={'How many children?'}>
                                     <Box align="center">
-                                        <Text>{children}</Text>
+                                        <Text>{values.children}</Text>
                                     </Box>
                                     <RangeInput
                                         name="children"
-                                        value={children}
                                         min={0}
                                         max={20}
-                                        onChange={event => setChildren(Number(event.target.value))}
+                                        onChange={handleChange}
                                     />
                                 </FormField>
                             </Box>
@@ -109,48 +114,32 @@ function Userinfo() {
                                         onChange={handleChange}
                                         options={genderOptions}/>
                                 </FormField>
+                                <FormField
+                                    error={errors.languages}
+                                    label={'Languages you speak'}>
+                                    <Select
+                                        name="languages"
+                                        multiple
+                                        onChange={({value}) => {
+                                            handleChange({
+                                                target: {
+                                                    name: 'languages',
+                                                    value
+                                                }
+                                            });
+                                        }}
+                                        options={languagesList}/>
+                                </FormField>
                             </Box>
                         </Box>
 
-                        {/*<Box*/}
-                        {/*    direction="row"*/}
-                        {/*    gap="medium"*/}
-                        {/*    justify="center"*/}
-                        {/*    margin="medium"*/}
-                        {/*>*/}
-                        {/*    <Button type="submit" primary label={t('register:registerButtonLabel')}/>*/}
-                        {/*</Box>*/}
-                        {/*<Box*/}
-                        {/*    direction="row"*/}
-                        {/*    justify="center"*/}
-                        {/*    align="center"*/}
-                        {/*    margin="small"*/}
-                        {/*>*/}
-                        {/*    <Paragraph margin="none">*/}
-                        {/*        {t('register:registerVia')}*/}
-                        {/*    </Paragraph>*/}
-                        {/*</Box>*/}
-                        {/*<Box*/}
-                        {/*    direction="row"*/}
-                        {/*    justify="around"*/}
-                        {/*>*/}
-                        {/*    <Button*/}
-                        {/*        onClick={registerWithGoogle}*/}
-                        {/*        icon={<Google color="plain"/>}/>*/}
-                        {/*    <Button*/}
-                        {/*        onClick={registerWithFacebook}*/}
-                        {/*        icon={<Facebook color="plain"/>}/>*/}
-                        {/*    <Button*/}
-                        {/*        onClick={registerWithTwitter}*/}
-                        {/*        icon={<Twitter color="plain"/>}/>*/}
-                        {/*</Box>*/}
-                        {/*<Box margin="small" align="center">*/}
-                        {/*    <Paragraph margin="none" textAlign="center">*/}
-                        {/*        <Trans i18nKey="register:register">*/}
-                        {/*            Already have an account? <Link to={LOGIN.path}>Login</Link>*/}
-                        {/*        </Trans>*/}
-                        {/*    </Paragraph>*/}
-                        {/*</Box>*/}
+                        <Box
+                            direction="row"
+                            justify="center"
+                            margin="medium"
+                        >
+                            <Button type="submit" primary label={'Save'}/>
+                        </Box>
                     </Form>
                 );
             }}

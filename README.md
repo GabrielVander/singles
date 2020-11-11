@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Singles
+
+We seek to provide a safe social environment where single parents can connect with each other, share common interests, ideas, experiences, advices and tips of all aspects of raising a child.
+
 ## Available Scripts
 
 In the project directory, you can run:

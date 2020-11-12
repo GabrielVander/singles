@@ -5,14 +5,16 @@ import * as Yup from "yup";
 import Gender from "../../../Model/Gender";
 
 function Userinfo() {
-    const countries = ['Brazil', 'United States'];
     const genderOptions = Object
         .keys(Gender)
         .filter(key => typeof Gender[key as any] === "number")
         .map(key => key.charAt(0) + key.slice(1).toLowerCase());
 
     const languages = require('language-list')();
-    const languagesList = languages.getData().map((language: { language: string; }) => language.language);
+    const languagesList = languages.getData();
+
+    const {getData} = require('country-list');
+    const countries = getData();
 
     const profileSchema = Yup.object({
         fullName: Yup
@@ -24,7 +26,7 @@ function Userinfo() {
         country: Yup
             .string()
             .optional()
-            .oneOf(countries),
+            .oneOf(countries.map((country: { code: string; }) => country.code)),
         gender: Yup
             .string()
             .optional()
@@ -104,6 +106,8 @@ function Userinfo() {
                                         placeholder={'Your current country'}
                                         onChange={handleChange}
                                         name="passwordConfirmation"
+                                        labelKey="name"
+                                        valueKey="code"
                                         options={countries}/>
                                 </FormField>
                                 <FormField
@@ -128,6 +132,8 @@ function Userinfo() {
                                                 }
                                             });
                                         }}
+                                        labelKey="language"
+                                        valueKey="code"
                                         options={languagesList}/>
                                 </FormField>
                             </Box>

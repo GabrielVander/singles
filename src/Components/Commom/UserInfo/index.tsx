@@ -66,7 +66,7 @@ function Userinfo() {
                             event.preventDefault();
                             handleSubmit();
                         }}>
-                        <Box direction="row-responsive" fill="horizontal" gap="medium">
+                        <Box direction="row-responsive" justify="center" fill="horizontal" gap="medium" margin="medium">
                             <Box direction="column">
                                 <FormField
                                     error={errors.fullName}

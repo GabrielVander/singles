@@ -4,12 +4,15 @@ import ProfileState from "../States/ProfileState";
 
 const defaultState: ProfileState = {
     isEditing: false,
-    loading: false
+    loading: false,
 };
 
 const profileReducer = createReducer({
     // @ts-ignore
-    [toggleIsEditing]: (state) => state.isEditing = !state.isEditing,
+    [toggleIsEditing]: (state) => ({
+        ...state,
+        isEditing: !state.isEditing
+    })
 }, defaultState);
 
 export default profileReducer;

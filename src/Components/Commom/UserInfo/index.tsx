@@ -1,10 +1,11 @@
 import React from "react";
 import {Form, Formik} from "formik";
-import {Box, Button, DateInput, FormField, RangeInput, Select, Text, TextInput} from "grommet";
+import {Box, Button, DateInput, FormField, RangeInput, Select, Text, TextArea, TextInput} from "grommet";
 import * as Yup from "yup";
 import Gender from "../../../Model/Gender";
+import UserDetails from "../../../Model/Authentication/UserDetails";
 
-function Userinfo() {
+function Userinfo({userDetails}: { userDetails: UserDetails }) {
     const genderOptions = Object
         .keys(Gender)
         .filter(key => typeof Gender[key as any] === "number")
@@ -25,17 +26,21 @@ function Userinfo() {
             .required('Birthday is required'),
         country: Yup
             .string()
-            .optional()
+            .required('Country is required')
             .oneOf(countries.map((country: { code: string; }) => country.code)),
         gender: Yup
             .string()
-            .optional()
+            .required('Gender is required')
             .oneOf(genderOptions),
         children: Yup
             .number()
             .default(0)
             .required(),
         languages: Yup
+            .object()
+            .required('Languages are required')
+            .nullable(),
+        description: Yup
             .object()
             .optional()
             .nullable()
@@ -44,14 +49,15 @@ function Userinfo() {
     return (
         <Formik
             initialValues={{
-                fullName: '',
-                birthday: '01/01/2000',
-                country: '',
-                gender: '',
-                languages: '',
-                children: 0
+                fullName: userDetails.fullName || undefined,
+                birthday: userDetails.dateOfBirth || undefined,
+                country: userDetails.country || undefined,
+                gender: userDetails.gender || undefined,
+                languages: userDetails.spokenLanguages?.reduce((previousValue, currentValue) => `${previousValue}, ${currentValue}`) || undefined,
+                children: userDetails.children || undefined,
+                description: userDetails.description || undefined
             }}
-            onSubmit={() => console.log('Submitted')}
+            onSubmit={(values) => console.log(values)}
             validationSchema={profileSchema}>
             {({
                   errors,
@@ -138,7 +144,15 @@ function Userinfo() {
                                 </FormField>
                             </Box>
                         </Box>
-
+                        <Box direction="row-responsive" justify="center" fill="horizontal" gap="medium" margin="medium">
+                            <Box direction="column">
+                                <FormField
+                                    error={errors.description}
+                                    label={'Description'}>
+                                    <TextArea value={values.description} placeholder={"Brief summary"}/>
+                                </FormField>
+                            </Box>
+                        </Box>
                         <Box
                             direction="row"
                             justify="center"

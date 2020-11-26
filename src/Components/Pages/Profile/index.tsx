@@ -1,45 +1,32 @@
 import React from "react";
-import {
-    Avatar,
-    Box,
-    Card,
-    CardBody,
-    CardHeader,
-    DateInput,
-    FormField,
-    Heading,
-    Main,
-    Paragraph,
-    RangeInput,
-    Text,
-    TextInput
-} from "grommet";
+import {Avatar, Box, Card, CardBody, CardHeader, Heading, Main, Paragraph} from "grommet";
 import {useFirestore, useFirestoreDocData, useUser} from "reactfire";
-import User from "../../../Model/Authentication/User";
+import UserDetails from "../../../Model/Authentication/UserDetails";
+import {useSelector} from "react-redux";
+import ReadOnlyUserDetails from "../../Commom/ReadOnlyUserDetails";
+import RootState from "../../../Redux/States/RootState";
+import Userinfo from "../../Commom/UserInfo";
 
 function Profile() {
-    const user = useUser<User>();
+    const user = useUser<UserDetails>();
+    const isEditing = useSelector<RootState>(state => state.profile.isEditing);
+
     const userDetailsRef = useFirestore()
         .collection('users')
         .doc(user.uid);
-    const {
-        backgroundImageURL,
-        displayName,
-        fullName,
-        email,
-        description,
-        children,
-        country,
-        gender,
-        photoURL,
-        spokenLanguages
-    } = useFirestoreDocData<User>(userDetailsRef);
+
+    const userDetails = useFirestoreDocData<UserDetails>(userDetailsRef);
 
     return (
-        <Main pad="medium" flex="grow">
-            <Card background={{
-                image: `url(${backgroundImageURL})`,
-            }} fill="vertical" pad="medium">
+        <Main pad="small" flex="grow">
+            <Card
+                background={{
+                    image: `url(${userDetails.backgroundImageURL})`,
+                }}
+                fill="vertical"
+                flex="grow"
+                overflow="scroll"
+                pad="medium">
                 <CardHeader pad='none' basis='small'>
                     <Box style={{position: 'relative'}} height='small' width='full'>
                         <Avatar
@@ -53,84 +40,32 @@ function Profile() {
                                 height: '96px',
                                 border: '3px solid white',
                             }}
-                            src={photoURL}
+                            src={userDetails.photoURL}
                             round='full'
                         />
                     </Box>
                 </CardHeader>
-                <CardBody round="medium" background={{
-                    color: "light-1",
-                    opacity: "strong"
-                }} pad={{top: 'large', bottom: 'medium'}}>
+                <CardBody
+                    flex="grow"
+                    round="medium"
+                    background={{
+                        color: "light-1",
+                        opacity: "strong"
+                    }}
+                    pad={{
+                        top: 'large',
+                        bottom: 'medium'
+                    }}>
                     <Box align='center' pad='large' gap='medium'>
                         <Heading margin='none'>
-                            {displayName || email}
+                            {userDetails.displayName || userDetails.email}
                         </Heading>
                         <Paragraph size="large" textAlign='center' margin='none'>
-                            {description}
+                            {userDetails.description}
                         </Paragraph>
                         <Box gap="medium">
-                            <Box direction="row-responsive" justify="center" gap="medium">
-                                <Box direction="column" width="medium">
-                                    <FormField label={"Full name"}>
-                                        <TextInput placeholder={"Unspecified"} readOnly value={fullName}/>
-                                    </FormField>
-                                </Box>
-                                <Box direction="column" width="medium">
-                                    <FormField label={"Country"}>
-                                        <TextInput placeholder={"Unspecified"} readOnly value={country}/>
-                                    </FormField>
-                                </Box>
-                            </Box>
-                            <Box direction="row-responsive" align="center" gap="medium">
-                                <Box direction="column" width="medium">
-                                    <FormField label={"Gender"}>
-                                        <TextInput placeholder={"Unspecified"} readOnly value={gender}/>
-                                    </FormField>
-                                </Box>
-                                <Box direction="column" width="medium">
-                                    <FormField label={"Date of Birth"}>
-                                        <DateInput
-                                            calendarProps={{
-                                                size: "small",
-                                                style: {
-                                                    display: "none"
-                                                }
-                                            }}
-                                            buttonProps={{
-                                                disabled: true
-                                            }}
-                                            inputProps={{
-                                                readOnly: true
-                                            }}
-                                            format={'mm/dd/yyyy'}
-                                            value={country}/>
-                                    </FormField>
-                                </Box>
-                            </Box>
-                            <Box direction="row-responsive" align="center" gap="medium">
-                                <Box direction="column" width="medium">
-                                    <FormField readOnly label={"Children"}>
-                                        <Box>
-                                            <RangeInput
-                                                disabled
-                                                min={0}
-                                                max={20}
-                                                defaultValue={children}
-                                            />
-                                            <Box align="center">
-                                                <Text>{children || "Unspecified"}</Text>
-                                            </Box>
-                                        </Box>
-                                    </FormField>
-                                </Box>
-                                <Box direction="column" width="medium">
-                                    <FormField label={"Languages"}>
-                                        <TextInput placeholder={"Unspecified"} readOnly
-                                                   value={spokenLanguages?.reduce((previousValue, currentValue) => `${previousValue}, ${currentValue}`)}/>
-                                    </FormField>
-                                </Box>
-                            </Box>
+                            {isEditing ? <Userinfo userDetails={userDetails}/> :
+                                <ReadOnlyUserDetails userDetails={userDetails}/>}
                         </Box>
                     </Box>
                 </CardBody>

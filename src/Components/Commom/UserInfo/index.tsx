@@ -1,21 +1,27 @@
-import React from "react";
-import {Form, Formik} from "formik";
+import React, {useState} from "react";
+import {Form, Formik, FormikValues} from "formik";
 import {Box, Button, DateInput, FormField, RangeInput, Select, Text, TextArea, TextInput} from "grommet";
 import * as Yup from "yup";
+import {string} from "yup";
 import Gender from "../../../Model/Gender";
 import UserDetails from "../../../Model/Authentication/UserDetails";
+import Loader from "react-loader-spinner";
+import {useTranslation} from "react-i18next";
 
 function Userinfo({userDetails}: { userDetails: UserDetails }) {
-    const genderOptions = Object
-        .keys(Gender)
-        .filter(key => typeof Gender[key as any] === "number")
-        .map(key => key.charAt(0) + key.slice(1).toLowerCase());
+    const {t} = useTranslation(['defaultApp'])
 
-    const languages = require('language-list')();
-    const languagesList = languages.getData();
+    const [saving, setSaving] = useState(false);
+    const genderOptions = Gender.getOptions.map(value => ({
+        code: value.getCode,
+        value: t(`defaultApp:${value.getCode}`)
+    }));
 
-    const {getData} = require('country-list');
-    const countries = getData();
+    const {getData: getLanguageData} = require('language-list')();
+    const languagesList = getLanguageData();
+
+    const {getData: getCountryData} = require('country-list');
+    const countries = getCountryData();
 
     const profileSchema = Yup.object({
         fullName: Yup
@@ -25,19 +31,17 @@ function Userinfo({userDetails}: { userDetails: UserDetails }) {
             .date()
             .required('Birthday is required'),
         country: Yup
-            .string()
-            .required('Country is required')
-            .oneOf(countries.map((country: { code: string; }) => country.code)),
+            .object({code: string(), language: string()})
+            .required('Country is required'),
         gender: Yup
-            .string()
-            .required('Gender is required')
-            .oneOf(genderOptions),
+            .object({code: string(), value: string()})
+            .required('Gender is required'),
         children: Yup
             .number()
             .default(0)
             .required(),
         languages: Yup
-            .object()
+            .array()
             .required('Languages are required')
             .nullable(),
         description: Yup
@@ -46,6 +50,12 @@ function Userinfo({userDetails}: { userDetails: UserDetails }) {
             .nullable()
     });
 
+    function saveProfile(values: FormikValues) {
+        console.debug(values)
+        setSaving(true)
+        return undefined;
+    }
+
     return (
         <Formik
             initialValues={{
@@ -53,11 +63,11 @@ function Userinfo({userDetails}: { userDetails: UserDetails }) {
                 birthday: userDetails.dateOfBirth || undefined,
                 country: userDetails.country || undefined,
                 gender: userDetails.gender || undefined,
-                languages: userDetails.spokenLanguages?.reduce((previousValue, currentValue) => `${previousValue}, ${currentValue}`) || undefined,
+                languages: userDetails.spokenLanguages?.map((language: string) => ({code: language})) || undefined,
                 children: userDetails.children || undefined,
                 description: userDetails.description || undefined
             }}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values) => saveProfile(values)}
             validationSchema={profileSchema}>
             {({
                   errors,
@@ -80,6 +90,7 @@ function Userinfo({userDetails}: { userDetails: UserDetails }) {
                                     <TextInput
                                         placeholder={'Your full name'}
                                         onChange={handleChange}
+                                        value={values.fullName}
                                         onBlur={handleBlur}
                                         name="fullName"/>
                                 </FormField>
@@ -87,6 +98,14 @@ function Userinfo({userDetails}: { userDetails: UserDetails }) {
                                     error={errors.birthday}
                                     label={'Birthday'}>
                                     <DateInput
+                                        onChange={(value) => handleChange({
+                                            target: {
+                                                name: 'birthday',
+                                                // @ts-ignore
+                                                value: value.value
+                                            }
+                                        })}
+                                        value={values.birthday}
                                         format="dd/mm/yyyy"
                                         name="birthday"/>
                                 </FormField>
@@ -100,6 +119,7 @@ function Userinfo({userDetails}: { userDetails: UserDetails }) {
                                         name="children"
                                         min={0}
                                         max={20}
+                                        value={values.children}
                                         onChange={handleChange}
                                     />
                                 </FormField>
@@ -110,8 +130,14 @@ function Userinfo({userDetails}: { userDetails: UserDetails }) {
                                     label={'Country'}>
                                     <Select
                                         placeholder={'Your current country'}
-                                        onChange={handleChange}
-                                        name="passwordConfirmation"
+                                        value={values.country}
+                                        onChange={({option}) => handleChange({
+                                            target: {
+                                                name: 'country',
+                                                value: option
+                                            }
+                                        })}
+                                        name="country"
                                         labelKey="name"
                                         valueKey="code"
                                         options={countries}/>
@@ -121,7 +147,15 @@ function Userinfo({userDetails}: { userDetails: UserDetails }) {
                                     label={'Gender'}>
                                     <Select
                                         name="gender"
-                                        onChange={handleChange}
+                                        value={values.gender}
+                                        labelKey="value"
+                                        valueKey="code"
+                                        onChange={({option}) => handleChange({
+                                            target: {
+                                                name: 'gender',
+                                                value: option
+                                            }
+                                        })}
                                         options={genderOptions}/>
                                 </FormField>
                                 <FormField
@@ -130,16 +164,15 @@ function Userinfo({userDetails}: { userDetails: UserDetails }) {
                                     <Select
                                         name="languages"
                                         multiple
-                                        onChange={({value}) => {
-                                            handleChange({
-                                                target: {
-                                                    name: 'languages',
-                                                    value
-                                                }
-                                            });
-                                        }}
+                                        onChange={({value}) => handleChange({
+                                            target: {
+                                                name: 'languages',
+                                                value: value
+                                            }
+                                        })}
                                         labelKey="language"
                                         valueKey="code"
+                                        value={values.languages}
                                         options={languagesList}/>
                                 </FormField>
                             </Box>
@@ -149,7 +182,11 @@ function Userinfo({userDetails}: { userDetails: UserDetails }) {
                                 <FormField
                                     error={errors.description}
                                     label={'Description'}>
-                                    <TextArea value={values.description} placeholder={"Brief summary"}/>
+                                    <TextArea
+                                        value={values.description}
+                                        onChange={handleChange}
+                                        name="description"
+                                        placeholder={"Brief summary"}/>
                                 </FormField>
                             </Box>
                         </Box>
@@ -158,7 +195,16 @@ function Userinfo({userDetails}: { userDetails: UserDetails }) {
                             justify="center"
                             margin="medium"
                         >
-                            <Button type="submit" primary label={'Save'}/>
+                            <Button
+                                type="submit"
+                                disabled={saving}
+                                primary
+                                label={'Save'}
+                                icon={
+                                    saving
+                                        ? <Loader type="TailSpin" color="#00BFFF" width={25} height={25}/>
+                                        : undefined
+                                }/>
                         </Box>
                     </Form>
                 );

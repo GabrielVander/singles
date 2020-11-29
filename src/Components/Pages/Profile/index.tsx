@@ -64,7 +64,7 @@ function Profile() {
                             {userDetails.description}
                         </Paragraph>
                         <Box gap="medium">
-                            {isEditing ? <Userinfo userDetails={userDetails}/> :
+                            {isEditing ? <Userinfo userDetails={userDetails} userDetailsRef={userDetailsRef}/> :
                                 <ReadOnlyUserDetails userDetails={userDetails}/>}
                         </Box>
                     </Box>

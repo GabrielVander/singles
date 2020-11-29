@@ -1,7 +1,4 @@
 {
     "editAndSave": "Edit <1>src/App.tsx</1> and save to reload.",
-    "learnReact": "Learn React",
-    "ma": "Male",
-    "fe": "Female",
-    "un": "Undefined"
+    "learnReact": "Learn React"
 }

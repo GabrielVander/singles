@@ -7,20 +7,25 @@ import Gender from "../../../Model/Gender";
 import UserDetails from "../../../Model/Authentication/UserDetails";
 import Loader from "react-loader-spinner";
 import {useTranslation} from "react-i18next";
+import firebase from "firebase";
+import {toast} from "react-toastify";
+import {useDispatch} from "react-redux";
+import {toggleIsEditing} from "../../../Redux/Actions/ProfileActions";
 
-function Userinfo({userDetails}: { userDetails: UserDetails }) {
-    const {t} = useTranslation(['defaultApp'])
+function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, userDetailsRef: firebase.firestore.DocumentReference }) {
+    const {t} = useTranslation(['gender']);
+    const dispatch = useDispatch();
 
     const [saving, setSaving] = useState(false);
     const genderOptions = Gender.getOptions.map(value => ({
         code: value.getCode,
-        value: t(`defaultApp:${value.getCode}`)
+        value: t(`gender:${value.getCode}`)
     }));
 
-    const {getData: getLanguageData} = require('language-list')();
+    const {getData: getLanguageData, getLanguageName: getLanguageByCode} = require('language-list')();
     const languagesList = getLanguageData();
 
-    const {getData: getCountryData} = require('country-list');
+    const {getData: getCountryData, getName: getCountryByCode} = require('country-list');
     const countries = getCountryData();
 
     const profileSchema = Yup.object({
@@ -51,9 +56,33 @@ function Userinfo({userDetails}: { userDetails: UserDetails }) {
     });
 
     function saveProfile(values: FormikValues) {
-        console.debug(values)
         setSaving(true)
-        return undefined;
+        const {
+            fullName,
+            birthday,
+            country,
+            gender,
+            children,
+            languages,
+            description
+        } = values;
+
+        userDetailsRef.update({
+            fullName,
+            dateOfBirth: birthday,
+            country: country.code,
+            gender: gender.code,
+            children,
+            spokenLanguages: languages.map((language: { code: string; }) => language.code),
+            description,
+            finishedSetup: true
+        })
+            .then(() => setSaving(false))
+            .catch(reason => toast.error(reason));
+    }
+
+    function cancelEdition() {
+        dispatch(toggleIsEditing());
     }
 
     return (
@@ -61,9 +90,12 @@ function Userinfo({userDetails}: { userDetails: UserDetails }) {
             initialValues={{
                 fullName: userDetails.fullName || undefined,
                 birthday: userDetails.dateOfBirth || undefined,
-                country: userDetails.country || undefined,
-                gender: userDetails.gender || undefined,
-                languages: userDetails.spokenLanguages?.map((language: string) => ({code: language})) || undefined,
+                country: {code: userDetails.country, country: getCountryByCode(userDetails.country)} || undefined,
+                gender: {code: userDetails.gender, value: t(`gender:${userDetails.gender}`)} || undefined,
+                languages: userDetails.spokenLanguages?.map((language: string) => ({
+                    code: language,
+                    language: getLanguageByCode(language)
+                })) || undefined,
                 children: userDetails.children || undefined,
                 description: userDetails.description || undefined
             }}
@@ -178,22 +210,23 @@ function Userinfo({userDetails}: { userDetails: UserDetails }) {
                             </Box>
                         </Box>
                         <Box direction="row-responsive" justify="center" fill="horizontal" gap="medium" margin="medium">
-                            <Box direction="column">
-                                <FormField
-                                    error={errors.description}
-                                    label={'Description'}>
-                                    <TextArea
-                                        value={values.description}
-                                        onChange={handleChange}
-                                        name="description"
-                                        placeholder={"Brief summary"}/>
-                                </FormField>
-                            </Box>
+                            <FormField
+                                error={errors.description}
+                                label={'Description'}>
+                                <TextArea
+                                    value={values.description}
+                                    onChange={handleChange}
+                                    fill
+                                    size='large'
+                                    name="description"
+                                    placeholder={"Brief summary"}/>
+                            </FormField>
                         </Box>
                         <Box
                             direction="row"
                             justify="center"
                             margin="medium"
+                            gap='medium'
                         >
                             <Button
                                 type="submit"
@@ -205,6 +238,12 @@ function Userinfo({userDetails}: { userDetails: UserDetails }) {
                                         ? <Loader type="TailSpin" color="#00BFFF" width={25} height={25}/>
                                         : undefined
                                 }/>
+
+                            <Button
+                                disabled={saving}
+                                label={'Cancel'}
+                                onClick={cancelEdition}
+                                secondary/>
                         </Box>
                     </Form>
                 );

@@ -5,7 +5,7 @@
 [debug] [2020-11-29T13:48:21.726Z] Node Version:  v12.19.0
 [debug] [2020-11-29T13:48:21.726Z] Time:          Sun Nov 29 2020 10:48:21 GMT-0300 (Brasilia Standard Time)
 [debug] [2020-11-29T13:48:21.726Z] ----------------------------------------------------------------------
-[debug] [2020-11-29T13:48:21.727Z] 
+[debug] [2020-11-29T13:48:21.727Z]
 [debug] [2020-11-29T13:48:21.802Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
 [debug] [2020-11-29T13:48:21.803Z] > authorizing via signed-in user
 [info] i  emulators: Starting emulators: auth, functions, firestore, hosting {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, firestore, hosting"}}
@@ -30,11 +30,11 @@ Dev App Server is now running.
 
  {"metadata":{"emulator":{"name":"firestore"},"message":"If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\r\n\n   export FIRESTORE_EMULATOR_HOST=localhost:8080\n\nDev App Server is now running.\n\r\n"}}
 [debug] [2020-11-29T13:48:27.150Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2020-11-29T13:48:27.150Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+[debug] [2020-11-29T13:48:27.150Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token
  <request body omitted>
 [debug] [2020-11-29T13:48:27.439Z] <<< HTTP RESPONSE 200 {"date":"Sun, 29 Nov 2020 13:48:29 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
-[debug] [2020-11-29T13:48:27.504Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/singles-7aa8b/webApps/-/config  
- 
+[debug] [2020-11-29T13:48:27.504Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/singles-7aa8b/webApps/-/config
+
 [debug] [2020-11-29T13:48:29.029Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sun, 29 Nov 2020 13:48:31 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
 [info] i  hosting: Serving hosting files from: build {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mbuild\u001b[22m"}}
 [info] +  hosting: Local server: http://localhost:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5000\u001b[22m\u001b[24m"}}
@@ -67,7 +67,7 @@ Dev App Server is now running.
 [debug] [2020-11-29T13:48:32.613Z] [runtime-status] [6136] auth.setJwtVerificationEnabled(false) {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [6136] auth.setJwtVerificationEnabled(false)"}}
 [debug] [2020-11-29T13:48:32.632Z] addAuthTrigger {"eventTrigger":{"resource":"projects/singles-7aa8b","eventType":"providers/firebase.auth/eventTypes/user.create","service":"firebaseauth.googleapis.com"}}
 [info] +  functions[saveUserToFirestore]: auth function initialized. {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mauth\u001b[22m function initialized."}}
-[info] 
+[info]
 ┌───────────────────────────────────────────────────────────────────────┐
 │ ✔  All emulators ready! View status and logs at http://localhost:4000 │
 └───────────────────────────────────────────────────────────────────────┘
@@ -86,7 +86,7 @@ Dev App Server is now running.
   Other reserved ports: 4400, 4500
 
 Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
- 
+
 [debug] [2020-11-29T13:48:32.635Z] [worker-~diagnostic~-7459cb7b-4186-42ea-9753-f3eccdb1acf8]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-7459cb7b-4186-42ea-9753-f3eccdb1acf8]: IDLE"}}
 [debug] [2020-11-29T13:52:33.951Z] [work-queue] {"queueLength":1,"workRunningCount":0}
 [debug] [2020-11-29T13:52:33.952Z] [work-queue] {"queueLength":0,"workRunningCount":1}

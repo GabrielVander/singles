@@ -10,7 +10,7 @@ interface ReadOnlyUserDetailsProps {
 }
 
 function ReadOnlyUserDetails({userDetails}: ReadOnlyUserDetailsProps) {
-    const {t} = useTranslation(['gender']);
+    const {t} = useTranslation(['gender', 'profile']);
     const dispatch = useDispatch();
 
     const {getName: getCountryByCode} = require('country-list');
@@ -27,25 +27,26 @@ function ReadOnlyUserDetails({userDetails}: ReadOnlyUserDetailsProps) {
         <Box>
             <Box direction="row-responsive" justify="center" gap="medium">
                 <Box direction="column" width="medium">
-                    <FormField label={"Full name"}>
-                        <TextInput placeholder={"Unspecified"} readOnly value={userDetails.fullName || undefined}/>
+                    <FormField label={t('profile:fullNameLabel')}>
+                        <TextInput placeholder={t('profile:unspecifiedLabel')} readOnly
+                                   value={userDetails.fullName || undefined}/>
                     </FormField>
                 </Box>
                 <Box direction="column" width="medium">
-                    <FormField label={"Country"}>
-                        <TextInput placeholder={"Unspecified"} readOnly
+                    <FormField label={t('profile:countryLabel')}>
+                        <TextInput placeholder={t('profile:unspecifiedLabel')} readOnly
                                    value={getCountryByCode(userDetails.country) || undefined}/>
                     </FormField>
                 </Box>
             </Box>
             <Box direction="row-responsive" align="center" gap="medium">
                 <Box direction="column" width="medium">
-                    <FormField label={"Gender"}>
-                        <TextInput placeholder={"Unspecified"} readOnly value={gender || undefined}/>
+                    <FormField label={t('profile:genderLabel')}>
+                        <TextInput placeholder={t('profile:unspecifiedLabel')} readOnly value={gender || undefined}/>
                     </FormField>
                 </Box>
                 <Box direction="column" width="medium">
-                    <FormField label={"Date of Birth"}>
+                    <FormField label={t('profile:birthdayLabel')}>
                         <DateInput
                             calendarProps={{
                                 size: "small",
@@ -66,7 +67,7 @@ function ReadOnlyUserDetails({userDetails}: ReadOnlyUserDetailsProps) {
             </Box>
             <Box direction="row-responsive" align="center" gap="medium">
                 <Box direction="column" width="medium">
-                    <FormField readOnly label={"Children"}>
+                    <FormField readOnly label={t('profile:childrenLabel')}>
                         <Box>
                             <RangeInput
                                 disabled
@@ -75,15 +76,15 @@ function ReadOnlyUserDetails({userDetails}: ReadOnlyUserDetailsProps) {
                                 defaultValue={userDetails.children}
                             />
                             <Box align="center">
-                                <Text>{userDetails.children || "Unspecified"}</Text>
+                                <Text>{userDetails.children || t('profile:unspecifiedLabel')}</Text>
                             </Box>
                         </Box>
                     </FormField>
                 </Box>
                 <Box direction="column" width="medium">
-                    <FormField label={"Languages"}>
+                    <FormField label={t('profile:languageLabel')}>
                         <TextInput
-                            placeholder={"Unspecified"}
+                            placeholder={t('profile:unspecifiedLabel')}
                             readOnly
                             value={languages}/>
                     </FormField>
@@ -94,7 +95,7 @@ function ReadOnlyUserDetails({userDetails}: ReadOnlyUserDetailsProps) {
                     direction="row-responsive"
                     margin="medium"
                     justify="center">
-                    <Button primary label={"Edit information"} onClick={() => dispatch(toggleIsEditing())}/>
+                    <Button primary label={t('profile:editButtonLabel')} onClick={() => dispatch(toggleIsEditing())}/>
                 </Box>
             )}
         </Box>

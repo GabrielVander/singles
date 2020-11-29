@@ -13,7 +13,7 @@ import {useDispatch} from "react-redux";
 import {toggleIsEditing} from "../../../Redux/Actions/ProfileActions";
 
 function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, userDetailsRef: firebase.firestore.DocumentReference }) {
-    const {t} = useTranslation(['gender']);
+    const {t} = useTranslation(['gender', 'profile']);
     const dispatch = useDispatch();
 
     const [saving, setSaving] = useState(false);
@@ -31,23 +31,23 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
     const profileSchema = Yup.object({
         fullName: Yup
             .string()
-            .required('Name is required'),
+            .required(t('profile:nameIsRequired')),
         birthday: Yup
             .date()
-            .required('Birthday is required'),
+            .required(t('profile:birthdayIsRequired')),
         country: Yup
             .object({code: string(), language: string()})
-            .required('Country is required'),
+            .required(t('profile:countryIsRequired')),
         gender: Yup
             .object({code: string(), value: string()})
-            .required('Gender is required'),
+            .required(t('profile:genderIsRequired')),
         children: Yup
             .number()
             .default(0)
             .required(),
         languages: Yup
             .array()
-            .required('Languages are required')
+            .required(t('profile:languageIsRequired'))
             .nullable(),
         description: Yup
             .object()
@@ -118,9 +118,9 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
                             <Box direction="column">
                                 <FormField
                                     error={errors.fullName}
-                                    label={'Full name'}>
+                                    label={t('profile:fullNameLabel')}>
                                     <TextInput
-                                        placeholder={'Your full name'}
+                                        placeholder={t('profile:fullNamePlaceholder')}
                                         onChange={handleChange}
                                         value={values.fullName}
                                         onBlur={handleBlur}
@@ -128,7 +128,7 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
                                 </FormField>
                                 <FormField
                                     error={errors.birthday}
-                                    label={'Birthday'}>
+                                    label={t('profile:birthdayLabel')}>
                                     <DateInput
                                         onChange={(value) => handleChange({
                                             target: {
@@ -143,7 +143,7 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
                                 </FormField>
                                 <FormField
                                     error={errors.children}
-                                    label={'How many children?'}>
+                                    label={t('profile:childrenLabel')}>
                                     <Box align="center">
                                         <Text>{values.children}</Text>
                                     </Box>
@@ -159,9 +159,9 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
                             <Box direction="column">
                                 <FormField
                                     error={errors.country}
-                                    label={'Country'}>
+                                    label={t('profile:countryLabel')}>
                                     <Select
-                                        placeholder={'Your current country'}
+                                        placeholder={t('profile:countryPlaceholder')}
                                         value={values.country}
                                         onChange={({option}) => handleChange({
                                             target: {
@@ -176,7 +176,7 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
                                 </FormField>
                                 <FormField
                                     error={errors.gender}
-                                    label={'Gender'}>
+                                    label={t('profile:genderLabel')}>
                                     <Select
                                         name="gender"
                                         value={values.gender}
@@ -192,7 +192,7 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
                                 </FormField>
                                 <FormField
                                     error={errors.languages}
-                                    label={'Languages you speak'}>
+                                    label={t('profile:languageLabel')}>
                                     <Select
                                         name="languages"
                                         multiple
@@ -212,14 +212,14 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
                         <Box direction="row-responsive" justify="center" fill="horizontal" gap="medium" margin="medium">
                             <FormField
                                 error={errors.description}
-                                label={'Description'}>
+                                label={t('profile:descriptionLabel')}>
                                 <TextArea
                                     value={values.description}
                                     onChange={handleChange}
                                     fill
                                     size='large'
                                     name="description"
-                                    placeholder={"Brief summary"}/>
+                                    placeholder={t('profile:descriptionPlaceholder')}/>
                             </FormField>
                         </Box>
                         <Box
@@ -232,7 +232,7 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
                                 type="submit"
                                 disabled={saving}
                                 primary
-                                label={'Save'}
+                                label={t('profile:saveButtonLabel')}
                                 icon={
                                     saving
                                         ? <Loader type="TailSpin" color="#00BFFF" width={25} height={25}/>
@@ -241,7 +241,7 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
 
                             <Button
                                 disabled={saving}
-                                label={'Cancel'}
+                                label={t('profile:cancelButtonLabel')}
                                 onClick={cancelEdition}
                                 secondary/>
                         </Box>

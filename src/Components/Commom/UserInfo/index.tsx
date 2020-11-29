@@ -12,6 +12,11 @@ import {toast} from "react-toastify";
 import {useDispatch} from "react-redux";
 import {toggleIsEditing} from "../../../Redux/Actions/ProfileActions";
 
+// @ts-ignore
+import language_list from "language-list";
+// @ts-ignore
+import {getData as getCountryData, getName as getCountryByCode} from "country-list";
+
 function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, userDetailsRef: firebase.firestore.DocumentReference }) {
     const {t} = useTranslation(['gender', 'profile', 'accessibility']);
     const dispatch = useDispatch();
@@ -22,10 +27,10 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
         value: t(`gender:${value.getCode}`)
     }));
 
-    const {getData: getLanguageData, getLanguageName: getLanguageByCode} = require('language-list')();
+    const {getData: getLanguageData, getLanguageName: getLanguageByCode} = language_list();
     const languagesList = getLanguageData();
 
-    const {getData: getCountryData, getName: getCountryByCode} = require('country-list');
+
     const countries = getCountryData();
 
     const profileSchema = Yup.object({
@@ -85,13 +90,20 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
         dispatch(toggleIsEditing());
     }
 
+    console.debug(userDetails)
     return (
         <Formik
             initialValues={{
                 fullName: userDetails.fullName || undefined,
                 birthday: userDetails.dateOfBirth || undefined,
-                country: {code: userDetails.country, country: getCountryByCode(userDetails.country)} || undefined,
-                gender: {code: userDetails.gender, value: t(`gender:${userDetails.gender}`)} || undefined,
+                country: userDetails.country ? {
+                    code: userDetails.country,
+                    country: getCountryByCode(userDetails.country)
+                } : undefined,
+                gender: userDetails.gender ? {
+                    code: userDetails.gender,
+                    value: t(`gender:${userDetails.gender}`)
+                } : undefined,
                 languages: userDetails.spokenLanguages?.map((language: string) => ({
                     code: language,
                     language: getLanguageByCode(language)

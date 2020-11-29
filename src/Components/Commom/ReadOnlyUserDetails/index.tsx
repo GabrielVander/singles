@@ -35,7 +35,7 @@ function ReadOnlyUserDetails({userDetails}: ReadOnlyUserDetailsProps) {
                 <Box direction="column" width="medium">
                     <FormField label={t('profile:countryLabel')}>
                         <TextInput placeholder={t('profile:unspecifiedLabel')} readOnly
-                                   value={getCountryByCode(userDetails.country) || undefined}/>
+                                   value={userDetails.country ? getCountryByCode(userDetails.country) : undefined}/>
                     </FormField>
                 </Box>
             </Box>

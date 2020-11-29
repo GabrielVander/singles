@@ -13,7 +13,7 @@ import {useDispatch} from "react-redux";
 import {toggleIsEditing} from "../../../Redux/Actions/ProfileActions";
 
 function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, userDetailsRef: firebase.firestore.DocumentReference }) {
-    const {t} = useTranslation(['gender', 'profile']);
+    const {t} = useTranslation(['gender', 'profile', 'accessibility']);
     const dispatch = useDispatch();
 
     const [saving, setSaving] = useState(false);
@@ -161,6 +161,7 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
                                     error={errors.country}
                                     label={t('profile:countryLabel')}>
                                     <Select
+                                        a11yTitle={t('accessibility:profile.countryLabel')}
                                         placeholder={t('profile:countryPlaceholder')}
                                         value={values.country}
                                         onChange={({option}) => handleChange({
@@ -216,6 +217,7 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
                                 <TextArea
                                     value={values.description}
                                     onChange={handleChange}
+                                    a11yTitle={t('accessibility:profile.descriptionLabel')}
                                     fill
                                     size='large'
                                     name="description"

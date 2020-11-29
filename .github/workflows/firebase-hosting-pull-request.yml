@@ -15,5 +15,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SINGLES_7AA8B }}'
           projectId: singles-7aa8b
         env:
-          NODE_ENV: production
           FIREBASE_CLI_PREVIEWS: hostingchannels

@@ -7,7 +7,7 @@ class Gender {
     constructor(private code: string) {
     }
 
-    public static get getOptions(): Gender[] {
+    public static get options(): Gender[] {
         return [this.MALE, this.FEMALE, this.UNDEFINED]
     }
 

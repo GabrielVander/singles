@@ -14,13 +14,12 @@ function ReadOnlyUserDetails({userDetails}: ReadOnlyUserDetailsProps) {
     const dispatch = useDispatch();
 
     const {getName: getCountryByCode} = require('country-list');
-    const {getLanguageName: getLanguageByCode} = require('language-list')();
 
     const isProfileOwner = true;
 
     const gender: string = t(`gender:${userDetails.gender}`);
     const languages = userDetails
-        .spokenLanguages?.map((language: string) => getLanguageByCode(language))
+        .spokenLanguages?.map((language: string) => t(`language:${language}`))
         .reduce((accumulator, value) => `${accumulator}, ${value}`);
 
     return (

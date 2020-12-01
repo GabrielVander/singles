@@ -13,23 +13,28 @@ import {useDispatch} from "react-redux";
 import {toggleIsEditing} from "../../../Redux/Actions/ProfileActions";
 
 // @ts-ignore
-import language_list from "language-list";
-// @ts-ignore
 import {getData as getCountryData, getName as getCountryByCode} from "country-list";
+import Language from "../../../Model/Language";
 
-function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, userDetailsRef: firebase.firestore.DocumentReference }) {
-    const {t} = useTranslation(['gender', 'profile', 'accessibility']);
+interface UserInfoProps {
+    userDetails: UserDetails;
+    userDetailsRef: firebase.firestore.DocumentReference;
+}
+
+function Userinfo({userDetails, userDetailsRef}: UserInfoProps) {
+    const {t} = useTranslation(['gender', 'profile', 'accessibility', 'country', 'language']);
     const dispatch = useDispatch();
 
     const [saving, setSaving] = useState(false);
-    const genderOptions = Gender.getOptions.map(value => ({
+    const genderOptions = Gender.options.map(value => ({
         code: value.getCode,
         value: t(`gender:${value.getCode}`)
     }));
 
-    const {getData: getLanguageData, getLanguageName: getLanguageByCode} = language_list();
-    const languagesList = getLanguageData();
-
+    const languageOptions = Language.options.map(language => ({
+        code: language.code,
+        language: t(`language:${language.code}`)
+    }));
 
     const countries = getCountryData();
 
@@ -73,16 +78,19 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
         } = values;
 
         userDetailsRef.update({
-            fullName,
-            dateOfBirth: birthday,
-            country: country.code,
-            gender: gender.code,
-            children,
-            spokenLanguages: languages.map((language: { code: string; }) => language.code),
-            description,
+            fullName: fullName || null,
+            dateOfBirth: birthday || null,
+            country: country?.code || null,
+            gender: gender?.code || null,
+            children: children || null,
+            spokenLanguages: languages?.map((language: { code: string; }) => language?.code) || null,
+            description: description || null,
             finishedSetup: true
         })
-            .then(() => setSaving(false))
+            .then(() => {
+                setSaving(false);
+                toast.success(t('profile:updateSuccess'));
+            })
             .catch(reason => toast.error(reason));
     }
 
@@ -90,7 +98,6 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
         dispatch(toggleIsEditing());
     }
 
-    console.debug(userDetails)
     return (
         <Formik
             initialValues={{
@@ -106,7 +113,7 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
                 } : undefined,
                 languages: userDetails.spokenLanguages?.map((language: string) => ({
                     code: language,
-                    language: getLanguageByCode(language)
+                    language: t(`language:${userDetails.gender}`)
                 })) || undefined,
                 children: userDetails.children || undefined,
                 description: userDetails.description || undefined
@@ -218,7 +225,7 @@ function Userinfo({userDetails, userDetailsRef}: { userDetails: UserDetails, use
                                         labelKey="language"
                                         valueKey="code"
                                         value={values.languages}
-                                        options={languagesList}/>
+                                        options={languageOptions}/>
                                 </FormField>
                             </Box>
                         </Box>

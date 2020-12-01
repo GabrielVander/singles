@@ -1,5 +1,5 @@
 import React from "react";
-import {Avatar, Box, Card, CardBody, CardHeader, Heading, Main, Paragraph} from "grommet";
+import {Avatar, Box, Card, CardBody, CardHeader, Heading, Layer, Main, Paragraph, Text} from "grommet";
 import {useFirestore, useFirestoreDocData, useUser} from "reactfire";
 import UserDetails from "../../../Model/Authentication/UserDetails";
 import {useSelector} from "react-redux";
@@ -16,6 +16,18 @@ function Profile() {
         .doc(user.uid);
 
     const userDetails = useFirestoreDocData<UserDetails>(userDetailsRef);
+
+    const objectIsEmpty = Object.keys(userDetails).length === 0;
+
+    if (objectIsEmpty) return (
+        <Layer>
+            <Box fill={true} pad='medium'>
+                <Text>
+                    User not found
+                </Text>
+            </Box>
+        </Layer>
+    );
 
     return (
         <Main pad="small" flex="grow">

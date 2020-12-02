@@ -10,10 +10,8 @@ interface ReadOnlyUserDetailsProps {
 }
 
 function ReadOnlyUserDetails({userDetails}: ReadOnlyUserDetailsProps) {
-    const {t} = useTranslation(['gender', 'profile']);
+    const {t} = useTranslation(['gender', 'profile', 'language', 'country']);
     const dispatch = useDispatch();
-
-    const {getName: getCountryByCode} = require('country-list');
 
     const isProfileOwner = true;
 
@@ -34,7 +32,7 @@ function ReadOnlyUserDetails({userDetails}: ReadOnlyUserDetailsProps) {
                 <Box direction="column" width="medium">
                     <FormField label={t('profile:countryLabel')}>
                         <TextInput placeholder={t('profile:unspecifiedLabel')} readOnly
-                                   value={userDetails.country ? getCountryByCode(userDetails.country) : undefined}/>
+                                   value={userDetails.country ? t(`country:${userDetails.country}`).toString() : undefined}/>
                     </FormField>
                 </Box>
             </Box>

@@ -3,18 +3,18 @@ import {Form, Formik, FormikValues} from "formik";
 import {Box, Button, DateInput, FormField, RangeInput, Select, Text, TextArea, TextInput} from "grommet";
 import * as Yup from "yup";
 import {string} from "yup";
-import Gender from "../../../Model/Gender";
-import UserDetails from "../../../Model/Authentication/UserDetails";
 import Loader from "react-loader-spinner";
 import {useTranslation} from "react-i18next";
 import firebase from "firebase";
 import {toast} from "react-toastify";
 import {useDispatch} from "react-redux";
+
 import {toggleIsEditing} from "../../../Redux/Actions/ProfileActions";
 
-// @ts-ignore
-import {getData as getCountryData, getName as getCountryByCode} from "country-list";
+import UserDetails from "../../../Model/Authentication/UserDetails";
+import Gender from "../../../Model/Gender";
 import Language from "../../../Model/Language";
+import Country from "../../../Model/Country";
 
 interface UserInfoProps {
     userDetails: UserDetails;
@@ -35,8 +35,10 @@ function Userinfo({userDetails, userDetailsRef}: UserInfoProps) {
         code: language.code,
         language: t(`language:${language.code}`)
     }));
-
-    const countries = getCountryData();
+    const countryOptions = Country.options.map(country => ({
+        code: country.code,
+        country: t(`country:${country.code}`)
+    }));
 
     const profileSchema = Yup.object({
         fullName: Yup
@@ -105,7 +107,7 @@ function Userinfo({userDetails, userDetailsRef}: UserInfoProps) {
                 birthday: userDetails.dateOfBirth || undefined,
                 country: userDetails.country ? {
                     code: userDetails.country,
-                    country: getCountryByCode(userDetails.country)
+                    country: t(`country:${userDetails.country}`)
                 } : undefined,
                 gender: userDetails.gender ? {
                     code: userDetails.gender,
@@ -190,9 +192,9 @@ function Userinfo({userDetails, userDetailsRef}: UserInfoProps) {
                                             }
                                         })}
                                         name="country"
-                                        labelKey="name"
+                                        labelKey="country"
                                         valueKey="code"
-                                        options={countries}/>
+                                        options={countryOptions}/>
                                 </FormField>
                                 <FormField
                                     error={errors.gender}

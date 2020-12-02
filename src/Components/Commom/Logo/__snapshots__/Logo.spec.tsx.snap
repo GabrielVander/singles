@@ -6,20 +6,20 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="StyledStack-ajspsk-0 exHXcQ"
+        class="StyledStack-ajspsk-0 fDjhAR"
       >
         <div
-          class="StyledStack__StyledStackLayer-ajspsk-1 egnOtZ"
+          class="StyledStack__StyledStackLayer-ajspsk-1 jeVJjk"
         >
           <div
-            class="StyledBox-sc-13pk1d4-0 kZvRLJ"
+            class="StyledBox-sc-13pk1d4-0 eLDbjY"
           />
         </div>
         <div
-          class="StyledStack__StyledStackLayer-ajspsk-1 czStoR"
+          class="StyledStack__StyledStackLayer-ajspsk-1 bnpxHo"
         >
           <div
-            class="StyledBox-sc-13pk1d4-0 kQmPjB"
+            class="StyledBox-sc-13pk1d4-0 dGGBRs"
           >
             <img
               alt="logo:accessibilityLabel"
@@ -32,20 +32,20 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="StyledStack-ajspsk-0 exHXcQ"
+      class="StyledStack-ajspsk-0 fDjhAR"
     >
       <div
-        class="StyledStack__StyledStackLayer-ajspsk-1 egnOtZ"
+        class="StyledStack__StyledStackLayer-ajspsk-1 jeVJjk"
       >
         <div
-          class="StyledBox-sc-13pk1d4-0 kZvRLJ"
+          class="StyledBox-sc-13pk1d4-0 eLDbjY"
         />
       </div>
       <div
-        class="StyledStack__StyledStackLayer-ajspsk-1 czStoR"
+        class="StyledStack__StyledStackLayer-ajspsk-1 bnpxHo"
       >
         <div
-          class="StyledBox-sc-13pk1d4-0 kQmPjB"
+          class="StyledBox-sc-13pk1d4-0 dGGBRs"
         >
           <img
             alt="logo:accessibilityLabel"

@@ -6,6 +6,12 @@ export const HOME: Route = {
     private: true
 }
 
+export const PROFILE: Route = {
+    path: '/profile',
+    exact: false,
+    private: true
+}
+
 export const LOGIN: Route = {
     path: '/login',
     exact: false,

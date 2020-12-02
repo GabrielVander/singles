@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="sc-bdnylx bnqWZe"
+        class="sc-bdfBwQ krUTKa"
       >
         <div
           class="App"
@@ -20,7 +20,7 @@ Object {
               src="logo.svg"
             />
             <p>
-              Edit 
+              Edit
               <code>
                 src/App.tsx
               </code>
@@ -41,7 +41,7 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="sc-bdnylx bnqWZe"
+      class="sc-bdfBwQ krUTKa"
     >
       <div
         class="App"
@@ -55,7 +55,7 @@ Object {
             src="logo.svg"
           />
           <p>
-            Edit 
+            Edit
             <code>
               src/App.tsx
             </code>

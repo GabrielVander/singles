@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {HOME} from "../../../Routes/AppRoutes";
 import {Box, Button, Heading, Image, Main} from "grommet";
 import notFound from "../../../Assets/page-not-found.svg";
+import AppFooter from "../../Commom/AppFooter";
 
 function NotFound() {
     const {t} = useTranslation(['notFound']);
@@ -27,6 +28,7 @@ function NotFound() {
                     </Box>
                 </Box>
             </Box>
+            <AppFooter/>
         </Main>
     );
 }

@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './DefaultApp.css';
 import {Trans, useTranslation} from "react-i18next";
 import DynamicFont from "../../Styled/DynamicFont";
+import AppFooter from "../../Commom/AppFooter";
 
 function DefaultApp() {
     const {t} = useTranslation(['defaultApp']);
@@ -26,6 +27,7 @@ function DefaultApp() {
                         {t('defaultApp:learnReact')}
                     </a>
                 </header>
+                <AppFooter/>
             </div>
         </DynamicFont>
     );

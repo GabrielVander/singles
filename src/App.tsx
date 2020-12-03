@@ -55,6 +55,7 @@ function App() {
                         <Route path={NOT_FOUND.path} exact={NOT_FOUND.exact}>
                             <Suspense fallback={<PageLoader/>}>
                                 <NotFound/>
+                                <AppFooter/>
                             </Suspense>
                         </Route>
                     </Switch>

@@ -1,7 +1,7 @@
 {
   "name": "singles",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.3.0",
+  "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -31,6 +31,7 @@
     "react-toastify": "^6.0.9",
     "reactfire": "^2.0.3",
     "redux": "^4.0.5",
+    "redux-smart-actions": "^1.0.0",
     "styled-components": "^5.2.0",
     "typescript": "~3.7.2",
     "yup": "^0.29.3"
@@ -63,6 +64,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.3",
     "@types/yup": "^0.29.8",
+    "babel-plugin-redux-smart-actions": "^1.0.0",
     "i18next-parser": "^3.3.0"
   }
 }

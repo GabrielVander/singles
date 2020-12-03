@@ -6,13 +6,13 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="StyledBox-sc-13pk1d4-0 cwIKOn"
+        class="StyledBox-sc-13pk1d4-0 cjAwSC"
       >
         <div
-          class="StyledBox-sc-13pk1d4-0 lfXogP"
+          class="StyledBox-sc-13pk1d4-0 bXRCHS"
         >
           <div
-            class="StyledBox-sc-13pk1d4-0 khUjuC"
+            class="StyledBox-sc-13pk1d4-0 jntfQf"
           >
             <span
               style="font-size: 128px;"
@@ -29,15 +29,15 @@ Object {
             </span>
           </div>
           <p
-            class="StyledParagraph-tbetod-0 eBvfAm"
+            class="StyledParagraph-tbetod-0 fNpWwn"
           >
             features:chatSummary
           </p>
           <div
-            class="StyledBox-sc-13pk1d4-0 daweyS"
+            class="StyledBox-sc-13pk1d4-0 dvIeIL"
           >
             <a
-              class="StyledAnchor-sc-1rp7lwl-0 iFYGxI"
+              class="StyledAnchor-sc-1rp7lwl-0 lcrrzR"
               href="/"
             >
               features:chatAction
@@ -45,13 +45,13 @@ Object {
           </div>
         </div>
         <div
-          class="StyledBox-sc-13pk1d4-0 lfXogP"
+          class="StyledBox-sc-13pk1d4-0 bXRCHS"
         >
           <div
-            class="StyledBox-sc-13pk1d4-0 khUjuC"
+            class="StyledBox-sc-13pk1d4-0 jntfQf"
           >
             <span
-              class="sc-gtssRu dUaMrD"
+              class="sc-gsTCUz hbZxPK"
               style="font-size: 128px;"
             >
               <span
@@ -79,15 +79,15 @@ Object {
             </span>
           </div>
           <p
-            class="StyledParagraph-tbetod-0 eBvfAm"
+            class="StyledParagraph-tbetod-0 fNpWwn"
           >
             features:ratingSummary
           </p>
           <div
-            class="StyledBox-sc-13pk1d4-0 daweyS"
+            class="StyledBox-sc-13pk1d4-0 dvIeIL"
           >
             <a
-              class="StyledAnchor-sc-1rp7lwl-0 iFYGxI"
+              class="StyledAnchor-sc-1rp7lwl-0 lcrrzR"
               href="/"
             >
               features:ratingAction
@@ -95,10 +95,10 @@ Object {
           </div>
         </div>
         <div
-          class="StyledBox-sc-13pk1d4-0 lfXogP"
+          class="StyledBox-sc-13pk1d4-0 bXRCHS"
         >
           <div
-            class="StyledBox-sc-13pk1d4-0 khUjuC"
+            class="StyledBox-sc-13pk1d4-0 jntfQf"
           >
             <span
               style="font-size: 128px;"
@@ -115,15 +115,15 @@ Object {
             </span>
           </div>
           <p
-            class="StyledParagraph-tbetod-0 eBvfAm"
+            class="StyledParagraph-tbetod-0 fNpWwn"
           >
             features:postSummary
           </p>
           <div
-            class="StyledBox-sc-13pk1d4-0 daweyS"
+            class="StyledBox-sc-13pk1d4-0 dvIeIL"
           >
             <a
-              class="StyledAnchor-sc-1rp7lwl-0 iFYGxI"
+              class="StyledAnchor-sc-1rp7lwl-0 lcrrzR"
               href="/"
             >
               features:postAction
@@ -135,13 +135,13 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="StyledBox-sc-13pk1d4-0 cwIKOn"
+      class="StyledBox-sc-13pk1d4-0 cjAwSC"
     >
       <div
-        class="StyledBox-sc-13pk1d4-0 lfXogP"
+        class="StyledBox-sc-13pk1d4-0 bXRCHS"
       >
         <div
-          class="StyledBox-sc-13pk1d4-0 khUjuC"
+          class="StyledBox-sc-13pk1d4-0 jntfQf"
         >
           <span
             style="font-size: 128px;"
@@ -158,15 +158,15 @@ Object {
           </span>
         </div>
         <p
-          class="StyledParagraph-tbetod-0 eBvfAm"
+          class="StyledParagraph-tbetod-0 fNpWwn"
         >
           features:chatSummary
         </p>
         <div
-          class="StyledBox-sc-13pk1d4-0 daweyS"
+          class="StyledBox-sc-13pk1d4-0 dvIeIL"
         >
           <a
-            class="StyledAnchor-sc-1rp7lwl-0 iFYGxI"
+            class="StyledAnchor-sc-1rp7lwl-0 lcrrzR"
             href="/"
           >
             features:chatAction
@@ -174,13 +174,13 @@ Object {
         </div>
       </div>
       <div
-        class="StyledBox-sc-13pk1d4-0 lfXogP"
+        class="StyledBox-sc-13pk1d4-0 bXRCHS"
       >
         <div
-          class="StyledBox-sc-13pk1d4-0 khUjuC"
+          class="StyledBox-sc-13pk1d4-0 jntfQf"
         >
           <span
-            class="sc-gtssRu dUaMrD"
+            class="sc-gsTCUz hbZxPK"
             style="font-size: 128px;"
           >
             <span
@@ -208,15 +208,15 @@ Object {
           </span>
         </div>
         <p
-          class="StyledParagraph-tbetod-0 eBvfAm"
+          class="StyledParagraph-tbetod-0 fNpWwn"
         >
           features:ratingSummary
         </p>
         <div
-          class="StyledBox-sc-13pk1d4-0 daweyS"
+          class="StyledBox-sc-13pk1d4-0 dvIeIL"
         >
           <a
-            class="StyledAnchor-sc-1rp7lwl-0 iFYGxI"
+            class="StyledAnchor-sc-1rp7lwl-0 lcrrzR"
             href="/"
           >
             features:ratingAction
@@ -224,10 +224,10 @@ Object {
         </div>
       </div>
       <div
-        class="StyledBox-sc-13pk1d4-0 lfXogP"
+        class="StyledBox-sc-13pk1d4-0 bXRCHS"
       >
         <div
-          class="StyledBox-sc-13pk1d4-0 khUjuC"
+          class="StyledBox-sc-13pk1d4-0 jntfQf"
         >
           <span
             style="font-size: 128px;"
@@ -244,15 +244,15 @@ Object {
           </span>
         </div>
         <p
-          class="StyledParagraph-tbetod-0 eBvfAm"
+          class="StyledParagraph-tbetod-0 fNpWwn"
         >
           features:postSummary
         </p>
         <div
-          class="StyledBox-sc-13pk1d4-0 daweyS"
+          class="StyledBox-sc-13pk1d4-0 dvIeIL"
         >
           <a
-            class="StyledAnchor-sc-1rp7lwl-0 iFYGxI"
+            class="StyledAnchor-sc-1rp7lwl-0 lcrrzR"
             href="/"
           >
             features:postAction

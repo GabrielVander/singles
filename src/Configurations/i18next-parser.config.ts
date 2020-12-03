@@ -4,7 +4,7 @@ module.exports = {
     defaultNamespace: 'translation',
     defaultValue: '',
     keepRemoved: false,
-    indentation: 4,
+    indentation: 2,
     lexers: {
         js: ['JsxLexer'],
         ts: ['JsxLexer'],

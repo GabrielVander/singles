@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {Box, Button, FormField, Image, Main, Paragraph, TextInput} from 'grommet';
 import logo from '../../../Assets/logoWithText.svg';
 import {Facebook, Google, Twitter} from 'grommet-icons';
@@ -12,8 +12,8 @@ import LogRocket from 'logrocket';
 import {Form, Formik} from 'formik';
 import * as Yup from 'yup';
 
-function Login() {
-    const { t } = useTranslation(['login']);
+function Login(): ReactElement {
+    const {t} = useTranslation(['login']);
     const auth = useAuth();
     const history = useHistory();
 
@@ -21,12 +21,12 @@ function Login() {
         email: Yup.string().email(t('login:invalidEmail')).required(t('login:required')),
         password: Yup.string()
             .required(t('login:required'))
-            .min(6, t('login:passwordMinChars', { number: 6 }))
-            .max(15, t('login:passwordMaxChars', { number: 15 })),
+            .min(6, t('login:passwordMinChars', {number: 6}))
+            .max(15, t('login:passwordMaxChars', {number: 15})),
     });
 
-    function submit(values: any, { setSubmitting }: any) {
-        const { email, password } = values;
+    function submit(values: any, {setSubmitting}: any): void {
+        const {email, password} = values;
         auth.signInWithEmailAndPassword(email, password)
             .then((credential) => {
                 LogRocket.identify(credential.user?.uid!, {
@@ -34,7 +34,7 @@ function Login() {
                     email: credential.user?.email!,
                 });
                 toast.success(
-                    t('login:successfullyLoggedIn', { name: credential.user?.displayName || credential.user?.email }),
+                    t('login:successfullyLoggedIn', {name: credential.user?.displayName || credential.user?.email}),
                 );
                 history.push(HOME.path);
             })
@@ -44,19 +44,19 @@ function Login() {
             });
     }
 
-    function loginWithGoogle() {
+    function loginWithGoogle(): void {
         oAuthLogin(new firebase.auth.GoogleAuthProvider());
     }
 
-    function loginWithFacebook() {
+    function loginWithFacebook(): void {
         oAuthLogin(new firebase.auth.FacebookAuthProvider());
     }
 
-    function loginWithTwitter() {
+    function loginWithTwitter(): void {
         oAuthLogin(new firebase.auth.TwitterAuthProvider());
     }
 
-    function oAuthLogin(provider: firebase.auth.AuthProvider) {
+    function oAuthLogin(provider: firebase.auth.AuthProvider): void {
         auth.useDeviceLanguage();
         auth.signInWithPopup(provider)
             .then((credential) => {
@@ -65,7 +65,7 @@ function Login() {
                     email: credential.user?.email!,
                 });
                 toast.success(
-                    t('login:successfullyLoggedIn', { name: credential.user?.displayName || credential.user?.email }),
+                    t('login:successfullyLoggedIn', {name: credential.user?.displayName || credential.user?.email}),
                 );
                 history.push(HOME.path);
             })
@@ -91,7 +91,7 @@ function Login() {
                     >
                         {({ errors, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
                             <Form
-                                onSubmit={(event) => {
+                                onSubmit={(event): void => {
                                     event.preventDefault();
                                     handleSubmit();
                                 }}

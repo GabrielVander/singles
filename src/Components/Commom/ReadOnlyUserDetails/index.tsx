@@ -1,6 +1,6 @@
 import UserDetails from '../../../Model/Authentication/UserDetails';
 import {Box, Button, DateInput, FormField, RangeInput, Text, TextInput} from 'grommet';
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {toggleIsEditing} from '../../../Redux/Actions/ProfileActions';
 import {useDispatch} from 'react-redux';
 import {useTranslation} from 'react-i18next';
@@ -9,8 +9,8 @@ interface ReadOnlyUserDetailsProps {
     userDetails: UserDetails;
 }
 
-function ReadOnlyUserDetails({ userDetails }: ReadOnlyUserDetailsProps) {
-    const { t } = useTranslation(['gender', 'profile', 'language', 'country']);
+function ReadOnlyUserDetails({userDetails}: ReadOnlyUserDetailsProps): ReactElement {
+    const {t} = useTranslation(['gender', 'profile', 'language', 'country']);
     const dispatch = useDispatch();
 
     const isProfileOwner = true;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {Box} from 'grommet';
 
 interface SectionProps {
@@ -6,7 +6,7 @@ interface SectionProps {
     width?: string;
 }
 
-const Section = ({ children, width }: SectionProps) => (
+const Section = ({children, width}: SectionProps): ReactElement => (
     <Box align="center" pad="large">
         <Box width={width}>{children}</Box>
     </Box>

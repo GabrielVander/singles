@@ -6,7 +6,7 @@ interface ActionToggleLoading {
     type: AppActions.TOGGLE_LOADING;
 }
 
-export function toggleLoading() {
+export function toggleLoading(): { type: number } {
     return {
         type: AppActions.TOGGLE_LOADING,
     };

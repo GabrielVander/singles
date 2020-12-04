@@ -19,7 +19,7 @@ class FirebaseConfig {
         measurementId: 'G-ESVCNFV5MH',
     };
 
-    static initialize = () => {
+    static initialize = (): void => {
         firebase.initializeApp(FirebaseConfig.config);
         firebase.analytics();
         firebase.performance();
@@ -27,7 +27,7 @@ class FirebaseConfig {
         const firestore = firebase.firestore();
         if (EnvironmentVariables.developmentMode) {
             auth.useEmulator('http://localhost:9099/');
-            firestore.settings({ host: 'localhost:8080', ssl: false });
+            firestore.settings({host: 'localhost:8080', ssl: false});
         }
     };
 }

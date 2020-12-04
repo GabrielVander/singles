@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 
 import {Box, Heading, Paragraph} from 'grommet';
 import FeatureEmoji from '../FeatureEmoji';
 import RegisterBeta from '../RegisterBeta';
 import {useTranslation} from 'react-i18next';
 
-const JoinUs = () => {
-    const { t } = useTranslation(['joinUs']);
+const JoinUs = (): ReactElement => {
+    const {t} = useTranslation(['joinUs']);
 
     return (
         <Box align="center" pad="large">

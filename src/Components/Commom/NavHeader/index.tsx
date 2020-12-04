@@ -1,24 +1,24 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {Anchor, Box, ResponsiveContext, Text} from 'grommet';
 import Logo from '../Logo';
 import {useTranslation} from 'react-i18next';
 
-const NavHeader = () => {
-    const { t } = useTranslation(['navHeader']);
+const NavHeader = (): ReactElement => {
+    const {t} = useTranslation(['navHeader']);
 
     return (
         <ResponsiveContext.Consumer>
-            {(size) => (
+            {(size): ReactElement => (
                 <Box
                     direction="row"
                     justify="between"
                     alignSelf="center"
                     gap="medium"
-                    pad={{ top: 'large', horizontal: 'xlarge' }}
+                    pad={{top: 'large', horizontal: 'xlarge'}}
                 >
                     <Anchor
                         href="/"
-                        icon={<Logo />}
+                        icon={<Logo/>}
                         color="black"
                         label={
                             size !== 'xsmall' &&

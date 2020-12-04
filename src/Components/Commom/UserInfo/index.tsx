@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {ReactElement, useState} from 'react';
 import {Form, Formik, FormikValues} from 'formik';
 import {Box, Button, DateInput, FormField, RangeInput, Select, Text, TextArea, TextInput} from 'grommet';
 import * as Yup from 'yup';
@@ -17,12 +17,12 @@ import Language from '../../../Model/Language';
 import Country from '../../../Model/Country';
 
 interface UserInfoProps {
-    userDetails: UserDetails;
-    userDetailsRef: firebase.firestore.DocumentReference;
+    userDetails: UserDetails | null;
+    userDetailsRef: firebase.firestore.DocumentReference | null;
 }
 
-function Userinfo({ userDetails, userDetailsRef }: UserInfoProps) {
-    const { t } = useTranslation(['gender', 'profile', 'accessibility', 'country', 'language']);
+function Userinfo({userDetails, userDetailsRef}: UserInfoProps): ReactElement {
+    const {t} = useTranslation(['gender', 'profile', 'accessibility', 'country', 'language']);
     const dispatch = useDispatch();
 
     const [saving, setSaving] = useState(false);
@@ -50,12 +50,12 @@ function Userinfo({ userDetails, userDetailsRef }: UserInfoProps) {
         description: Yup.object().optional().nullable(),
     });
 
-    function saveProfile(values: FormikValues) {
+    function saveProfile(values: FormikValues): void {
         setSaving(true);
-        const { fullName, birthday, country, gender, children, languages, description } = values;
+        const {fullName, birthday, country, gender, children, languages, description} = values;
 
         userDetailsRef
-            .update({
+            ?.update({
                 fullName: fullName || null,
                 dateOfBirth: birthday || null,
                 country: country?.code || null,
@@ -72,42 +72,42 @@ function Userinfo({ userDetails, userDetailsRef }: UserInfoProps) {
             .catch((reason) => toast.error(reason));
     }
 
-    function cancelEdition() {
+    function cancelEdition(): void {
         dispatch(toggleIsEditing());
     }
 
     return (
         <Formik
             initialValues={{
-                fullName: userDetails.fullName || undefined,
-                birthday: userDetails.dateOfBirth || undefined,
-                country: userDetails.country
+                fullName: userDetails?.fullName || undefined,
+                birthday: userDetails?.dateOfBirth || undefined,
+                country: userDetails?.country
                     ? {
-                          code: userDetails.country,
-                          country: t(`country:${userDetails.country}`),
-                      }
+                        code: userDetails?.country,
+                        country: t(`country:${userDetails?.country}`),
+                    }
                     : undefined,
-                gender: userDetails.gender
+                gender: userDetails?.gender
                     ? {
-                          code: userDetails.gender,
-                          value: t(`gender:${userDetails.gender}`),
-                      }
+                        code: userDetails?.gender,
+                        value: t(`gender:${userDetails?.gender}`),
+                    }
                     : undefined,
                 languages:
-                    userDetails.spokenLanguages?.map((language: string) => ({
+                    userDetails?.spokenLanguages?.map((language: string) => ({
                         code: language,
-                        language: t(`language:${userDetails.gender}`),
+                        language: t(`language:${userDetails?.gender}`),
                     })) || undefined,
-                children: userDetails.children || undefined,
-                description: userDetails.description || undefined,
+                children: userDetails?.children || undefined,
+                description: userDetails?.description || undefined,
             }}
-            onSubmit={(values) => saveProfile(values)}
+            onSubmit={(values): void => saveProfile(values)}
             validationSchema={profileSchema}
         >
-            {({ errors, handleChange, handleBlur, handleSubmit, values }) => {
+            {({errors, handleChange, handleBlur, handleSubmit, values}): ReactElement => {
                 return (
                     <Form
-                        onSubmit={(event) => {
+                        onSubmit={(event): void => {
                             event.preventDefault();
                             handleSubmit();
                         }}
@@ -125,7 +125,7 @@ function Userinfo({ userDetails, userDetailsRef }: UserInfoProps) {
                                 </FormField>
                                 <FormField error={errors.birthday} label={t('profile:birthdayLabel')}>
                                     <DateInput
-                                        onChange={(value) =>
+                                        onChange={(value): object =>
                                             handleChange({
                                                 target: {
                                                     name: 'birthday',
@@ -158,7 +158,7 @@ function Userinfo({ userDetails, userDetailsRef }: UserInfoProps) {
                                         a11yTitle={t('accessibility:profile.countryLabel')}
                                         placeholder={t('profile:countryPlaceholder')}
                                         value={values.country}
-                                        onChange={({ option }) =>
+                                        onChange={({option}): object =>
                                             handleChange({
                                                 target: {
                                                     name: 'country',
@@ -178,7 +178,7 @@ function Userinfo({ userDetails, userDetailsRef }: UserInfoProps) {
                                         value={values.gender}
                                         labelKey="value"
                                         valueKey="code"
-                                        onChange={({ option }) =>
+                                        onChange={({option}): object =>
                                             handleChange({
                                                 target: {
                                                     name: 'gender',
@@ -193,7 +193,7 @@ function Userinfo({ userDetails, userDetailsRef }: UserInfoProps) {
                                     <Select
                                         name="languages"
                                         multiple
-                                        onChange={({ value }) =>
+                                        onChange={({value}): object =>
                                             handleChange({
                                                 target: {
                                                     name: 'languages',

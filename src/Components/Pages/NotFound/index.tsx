@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Link} from 'react-router-dom';
 import {HOME} from '../../../Routes/AppRoutes';
 import {Box, Button, Heading, Image, Main} from 'grommet';
 import notFound from '../../../Assets/page-not-found.svg';
 
-function NotFound() {
-    const { t } = useTranslation(['notFound']);
+function NotFound(): ReactElement {
+    const {t} = useTranslation(['notFound']);
 
     return (
         <Main align="center" justify="center">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {Box} from 'grommet';
 import NavHeader from '../../Commom/NavHeader';
 import Hero from '../../Commom/Hero';
@@ -6,16 +6,16 @@ import RegisterBeta from '../../Commom/RegisterBeta';
 import Features from '../../Commom/Features';
 import JoinUs from '../../Commom/JoinUs';
 
-const Landing = () => {
+const Landing = (): ReactElement => {
     return (
         <>
-            <NavHeader />
+            <NavHeader/>
             <Box align="center" pad="large">
-                <Hero size="xlarge" />
-                <RegisterBeta />
+                <Hero size="xlarge"/>
+                <RegisterBeta/>
             </Box>
             <Box>
-                <Features />
+                <Features/>
             </Box>
             <Box>
                 <JoinUs />

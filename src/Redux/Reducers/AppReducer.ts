@@ -5,7 +5,7 @@ const initialState: AppState = {
     loading: false,
 };
 
-function appReducer(state = initialState, action: AppActionTypes) {
+function appReducer(state = initialState, action: AppActionTypes): AppState {
     switch (action.type) {
         case AppActions.TOGGLE_LOADING:
             return {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {Box, Button, FormField, Heading, Image, Main, Paragraph, TextInput} from 'grommet';
 import logo from '../../../Assets/logoWithText.svg';
 import {Facebook, Google, Twitter} from 'grommet-icons';
@@ -12,8 +12,8 @@ import LogRocket from 'logrocket';
 import * as Yup from 'yup';
 import {Form, Formik} from 'formik';
 
-function Register() {
-    const { t } = useTranslation(['register']);
+function Register(): ReactElement {
+    const {t} = useTranslation(['register']);
     const auth = useAuth();
     const history = useHistory();
 
@@ -28,8 +28,8 @@ function Register() {
             .oneOf([Yup.ref('password')], t('register:passwordsMatch')),
     });
 
-    function submit(values: any, { setSubmitting }: any) {
-        const { email, password } = values;
+    function submit(values: any, {setSubmitting}: any): void {
+        const {email, password} = values;
         auth.createUserWithEmailAndPassword(email, password)
             .then((credential) => {
                 LogRocket.identify(credential.user?.uid!, {
@@ -49,19 +49,19 @@ function Register() {
             });
     }
 
-    function registerWithGoogle() {
+    function registerWithGoogle(): void {
         oAuthLogin(new firebase.auth.GoogleAuthProvider());
     }
 
-    function registerWithFacebook() {
+    function registerWithFacebook(): void {
         oAuthLogin(new firebase.auth.FacebookAuthProvider());
     }
 
-    function registerWithTwitter() {
+    function registerWithTwitter(): void {
         oAuthLogin(new firebase.auth.TwitterAuthProvider());
     }
 
-    function oAuthLogin(provider: firebase.auth.AuthProvider) {
+    function oAuthLogin(provider: firebase.auth.AuthProvider): void {
         auth.useDeviceLanguage();
         auth.signInWithPopup(provider)
             .then((credential) => {
@@ -99,9 +99,9 @@ function Register() {
                             onSubmit={submit}
                             validationSchema={registerSchema}
                         >
-                            {({ errors, handleChange, handleBlur, handleSubmit }) => (
+                            {({errors, handleChange, handleBlur, handleSubmit}): ReactElement => (
                                 <Form
-                                    onSubmit={(event) => {
+                                    onSubmit={(event): void => {
                                         event.preventDefault();
                                         handleSubmit();
                                     }}

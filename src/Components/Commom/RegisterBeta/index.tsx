@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React, {ReactElement, useState} from 'react';
 import {Box, Button, Text, TextInput} from 'grommet';
 import {useTranslation} from 'react-i18next';
 import {useAnalytics, useFirestore} from 'reactfire';
 import firebase from 'firebase/app';
 import {toast} from 'react-toastify';
 
-const RegisterBeta = () => {
-    const { t } = useTranslation(['registerBeta']);
+const RegisterBeta = (): ReactElement => {
+    const {t} = useTranslation(['registerBeta']);
     const firestore = useFirestore();
     const analytics = useAnalytics();
 
@@ -14,7 +14,7 @@ const RegisterBeta = () => {
     const [savingEmail, setSavingEmail] = useState<boolean>(false);
     const [hasFocus, setHasFocus] = useState<boolean>(false);
 
-    async function applyForBeta() {
+    async function applyForBeta(): Promise<void> {
         setSavingEmail(() => true);
 
         if (!email || email.length === 0) {
@@ -51,15 +51,15 @@ const RegisterBeta = () => {
             })
             .catch((reason) => {
                 setSavingEmail(() => false);
-                toast.error(t('registerBeta:error', { reason }));
+                toast.error(t('registerBeta:error', {reason}));
             });
     }
 
-    function emailIsValid() {
-        return new RegExp('\\S+@\\S+\\.\\S+').test(email!);
+    function emailIsValid(): boolean {
+        return new RegExp('\\S+@\\S+\\.\\S+').test(email);
     }
 
-    async function emailExists(collection: firebase.firestore.CollectionReference) {
+    async function emailExists(collection: firebase.firestore.CollectionReference): Promise<boolean> {
         const querySnapshot = await collection.where('email', '==', email).get();
 
         return !querySnapshot.empty;
@@ -82,9 +82,9 @@ const RegisterBeta = () => {
                     placeholder={<Text size="small">{t('registerBeta:emailPlaceholder')}</Text>}
                     value={email}
                     disabled={savingEmail}
-                    onChange={(event) => setEmail(event.target.value)}
-                    onFocus={() => setHasFocus(true)}
-                    onBlur={() => setHasFocus(false)}
+                    onChange={(event): void => setEmail(event.target.value)}
+                    onFocus={(): void => setHasFocus(true)}
+                    onBlur={(): void => setHasFocus(false)}
                 />
             </Box>
             <Button disabled={savingEmail} onClick={applyForBeta}>

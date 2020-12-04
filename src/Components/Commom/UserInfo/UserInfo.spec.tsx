@@ -9,7 +9,7 @@ test('matches snapshot', () => {
     const component = render(
         <Provider store={Store.store}>
             <BrowserRouter>
-                <Userinfo />
+                <Userinfo userDetails={null} userDetailsRef={null}/>
             </BrowserRouter>
         </Provider>,
     );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {Avatar, Box, Card, CardBody, CardHeader, Heading, Layer, Main, Paragraph, Text} from 'grommet';
 import {useFirestore, useFirestoreDocData, useUser} from 'reactfire';
 import UserDetails from '../../../Model/Authentication/UserDetails';
@@ -7,7 +7,7 @@ import ReadOnlyUserDetails from '../../Commom/ReadOnlyUserDetails';
 import RootState from '../../../Redux/States/RootState';
 import Userinfo from '../../Commom/UserInfo';
 
-function Profile() {
+function Profile(): ReactElement {
     const user = useUser<UserDetails>();
     const isEditing = useSelector<RootState>((state) => state.profile.isEditing);
 

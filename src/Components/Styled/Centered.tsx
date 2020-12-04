@@ -5,7 +5,7 @@ const Centered = styled.div`
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    height: 100%
+    height: 100%;
 `;
 
 export default Centered;

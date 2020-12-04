@@ -1,33 +1,30 @@
-import React from "react";
-import {Avatar, Box, Card, CardBody, CardHeader, Heading, Layer, Main, Paragraph, Text} from "grommet";
-import {useFirestore, useFirestoreDocData, useUser} from "reactfire";
-import UserDetails from "../../../Model/Authentication/UserDetails";
-import {useSelector} from "react-redux";
-import ReadOnlyUserDetails from "../../Commom/ReadOnlyUserDetails";
-import RootState from "../../../Redux/States/RootState";
-import Userinfo from "../../Commom/UserInfo";
+import React from 'react';
+import {Avatar, Box, Card, CardBody, CardHeader, Heading, Layer, Main, Paragraph, Text} from 'grommet';
+import {useFirestore, useFirestoreDocData, useUser} from 'reactfire';
+import UserDetails from '../../../Model/Authentication/UserDetails';
+import {useSelector} from 'react-redux';
+import ReadOnlyUserDetails from '../../Commom/ReadOnlyUserDetails';
+import RootState from '../../../Redux/States/RootState';
+import Userinfo from '../../Commom/UserInfo';
 
 function Profile() {
     const user = useUser<UserDetails>();
-    const isEditing = useSelector<RootState>(state => state.profile.isEditing);
+    const isEditing = useSelector<RootState>((state) => state.profile.isEditing);
 
-    const userDetailsRef = useFirestore()
-        .collection('users')
-        .doc(user.uid);
+    const userDetailsRef = useFirestore().collection('users').doc(user.uid);
 
     const userDetails = useFirestoreDocData<UserDetails>(userDetailsRef);
 
     const objectIsEmpty = Object.keys(userDetails).length === 0;
 
-    if (objectIsEmpty) return (
-        <Layer>
-            <Box fill={true} pad='medium'>
-                <Text>
-                    User not found
-                </Text>
-            </Box>
-        </Layer>
-    );
+    if (objectIsEmpty)
+        return (
+            <Layer>
+                <Box fill={true} pad="medium">
+                    <Text>User not found</Text>
+                </Box>
+            </Layer>
+        );
 
     return (
         <Main pad="small" flex="grow">
@@ -38,9 +35,10 @@ function Profile() {
                 fill="vertical"
                 flex="grow"
                 overflow="scroll"
-                pad="medium">
-                <CardHeader pad='none' basis='small'>
-                    <Box style={{position: 'relative'}} height='small' width='full'>
+                pad="medium"
+            >
+                <CardHeader pad="none" basis="small">
+                    <Box style={{ position: 'relative' }} height="small" width="full">
                         <Avatar
                             style={{
                                 position: 'absolute',
@@ -53,7 +51,7 @@ function Profile() {
                                 border: '3px solid white',
                             }}
                             src={userDetails.photoURL}
-                            round='full'
+                            round="full"
                         />
                     </Box>
                 </CardHeader>
@@ -61,23 +59,25 @@ function Profile() {
                     flex="grow"
                     round="medium"
                     background={{
-                        color: "light-1",
-                        opacity: "strong"
+                        color: 'light-1',
+                        opacity: 'strong',
                     }}
                     pad={{
                         top: 'large',
-                        bottom: 'medium'
-                    }}>
-                    <Box align='center' pad='large' gap='medium'>
-                        <Heading margin='none'>
-                            {userDetails.displayName || userDetails.email}
-                        </Heading>
-                        <Paragraph size="large" textAlign='center' margin='none'>
+                        bottom: 'medium',
+                    }}
+                >
+                    <Box align="center" pad="large" gap="medium">
+                        <Heading margin="none">{userDetails.displayName || userDetails.email}</Heading>
+                        <Paragraph size="large" textAlign="center" margin="none">
                             {userDetails.description}
                         </Paragraph>
                         <Box gap="medium">
-                            {isEditing ? <Userinfo userDetails={userDetails} userDetailsRef={userDetailsRef}/> :
-                                <ReadOnlyUserDetails userDetails={userDetails}/>}
+                            {isEditing ? (
+                                <Userinfo userDetails={userDetails} userDetailsRef={userDetailsRef} />
+                            ) : (
+                                <ReadOnlyUserDetails userDetails={userDetails} />
+                            )}
                         </Box>
                     </Box>
                 </CardBody>

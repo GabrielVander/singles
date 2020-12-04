@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import {Box, Heading, Paragraph} from "grommet";
-import FeatureEmoji from "../FeatureEmoji";
-import RegisterBeta from "../RegisterBeta";
-import {useTranslation} from "react-i18next";
+import {Box, Heading, Paragraph} from 'grommet';
+import FeatureEmoji from '../FeatureEmoji';
+import RegisterBeta from '../RegisterBeta';
+import {useTranslation} from 'react-i18next';
 
 const JoinUs = () => {
-    const {t} = useTranslation(['joinUs']);
+    const { t } = useTranslation(['joinUs']);
 
     return (
         <Box align="center" pad="large">
@@ -18,9 +18,9 @@ const JoinUs = () => {
                 {t('joinUs:secondarySummary')}
             </Paragraph>
             <Box>
-                <FeatureEmoji name=":winking_face:"/>
+                <FeatureEmoji name=":winking_face:" />
             </Box>
-            <RegisterBeta/>
+            <RegisterBeta />
         </Box>
     );
 };

@@ -1,5 +1,4 @@
 class Language {
-
     public static ENGLISH = new Language('en');
     public static GERMAN = new Language('ge');
     public static PORTUGUESE = new Language('pt');
@@ -10,12 +9,7 @@ class Language {
     }
 
     static get options(): Language[] {
-        return [
-            this.ENGLISH,
-            this.GERMAN,
-            this.PORTUGUESE,
-            this.OTHER
-        ];
+        return [this.ENGLISH, this.GERMAN, this.PORTUGUESE, this.OTHER];
     }
 
     get code(): string {

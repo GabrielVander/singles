@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 import logo from './logo.svg';
 import './DefaultApp.css';
-import {Trans, useTranslation} from "react-i18next";
-import DynamicFont from "../../Styled/DynamicFont";
-import AppFooter from "../../Commom/AppFooter";
+import { Trans, useTranslation } from 'react-i18next';
+import DynamicFont from '../../Styled/DynamicFont';
+import AppFooter from '../../Commom/AppFooter';
 
 function DefaultApp(): ReactElement {
     const { t } = useTranslation(['defaultApp']);
@@ -22,7 +22,7 @@ function DefaultApp(): ReactElement {
                         {t('defaultApp:learnReact')}
                     </a>
                 </header>
-                <AppFooter/>
+                <AppFooter />
             </div>
         </DynamicFont>
     );

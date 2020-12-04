@@ -1,8 +1,8 @@
-import {Footer, Text} from "grommet";
-import packageJson from "../../../../package.json";
-import React from "react";
+import { Footer, Text } from 'grommet';
+import packageJson from '../../../../package.json';
+import React, { ReactElement } from 'react';
 
-function AppFooter() {
+function AppFooter(): ReactElement {
     // noinspection HtmlUnknownTarget
     return (
         <Footer background="brand" pad="medium" justify="center">

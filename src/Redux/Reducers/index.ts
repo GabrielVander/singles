@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import appReducer from './AppReducer';
 import profileReducer from './ProfileReducer';
 

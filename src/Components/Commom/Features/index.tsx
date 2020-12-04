@@ -1,8 +1,8 @@
-import React, {ReactElement} from 'react';
-import {Box} from 'grommet';
+import React, { ReactElement } from 'react';
+import { Box } from 'grommet';
 import Tile from './Tile';
 import FeatureEmoji from '../FeatureEmoji';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 const Features = (): ReactElement => {
     const { t } = useTranslation(['features']);

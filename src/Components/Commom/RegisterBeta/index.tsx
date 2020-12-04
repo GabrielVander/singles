@@ -1,12 +1,12 @@
-import React, {ReactElement, useState} from 'react';
-import {Box, Button, Text, TextInput} from 'grommet';
-import {useTranslation} from 'react-i18next';
-import {useAnalytics, useFirestore} from 'reactfire';
+import React, { ReactElement, useState } from 'react';
+import { Box, Button, Text, TextInput } from 'grommet';
+import { useTranslation } from 'react-i18next';
+import { useAnalytics, useFirestore } from 'reactfire';
 import firebase from 'firebase/app';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const RegisterBeta = (): ReactElement => {
-    const {t} = useTranslation(['registerBeta']);
+    const { t } = useTranslation(['registerBeta']);
     const firestore = useFirestore();
     const analytics = useAnalytics();
 
@@ -51,7 +51,7 @@ const RegisterBeta = (): ReactElement => {
             })
             .catch((reason) => {
                 setSavingEmail(() => false);
-                toast.error(t('registerBeta:error', {reason}));
+                toast.error(t('registerBeta:error', { reason }));
             });
     }
 

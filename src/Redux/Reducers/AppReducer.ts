@@ -1,5 +1,5 @@
 import AppState from '../States/AppState';
-import {AppActions, AppActionTypes} from '../Actions/AppActions';
+import { AppActions, AppActionTypes } from '../Actions/AppActions';
 
 const initialState: AppState = {
     loading: false,

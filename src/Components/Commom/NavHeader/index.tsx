@@ -1,10 +1,10 @@
-import React, {ReactElement} from 'react';
-import {Anchor, Box, ResponsiveContext, Text} from 'grommet';
+import React, { ReactElement } from 'react';
+import { Anchor, Box, ResponsiveContext, Text } from 'grommet';
 import Logo from '../Logo';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 const NavHeader = (): ReactElement => {
-    const {t} = useTranslation(['navHeader']);
+    const { t } = useTranslation(['navHeader']);
 
     return (
         <ResponsiveContext.Consumer>
@@ -14,11 +14,11 @@ const NavHeader = (): ReactElement => {
                     justify="between"
                     alignSelf="center"
                     gap="medium"
-                    pad={{top: 'large', horizontal: 'xlarge'}}
+                    pad={{ top: 'large', horizontal: 'xlarge' }}
                 >
                     <Anchor
                         href="/"
-                        icon={<Logo/>}
+                        icon={<Logo />}
                         color="black"
                         label={
                             size !== 'xsmall' &&

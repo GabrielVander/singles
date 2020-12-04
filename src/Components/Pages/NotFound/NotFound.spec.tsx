@@ -1,9 +1,9 @@
-import {render} from '@testing-library/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 import NotFound from './index';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import Store from '../../../Redux/Store';
-import {BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 // Jest's official workaround for the "window.matchMedia is not a function" error
 beforeAll(() => {

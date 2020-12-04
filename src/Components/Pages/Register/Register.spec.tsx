@@ -1,11 +1,11 @@
-import {render} from '@testing-library/react';
-import {Provider} from 'react-redux';
+import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import Store from '../../../Redux/Store';
-import {FirebaseAppProvider} from 'reactfire';
+import { FirebaseAppProvider } from 'reactfire';
 import FirebaseConfig from '../../../Configurations/FirebaseConfig';
-import React, {Suspense} from 'react';
+import React, { Suspense } from 'react';
 import Loader from 'react-loader-spinner';
-import {BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Register from './index';
 
 test('matches snapshot', () => {

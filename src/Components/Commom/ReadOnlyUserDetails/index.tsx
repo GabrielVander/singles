@@ -1,16 +1,16 @@
 import UserDetails from '../../../Model/Authentication/UserDetails';
-import {Box, Button, DateInput, FormField, RangeInput, Text, TextInput} from 'grommet';
-import React, {ReactElement} from 'react';
-import {toggleIsEditing} from '../../../Redux/Actions/ProfileActions';
-import {useDispatch} from 'react-redux';
-import {useTranslation} from 'react-i18next';
+import { Box, Button, DateInput, FormField, RangeInput, Text, TextInput } from 'grommet';
+import React, { ReactElement } from 'react';
+import { toggleIsEditing } from '../../../Redux/Actions/ProfileActions';
+import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 interface ReadOnlyUserDetailsProps {
     userDetails: UserDetails;
 }
 
-function ReadOnlyUserDetails({userDetails}: ReadOnlyUserDetailsProps): ReactElement {
-    const {t} = useTranslation(['gender', 'profile', 'language', 'country']);
+function ReadOnlyUserDetails({ userDetails }: ReadOnlyUserDetailsProps): ReactElement {
+    const { t } = useTranslation(['gender', 'profile', 'language', 'country']);
     const dispatch = useDispatch();
 
     const isProfileOwner = true;
@@ -88,7 +88,11 @@ function ReadOnlyUserDetails({userDetails}: ReadOnlyUserDetailsProps): ReactElem
             </Box>
             {isProfileOwner && (
                 <Box direction="row-responsive" margin="medium" justify="center">
-                    <Button primary label={t('profile:editButtonLabel')} onClick={() => dispatch(toggleIsEditing())} />
+                    <Button
+                        primary
+                        label={t('profile:editButtonLabel')}
+                        onClick={(): object => dispatch(toggleIsEditing())}
+                    />
                 </Box>
             )}
         </Box>

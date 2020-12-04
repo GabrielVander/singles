@@ -1,10 +1,10 @@
-import React, {ReactElement} from 'react';
-import {Box, Stack} from 'grommet';
+import React, { ReactElement } from 'react';
+import { Box, Stack } from 'grommet';
 import logo from '../../../Assets/logo.svg';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 const Logo = (): ReactElement => {
-    const {t} = useTranslation(['logo']);
+    const { t } = useTranslation(['logo']);
 
     return (
         <Stack anchor="center">

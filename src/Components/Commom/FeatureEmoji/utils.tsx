@@ -1,6 +1,6 @@
-import React, {ReactElement} from 'react';
+import React, { ReactElement } from 'react';
 // @ts-ignore
-import Emoji, {EmojioneV4} from 'react-emoji-render';
+import Emoji, { EmojioneV4 } from 'react-emoji-render';
 import styled from 'styled-components';
 
 const StyledEmoji = styled(Emoji)`

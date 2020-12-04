@@ -1,15 +1,15 @@
-import React, {ReactElement, useState} from 'react';
-import {Form, Formik, FormikValues} from 'formik';
-import {Box, Button, DateInput, FormField, RangeInput, Select, Text, TextArea, TextInput} from 'grommet';
+import React, { ReactElement, useState } from 'react';
+import { Form, Formik, FormikValues } from 'formik';
+import { Box, Button, DateInput, FormField, RangeInput, Select, Text, TextArea, TextInput } from 'grommet';
 import * as Yup from 'yup';
-import {string} from 'yup';
+import { string } from 'yup';
 import Loader from 'react-loader-spinner';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import firebase from 'firebase';
-import {toast} from 'react-toastify';
-import {useDispatch} from 'react-redux';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 
-import {toggleIsEditing} from '../../../Redux/Actions/ProfileActions';
+import { toggleIsEditing } from '../../../Redux/Actions/ProfileActions';
 
 import UserDetails from '../../../Model/Authentication/UserDetails';
 import Gender from '../../../Model/Gender';
@@ -21,8 +21,8 @@ interface UserInfoProps {
     userDetailsRef: firebase.firestore.DocumentReference | null;
 }
 
-function Userinfo({userDetails, userDetailsRef}: UserInfoProps): ReactElement {
-    const {t} = useTranslation(['gender', 'profile', 'accessibility', 'country', 'language']);
+function Userinfo({ userDetails, userDetailsRef }: UserInfoProps): ReactElement {
+    const { t } = useTranslation(['gender', 'profile', 'accessibility', 'country', 'language']);
     const dispatch = useDispatch();
 
     const [saving, setSaving] = useState(false);
@@ -52,7 +52,7 @@ function Userinfo({userDetails, userDetailsRef}: UserInfoProps): ReactElement {
 
     function saveProfile(values: FormikValues): void {
         setSaving(true);
-        const {fullName, birthday, country, gender, children, languages, description} = values;
+        const { fullName, birthday, country, gender, children, languages, description } = values;
 
         userDetailsRef
             ?.update({
@@ -83,15 +83,15 @@ function Userinfo({userDetails, userDetailsRef}: UserInfoProps): ReactElement {
                 birthday: userDetails?.dateOfBirth || undefined,
                 country: userDetails?.country
                     ? {
-                        code: userDetails?.country,
-                        country: t(`country:${userDetails?.country}`),
-                    }
+                          code: userDetails?.country,
+                          country: t(`country:${userDetails?.country}`),
+                      }
                     : undefined,
                 gender: userDetails?.gender
                     ? {
-                        code: userDetails?.gender,
-                        value: t(`gender:${userDetails?.gender}`),
-                    }
+                          code: userDetails?.gender,
+                          value: t(`gender:${userDetails?.gender}`),
+                      }
                     : undefined,
                 languages:
                     userDetails?.spokenLanguages?.map((language: string) => ({
@@ -104,7 +104,7 @@ function Userinfo({userDetails, userDetailsRef}: UserInfoProps): ReactElement {
             onSubmit={(values): void => saveProfile(values)}
             validationSchema={profileSchema}
         >
-            {({errors, handleChange, handleBlur, handleSubmit, values}): ReactElement => {
+            {({ errors, handleChange, handleBlur, handleSubmit, values }): ReactElement => {
                 return (
                     <Form
                         onSubmit={(event): void => {
@@ -158,7 +158,7 @@ function Userinfo({userDetails, userDetailsRef}: UserInfoProps): ReactElement {
                                         a11yTitle={t('accessibility:profile.countryLabel')}
                                         placeholder={t('profile:countryPlaceholder')}
                                         value={values.country}
-                                        onChange={({option}): object =>
+                                        onChange={({ option }): object =>
                                             handleChange({
                                                 target: {
                                                     name: 'country',
@@ -178,7 +178,7 @@ function Userinfo({userDetails, userDetailsRef}: UserInfoProps): ReactElement {
                                         value={values.gender}
                                         labelKey="value"
                                         valueKey="code"
-                                        onChange={({option}): object =>
+                                        onChange={({ option }): object =>
                                             handleChange({
                                                 target: {
                                                     name: 'gender',
@@ -193,7 +193,7 @@ function Userinfo({userDetails, userDetailsRef}: UserInfoProps): ReactElement {
                                     <Select
                                         name="languages"
                                         multiple
-                                        onChange={({value}): object =>
+                                        onChange={({ value }): object =>
                                             handleChange({
                                                 target: {
                                                     name: 'languages',

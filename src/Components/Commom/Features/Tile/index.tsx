@@ -1,5 +1,5 @@
-import React, {ReactElement} from 'react';
-import {Anchor, Box, Paragraph} from 'grommet';
+import React, { ReactElement } from 'react';
+import { Anchor, Box, Paragraph } from 'grommet';
 
 interface TileProps {
     children?: React.ReactNode;

@@ -1,6 +1,6 @@
-import React, {ReactElement} from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import {getEmoji} from './utils';
+import { getEmoji } from './utils';
 
 const StyledFlip = styled.span`
     -moz-transform: scale(-1, 1);

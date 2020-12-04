@@ -1,7 +1,7 @@
-import React, {Fragment, ReactElement} from 'react';
+import React, { Fragment, ReactElement } from 'react';
 
-import {Box, Heading, Paragraph} from 'grommet';
-import {Trans, useTranslation} from 'react-i18next';
+import { Box, Heading, Paragraph } from 'grommet';
+import { Trans, useTranslation } from 'react-i18next';
 
 interface HeroProps {
     size: string;

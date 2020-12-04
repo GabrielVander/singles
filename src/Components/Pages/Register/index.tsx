@@ -1,19 +1,19 @@
-import React, {ReactElement} from 'react';
-import {Box, Button, FormField, Heading, Image, Main, Paragraph, TextInput} from 'grommet';
+import React, { ReactElement } from 'react';
+import { Box, Button, FormField, Heading, Image, Main, Paragraph, TextInput } from 'grommet';
 import logo from '../../../Assets/logoWithText.svg';
-import {Facebook, Google, Twitter} from 'grommet-icons';
-import {Link, useHistory} from 'react-router-dom';
-import {HOME, LOGIN} from '../../../Routes/AppRoutes';
-import {Trans, useTranslation} from 'react-i18next';
-import {useAuth} from 'reactfire';
-import {toast} from 'react-toastify';
+import { Facebook, Google, Twitter } from 'grommet-icons';
+import { Link, useHistory } from 'react-router-dom';
+import { HOME, LOGIN } from '../../../Routes/AppRoutes';
+import { Trans, useTranslation } from 'react-i18next';
+import { useAuth } from 'reactfire';
+import { toast } from 'react-toastify';
 import firebase from 'firebase/app';
 import LogRocket from 'logrocket';
 import * as Yup from 'yup';
-import {Form, Formik} from 'formik';
+import { Form, Formik, FormikValues } from 'formik';
 
 function Register(): ReactElement {
-    const {t} = useTranslation(['register']);
+    const { t } = useTranslation(['register']);
     const auth = useAuth();
     const history = useHistory();
 
@@ -28,13 +28,14 @@ function Register(): ReactElement {
             .oneOf([Yup.ref('password')], t('register:passwordsMatch')),
     });
 
-    function submit(values: any, {setSubmitting}: any): void {
-        const {email, password} = values;
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    function submit(values: FormikValues, { setSubmitting }: any): void {
+        const { email, password } = values;
         auth.createUserWithEmailAndPassword(email, password)
             .then((credential) => {
-                LogRocket.identify(credential.user?.uid!, {
-                    name: credential.user?.displayName || '',
-                    email: credential.user?.email!,
+                LogRocket.identify(credential.user?.uid as string, {
+                    name: (credential.user?.displayName as string) || '',
+                    email: (credential.user?.email as string) || '',
                 });
                 toast.success(
                     t('register:registeredSuccessfully', {
@@ -65,9 +66,9 @@ function Register(): ReactElement {
         auth.useDeviceLanguage();
         auth.signInWithPopup(provider)
             .then((credential) => {
-                LogRocket.identify(credential.user?.uid!, {
-                    name: credential.user?.displayName || '',
-                    email: credential.user?.email!,
+                LogRocket.identify(credential.user?.uid as string, {
+                    name: (credential.user?.displayName as string) || '',
+                    email: (credential.user?.email as string) || '',
                 });
                 toast.success(
                     t('register:registeredSuccessfully', {
@@ -99,7 +100,7 @@ function Register(): ReactElement {
                             onSubmit={submit}
                             validationSchema={registerSchema}
                         >
-                            {({errors, handleChange, handleBlur, handleSubmit}): ReactElement => (
+                            {({ errors, handleChange, handleBlur, handleSubmit }): ReactElement => (
                                 <Form
                                     onSubmit={(event): void => {
                                         event.preventDefault();

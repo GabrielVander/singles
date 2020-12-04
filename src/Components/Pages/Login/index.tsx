@@ -1,19 +1,19 @@
-import React, {ReactElement} from 'react';
-import {Box, Button, FormField, Image, Main, Paragraph, TextInput} from 'grommet';
+import React, { ReactElement } from 'react';
+import { Box, Button, FormField, Image, Main, Paragraph, TextInput } from 'grommet';
 import logo from '../../../Assets/logoWithText.svg';
-import {Facebook, Google, Twitter} from 'grommet-icons';
-import {Link, useHistory} from 'react-router-dom';
-import {HOME, REGISTER} from '../../../Routes/AppRoutes';
-import {Trans, useTranslation} from 'react-i18next';
-import {useAuth} from 'reactfire';
-import {toast} from 'react-toastify';
+import { Facebook, Google, Twitter } from 'grommet-icons';
+import { Link, useHistory } from 'react-router-dom';
+import { HOME, REGISTER } from '../../../Routes/AppRoutes';
+import { Trans, useTranslation } from 'react-i18next';
+import { useAuth } from 'reactfire';
+import { toast } from 'react-toastify';
 import firebase from 'firebase/app';
 import LogRocket from 'logrocket';
-import {Form, Formik} from 'formik';
+import { Form, Formik, FormikValues } from 'formik';
 import * as Yup from 'yup';
 
 function Login(): ReactElement {
-    const {t} = useTranslation(['login']);
+    const { t } = useTranslation(['login']);
     const auth = useAuth();
     const history = useHistory();
 
@@ -21,20 +21,21 @@ function Login(): ReactElement {
         email: Yup.string().email(t('login:invalidEmail')).required(t('login:required')),
         password: Yup.string()
             .required(t('login:required'))
-            .min(6, t('login:passwordMinChars', {number: 6}))
-            .max(15, t('login:passwordMaxChars', {number: 15})),
+            .min(6, t('login:passwordMinChars', { number: 6 }))
+            .max(15, t('login:passwordMaxChars', { number: 15 })),
     });
 
-    function submit(values: any, {setSubmitting}: any): void {
-        const {email, password} = values;
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    function submit(values: FormikValues, { setSubmitting }: any): void {
+        const { email, password } = values;
         auth.signInWithEmailAndPassword(email, password)
             .then((credential) => {
-                LogRocket.identify(credential.user?.uid!, {
+                LogRocket.identify(credential.user?.uid as string, {
                     name: credential.user?.displayName || '',
-                    email: credential.user?.email!,
+                    email: credential.user?.email || '',
                 });
                 toast.success(
-                    t('login:successfullyLoggedIn', {name: credential.user?.displayName || credential.user?.email}),
+                    t('login:successfullyLoggedIn', { name: credential.user?.displayName || credential.user?.email }),
                 );
                 history.push(HOME.path);
             })
@@ -60,12 +61,12 @@ function Login(): ReactElement {
         auth.useDeviceLanguage();
         auth.signInWithPopup(provider)
             .then((credential) => {
-                LogRocket.identify(credential.user?.uid!, {
+                LogRocket.identify(credential.user?.uid as string, {
                     name: credential.user?.displayName || '',
-                    email: credential.user?.email!,
+                    email: credential.user?.email || '',
                 });
                 toast.success(
-                    t('login:successfullyLoggedIn', {name: credential.user?.displayName || credential.user?.email}),
+                    t('login:successfullyLoggedIn', { name: credential.user?.displayName || credential.user?.email }),
                 );
                 history.push(HOME.path);
             })
@@ -89,7 +90,7 @@ function Login(): ReactElement {
                         }}
                         validationSchema={loginSchema}
                     >
-                        {({ errors, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+                        {({ errors, handleChange, handleBlur, handleSubmit, isSubmitting }): ReactElement => (
                             <Form
                                 onSubmit={(event): void => {
                                     event.preventDefault();
@@ -134,6 +135,7 @@ function Login(): ReactElement {
                                 <Box direction="row" margin="small">
                                     <Paragraph margin="none">
                                         <Trans i18nKey="login:register">
+                                            {/* eslint-disable-next-line react/no-unescaped-entities */}
                                             Don't have an account? <Link to={REGISTER.path}>Register now</Link>
                                         </Trans>
                                     </Paragraph>

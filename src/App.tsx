@@ -9,10 +9,11 @@ import DefaultApp from './Components/Pages/DefaultApp';
 import NotFound from './Components/Pages/NotFound';
 import { AuthCheck } from 'reactfire';
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
-import Register from './Components/Pages/Register';
-import Profile from './Components/Pages/Profile';
-import PageLoader from './Components/Commom/PageLoader';
+import {ToastContainer} from "react-toastify";
+import Register from "./Components/Pages/Register";
+import Profile from "./Components/Pages/Profile";
+import PageLoader from "./Components/Commom/PageLoader";
+import AppFooter from "./Components/Commom/AppFooter";
 
 function App(): ReactElement {
     return (
@@ -21,13 +22,15 @@ function App(): ReactElement {
                 <BrowserRouter>
                     <Switch>
                         <Route path={LOGIN.path} exact={LOGIN.exact}>
-                            <Suspense fallback={<PageLoader />}>
-                                <Login />
+                            <Suspense fallback={<PageLoader/>}>
+                                <Login/>
+                                <AppFooter/>
                             </Suspense>
                         </Route>
                         <Route path={REGISTER.path} exact={REGISTER.exact}>
-                            <Suspense fallback={<PageLoader />}>
-                                <Register />
+                            <Suspense fallback={<PageLoader/>}>
+                                <Register/>
+                                <AppFooter/>
                             </Suspense>
                         </Route>
                         <Route path={LANDING.path} exact={LANDING.exact}>
@@ -50,8 +53,9 @@ function App(): ReactElement {
                             </Suspense>
                         </Route>
                         <Route path={NOT_FOUND.path} exact={NOT_FOUND.exact}>
-                            <Suspense fallback={<PageLoader />}>
-                                <NotFound />
+                            <Suspense fallback={<PageLoader/>}>
+                                <NotFound/>
+                                <AppFooter/>
                             </Suspense>
                         </Route>
                     </Switch>

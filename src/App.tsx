@@ -13,6 +13,7 @@ import {ToastContainer} from "react-toastify";
 import Register from "./Components/Pages/Register";
 import Profile from "./Components/Pages/Profile";
 import PageLoader from "./Components/Commom/PageLoader";
+import AppFooter from "./Components/Commom/AppFooter";
 
 function App() {
     return (
@@ -23,11 +24,13 @@ function App() {
                         <Route path={LOGIN.path} exact={LOGIN.exact}>
                             <Suspense fallback={<PageLoader/>}>
                                 <Login/>
+                                <AppFooter/>
                             </Suspense>
                         </Route>
                         <Route path={REGISTER.path} exact={REGISTER.exact}>
                             <Suspense fallback={<PageLoader/>}>
                                 <Register/>
+                                <AppFooter/>
                             </Suspense>
                         </Route>
                         <Route path={LANDING.path} exact={LANDING.exact}>
@@ -52,6 +55,7 @@ function App() {
                         <Route path={NOT_FOUND.path} exact={NOT_FOUND.exact}>
                             <Suspense fallback={<PageLoader/>}>
                                 <NotFound/>
+                                <AppFooter/>
                             </Suspense>
                         </Route>
                     </Switch>

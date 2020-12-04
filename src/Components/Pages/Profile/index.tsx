@@ -6,6 +6,7 @@ import {useSelector} from "react-redux";
 import ReadOnlyUserDetails from "../../Commom/ReadOnlyUserDetails";
 import RootState from "../../../Redux/States/RootState";
 import Userinfo from "../../Commom/UserInfo";
+import AppFooter from "../../Commom/AppFooter";
 
 function Profile() {
     const user = useUser<UserDetails>();
@@ -82,6 +83,7 @@ function Profile() {
                     </Box>
                 </CardBody>
             </Card>
+            <AppFooter/>
         </Main>
     );
 }

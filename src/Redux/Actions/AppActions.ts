@@ -1,15 +1,15 @@
 export enum AppActions {
-    TOGGLE_LOADING
+    TOGGLE_LOADING,
 }
 
 interface ActionToggleLoading {
     type: AppActions.TOGGLE_LOADING;
 }
 
-export function toggleLoading() {
+export function toggleLoading(): { type: number } {
     return {
-        type: AppActions.TOGGLE_LOADING
-    }
+        type: AppActions.TOGGLE_LOADING,
+    };
 }
 
-export type AppActionTypes = ActionToggleLoading
+export type AppActionTypes = ActionToggleLoading;

@@ -1,14 +1,14 @@
-import React from "react";
-import {Anchor, Box, Paragraph} from "grommet";
+import React, { ReactElement } from 'react';
+import { Anchor, Box, Paragraph } from 'grommet';
 
 interface TileProps {
     children?: React.ReactNode;
     action?: string;
     summary?: string;
-    direction?: "row" | "column" | "row-responsive" | "row-reverse" | "column-reverse" | undefined;
+    direction?: 'row' | 'column' | 'row-responsive' | 'row-reverse' | 'column-reverse' | undefined;
 }
 
-const Tile = ({children, action, summary, direction}: TileProps) => (
+const Tile = ({ children, action, summary, direction }: TileProps): ReactElement => (
     <Box basis="medium" align="center" margin="medium">
         <Box height="small" align="center" justify="center" direction={direction}>
             {children}

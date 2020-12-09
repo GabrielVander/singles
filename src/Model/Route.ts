@@ -1,7 +1,7 @@
 interface Route {
-    path: string
-    exact: boolean
-    private: boolean
+    path: string;
+    exact: boolean;
+    private: boolean;
 }
 
 export default Route;

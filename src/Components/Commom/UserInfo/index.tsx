@@ -11,10 +11,10 @@ import {useDispatch} from "react-redux";
 
 import {toggleIsEditing} from "../../../Redux/Actions/ProfileActions";
 
-import UserDetails from "../../../Model/Authentication/UserDetails";
-import Gender from "../../../Model/Gender";
-import Language from "../../../Model/Language";
-import Country from "../../../Model/Country";
+import UserDetails from "../../../Models/Authentication/UserDetails";
+import Gender from "../../../Models/Gender";
+import Language from "../../../Models/Language";
+import Country from "../../../Models/Country";
 
 interface UserInfoProps {
     userDetails: UserDetails;

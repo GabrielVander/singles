@@ -11,6 +11,7 @@ import firebase from "firebase/app";
 import LogRocket from "logrocket";
 import * as Yup from 'yup';
 import {Form, Formik} from "formik";
+import AppFooter from "../../Commom/AppFooter";
 
 function Register() {
     const {t} = useTranslation(['register']);
@@ -194,6 +195,7 @@ function Register() {
                     </Box>
                 </Box>
             </Main>
+            <AppFooter/>
         </>
     );
 }

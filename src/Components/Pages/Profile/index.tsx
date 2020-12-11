@@ -1,7 +1,7 @@
 import React from "react";
 import {Avatar, Box, Card, CardBody, CardHeader, Heading, Layer, Main, Paragraph, Text} from "grommet";
 import {useFirestore, useFirestoreDocData, useUser} from "reactfire";
-import UserDetails from "../../../Model/Authentication/UserDetails";
+import UserDetails from "../../../Models/Authentication/UserDetails";
 import {useSelector} from "react-redux";
 import ReadOnlyUserDetails from "../../Commom/ReadOnlyUserDetails";
 import RootState from "../../../Redux/States/RootState";

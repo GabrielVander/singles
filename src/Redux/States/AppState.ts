@@ -1,5 +1,5 @@
 interface AppState {
-    loading: boolean
+    loading: boolean;
 }
 
 export default AppState;

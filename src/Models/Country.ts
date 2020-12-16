@@ -1,5 +1,4 @@
 class Country {
-
     public static UNITED_STATES = new Country('us');
     public static UNITED_KINGDOM = new Country('uk');
     public static GERMANY = new Country('ge');
@@ -11,13 +10,7 @@ class Country {
     }
 
     static get options(): Country[] {
-        return [
-            this.UNITED_STATES,
-            this.UNITED_KINGDOM,
-            this.GERMANY,
-            this.BRAZIL,
-            this.OTHER,
-        ];
+        return [this.UNITED_STATES, this.UNITED_KINGDOM, this.GERMANY, this.BRAZIL, this.OTHER];
     }
 
     get code(): string {

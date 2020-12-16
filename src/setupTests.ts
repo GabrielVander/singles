@@ -6,9 +6,9 @@ import '@testing-library/jest-dom/extend-expect';
 
 // Jest's official workaround for the "window.matchMedia is not a function" error
 beforeAll(() => {
-    Object.defineProperty(window, "matchMedia", {
+    Object.defineProperty(window, 'matchMedia', {
         writable: true,
-        value: jest.fn().mockImplementation(query => ({
+        value: jest.fn().mockImplementation((query) => ({
             matches: false,
             media: query,
             onchange: null,
@@ -17,6 +17,6 @@ beforeAll(() => {
             addEventListener: jest.fn(),
             removeEventListener: jest.fn(),
             dispatchEvent: jest.fn(),
-        }))
+        })),
     });
 });

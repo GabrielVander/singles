@@ -1,0 +1,5 @@
+enabled: true
+exclude:
+  - "**/*.spec.*"
+  - "**/node_modules/**/*"
+  - ".github/workflows/**/*"

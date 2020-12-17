@@ -11,6 +11,7 @@ import firebase from 'firebase/app';
 import LogRocket from 'logrocket';
 import * as Yup from 'yup';
 import { Form, Formik, FormikValues } from 'formik';
+import AppFooter from '../../Commom/AppFooter';
 
 function Register(): ReactElement {
     const { t } = useTranslation(['register']);
@@ -160,6 +161,7 @@ function Register(): ReactElement {
                     </Box>
                 </Box>
             </Main>
+            <AppFooter />
         </>
     );
 }

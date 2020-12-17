@@ -11,6 +11,7 @@ import firebase from 'firebase/app';
 import LogRocket from 'logrocket';
 import { Form, Formik, FormikValues } from 'formik';
 import * as Yup from 'yup';
+import AppFooter from '../../Commom/AppFooter';
 
 function Login(): ReactElement {
     const { t } = useTranslation(['login']);
@@ -76,76 +77,79 @@ function Login(): ReactElement {
     }
 
     return (
-        <Main justify="center" align="center">
-            <Box align="center" justify="around" pad="large">
-                <Box width="small" height="small">
-                    <Image fit="contain" src={logo} a11yTitle={t('login:logoLabel')} />
+        <>
+            <Main justify="center" align="center">
+                <Box align="center" justify="around" pad="large">
+                    <Box width="small" height="small">
+                        <Image fit="contain" src={logo} a11yTitle={t('login:logoLabel')} />
+                    </Box>
+                    <Box width="medium">
+                        <Formik
+                            onSubmit={submit}
+                            initialValues={{
+                                email: '',
+                                password: '',
+                            }}
+                            validationSchema={loginSchema}
+                        >
+                            {({ errors, handleChange, handleBlur, handleSubmit, isSubmitting }): ReactElement => (
+                                <Form
+                                    onSubmit={(event): void => {
+                                        event.preventDefault();
+                                        handleSubmit();
+                                    }}
+                                >
+                                    <FormField error={errors.email} label={t('login:emailLabel')}>
+                                        <TextInput
+                                            id="email-input-id"
+                                            placeholder={t('login:emailPlaceholder')}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            name="email"
+                                        />
+                                    </FormField>
+                                    <FormField error={errors.password} label={t('login:passwordLabel')}>
+                                        <TextInput
+                                            id="password-input-id"
+                                            type="password"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            placeholder={t('login:passwordPlaceholder')}
+                                            name="password"
+                                        />
+                                    </FormField>
+                                    <Box direction="row" gap="medium" justify="center" margin="medium">
+                                        <Button
+                                            type="submit"
+                                            disabled={isSubmitting}
+                                            primary
+                                            label={t('login:loginButtonLabel')}
+                                        />
+                                    </Box>
+                                    <Box direction="row" justify="center" align="center" margin="small">
+                                        <Paragraph margin="none">{t('login:loginVia')}</Paragraph>
+                                    </Box>
+                                    <Box direction="row" justify="around">
+                                        <Button onClick={loginWithGoogle} icon={<Google color="plain" />} />
+                                        <Button onClick={loginWithFacebook} icon={<Facebook color="plain" />} />
+                                        <Button onClick={loginWithTwitter} icon={<Twitter color="plain" />} />
+                                    </Box>
+                                    <Box direction="row" margin="small">
+                                        <Paragraph margin="none">
+                                            <Trans i18nKey="login:register">
+                                                {/* eslint-disable-next-line react/no-unescaped-entities */}
+                                                Don't have an account? <Link to={REGISTER.path}>Register now</Link>
+                                            </Trans>
+                                        </Paragraph>
+                                    </Box>
+                                </Form>
+                            )}
+                        </Formik>
+                    </Box>
                 </Box>
-                <Box width="medium">
-                    <Formik
-                        onSubmit={submit}
-                        initialValues={{
-                            email: '',
-                            password: '',
-                        }}
-                        validationSchema={loginSchema}
-                    >
-                        {({ errors, handleChange, handleBlur, handleSubmit, isSubmitting }): ReactElement => (
-                            <Form
-                                onSubmit={(event): void => {
-                                    event.preventDefault();
-                                    handleSubmit();
-                                }}
-                            >
-                                <FormField error={errors.email} label={t('login:emailLabel')}>
-                                    <TextInput
-                                        id="email-input-id"
-                                        placeholder={t('login:emailPlaceholder')}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        name="email"
-                                    />
-                                </FormField>
-                                <FormField error={errors.password} label={t('login:passwordLabel')}>
-                                    <TextInput
-                                        id="password-input-id"
-                                        type="password"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        placeholder={t('login:passwordPlaceholder')}
-                                        name="password"
-                                    />
-                                </FormField>
-                                <Box direction="row" gap="medium" justify="center" margin="medium">
-                                    <Button
-                                        type="submit"
-                                        disabled={isSubmitting}
-                                        primary
-                                        label={t('login:loginButtonLabel')}
-                                    />
-                                </Box>
-                                <Box direction="row" justify="center" align="center" margin="small">
-                                    <Paragraph margin="none">{t('login:loginVia')}</Paragraph>
-                                </Box>
-                                <Box direction="row" justify="around">
-                                    <Button onClick={loginWithGoogle} icon={<Google color="plain" />} />
-                                    <Button onClick={loginWithFacebook} icon={<Facebook color="plain" />} />
-                                    <Button onClick={loginWithTwitter} icon={<Twitter color="plain" />} />
-                                </Box>
-                                <Box direction="row" margin="small">
-                                    <Paragraph margin="none">
-                                        <Trans i18nKey="login:register">
-                                            {/* eslint-disable-next-line react/no-unescaped-entities */}
-                                            Don't have an account? <Link to={REGISTER.path}>Register now</Link>
-                                        </Trans>
-                                    </Paragraph>
-                                </Box>
-                            </Form>
-                        )}
-                    </Formik>
-                </Box>
-            </Box>
-        </Main>
+            </Main>
+            <AppFooter />
+        </>
     );
 }
 

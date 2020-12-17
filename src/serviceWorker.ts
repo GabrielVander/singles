@@ -23,6 +23,7 @@ type Config = {
     onUpdate?: (registration: ServiceWorkerRegistration) => void;
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function register(config?: Config) {
     if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
         // The URL constructor is available in all browsers that support SW.
@@ -57,15 +58,18 @@ export function register(config?: Config) {
     }
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function registerValidSW(swUrl: string, config?: Config) {
     navigator.serviceWorker
         .register(swUrl)
         .then((registration) => {
+            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
             registration.onupdatefound = () => {
                 const installingWorker = registration.installing;
                 if (installingWorker == null) {
                     return;
                 }
+                // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
                 installingWorker.onstatechange = () => {
                     if (installingWorker.state === 'installed') {
                         if (navigator.serviceWorker.controller) {
@@ -101,6 +105,7 @@ function registerValidSW(swUrl: string, config?: Config) {
         });
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function checkValidServiceWorker(swUrl: string, config?: Config) {
     // Check if the service worker can be found. If it can't reload the page.
     fetch(swUrl, {
@@ -126,6 +131,7 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
         });
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function unregister() {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.ready

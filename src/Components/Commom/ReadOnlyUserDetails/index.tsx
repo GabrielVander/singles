@@ -1,4 +1,4 @@
-import UserDetails from '../../../Model/Authentication/UserDetails';
+import UserDetails from '../../../Models/Authentication/UserDetails';
 import { Box, Button, DateInput, FormField, RangeInput, Text, TextInput } from 'grommet';
 import React, { ReactElement } from 'react';
 import { toggleIsEditing } from '../../../Redux/Actions/ProfileActions';

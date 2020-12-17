@@ -8,9 +8,9 @@ import Store from './Redux/Store';
 import { Provider } from 'react-redux';
 import './Configurations/i18nConfig';
 import { FirebaseAppProvider, SuspenseWithPerf } from 'reactfire';
-import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import LogRocket from 'logrocket';
+import PageLoader from './Components/Commom/PageLoader';
 
 FirebaseConfig.initialize();
 LogRocket.init('id8jrz/singles');
@@ -19,7 +19,7 @@ ReactDOM.render(
     <React.StrictMode>
         <Provider store={Store.store}>
             <FirebaseAppProvider firebaseConfig={FirebaseConfig.config}>
-                <SuspenseWithPerf fallback={<Loader type="RevolvingDot" />} traceId="load-app">
+                <SuspenseWithPerf fallback={<PageLoader />} traceId="load-app">
                     <App />
                 </SuspenseWithPerf>
             </FirebaseAppProvider>

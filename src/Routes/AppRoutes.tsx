@@ -42,6 +42,14 @@ export const REGISTER: Route = {
     private: false,
 };
 
+export const FEED: Route = {
+    component: lazy(() => import('../Components/Pages/FeedPage/index')),
+    fallback: <PageLoader />,
+    path: '/feed',
+    exact: false,
+    private: true,
+};
+
 export const LANDING: Route = {
     component: lazy(() => import('../Components/Pages/Landing/index')),
     fallback: <PageLoader />,
@@ -50,4 +58,4 @@ export const LANDING: Route = {
     private: false,
 };
 
-export const routes: Route[] = [LANDING, LOGIN, REGISTER, HOME, PROFILE, NOT_FOUND];
+export const routes: Route[] = [LANDING, LOGIN, REGISTER, HOME, PROFILE, FEED, NOT_FOUND];
